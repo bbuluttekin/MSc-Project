@@ -1,10 +1,52 @@
-\documentclass{article}
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
 
 \usepackage[margin=1in,left=1.5in,includefoot]{geometry}
+
+\usepackage{pythonhighlight}
+\usepackage{listings}
+
+% Python style for highlighting
+\newcommand\pythonstyle{\lstset{
+language=Python,
+basicstyle=\ttm,
+otherkeywords={self},             % Add keywords here
+keywordstyle=\ttb\color{deepblue},
+emph={MyClass,__init__},          % Custom highlighting
+emphstyle=\ttb\color{deepred},    % Custom highlighting style
+stringstyle=\color{deepgreen},
+frame=tb,                         % Any extra options here
+showstringspaces=false            % 
+}}
+
+% Python environment
+\lstnewenvironment{ipython}[1][]
+{
+\pythonstyle
+\lstset{#1}
+}
+{}
+
 % Header and Footer
 \usepackage{fancyhdr}
 \pagestyle{fancy}
+\fancyfoot{}
+\fancyfoot[R]{\thepage}
 
+% Custom colors
+\usepackage{color}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
+\usepackage{graphicx}
+
+\usepackage{biblatex}
+
+\addbibresource{references.bib}
 
 \begin{document}
 
@@ -13,25 +55,25 @@
         \vspace*{.06\textheight}{\scshape\LARGE Birkbeck, University of London\par}\vspace{1.5cm} % University name
         \rule[0.5ex]{\linewidth}{2pt}\vspace*{-\baselineskip}\vspace*{3.2pt}
         \rule[0.5ex]{\linewidth}{1pt}\\[\baselineskip]
-        \huge{\bfseries Msc Project Title}\\[4mm]
+        \huge{\bfseries Pneumonia Detection from Chest X-Ray Images\\ Draft}\\[4mm]
         \rule[0.5ex]{\linewidth}{1pt}\vspace*{-\baselineskip}\vspace{3.2pt}
         \rule[0.5ex]{\linewidth}{2pt}\\
         [1.5cm]
 
 
-            \begin{minipage}[t]{\textwidth}
-            \begin{flushleft} \large
-            \emph{Author:}\\
-            {Baran} % Author name - remove the \href bracket to remove the link
-            \end{flushleft}
-            \end{minipage}
-            \begin{minipage}[t]{0.4\textwidth}
-            \begin{flushright} \large
-            \emph{Supervisor:} \\
-            {George} % Supervisor name - remove the \href bracket to remove the link  
-            \end{flushright}
-            \end{minipage}\\
-            [3cm]
+        \begin{minipage}[t]{0.4\textwidth}
+        \begin{flushleft} \large
+        \emph{Author:}\\
+        {Baran Buluttekin} % Author name - remove the \href bracket to remove the link
+        \end{flushleft}
+        \end{minipage}
+        \begin{minipage}[t]{0.4\textwidth}
+        \begin{flushright} \large
+        \emph{Supervisor:} \\
+        {Dr. George Magoulas} % Supervisor name - remove the \href bracket to remove the link  
+        \end{flushright}
+        \end{minipage}\\
+        [3cm]
 
             \vfill
 
@@ -44,11 +86,55 @@
             {\large \today}\\[4cm] % Date
             %\includegraphics{Logo} % University/department logo - uncomment to place it
  
-            
             \vfill
     \end{center}
 \end{titlepage}    
 
+\pagenumbering{roman}
+\section*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
+This is placeholder text. To add more information type it after this line.\\
+\cleardoublepage
+
+
+\section*{Declaration}
+\addcontentsline{toc}{section}{Declaration}
+I hearby declare this file a text.
+
+\begin{python}
+    import pymongo as pm
+    import json
+    # line comment
+    with open("DSTA/Lab/mongo.json") as f:
+    url = json.load(f)
+    """ Comment 1"""
+    "Comment 2"
+
+    c = pm.MongoClient(url["url"])
+
+    def Myfunc(x):
+        print(x)
+        
+    print(c.admin)
+\end{python}
+and text goes on.\\
+\cleardoublepage
+
+\tableofcontents
+\thispagestyle{empty}
+\cleardoublepage
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+
 \section{Introduction}
+\subsection{Pneumonia}
+Pneumonia is swelling (inflammation) of the tissue in one or both lungs. IT usually formed at the end of breathing tubes of the lungs and cause these tubes to inflame and fill up with fluid. In the UK, pneumonia effects around 8 in 1000 adults each year \cite{nhs}. Global economic cost of pneumonia has estimated at \$17 billion annually \cite{cost}.
+
+\cleardoublepage
+
+\printbibliography
+\addcontentsline{toc}{section}{References}
 
 \end{document}
