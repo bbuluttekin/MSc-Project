@@ -34,7 +34,11 @@ showstringspaces=false            %
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyfoot{}
-\fancyfoot[R]{\thepage}
+\fancyhead{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[LE]{\thepage}
+\fancyfoot[RO]{\thepage}
+%\fancyfoot[LE,RO]{\thepage}
 
 % Custom colors
 \usepackage{color}
@@ -89,6 +93,8 @@ showstringspaces=false            %
             \vfill
     \end{center}
 \end{titlepage}    
+\thispagestyle{empty}
+\cleardoublepage
 
 \pagenumbering{roman}
 \section*{Abstract}
@@ -122,15 +128,21 @@ and text goes on.\\
 
 \tableofcontents
 \thispagestyle{empty}
-\cleardoublepage
+\clearpage
 
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
 
 \section{Introduction}
-\subsection{Pneumonia}
-Pneumonia is swelling (inflammation) of the tissue in one or both lungs. It is usually formed at the end of breathing tubes of the lungs and cause these tubes to inflame and fill up with fluid. In the UK, pneumonia effects around 8 in 1000 adults each year \cite{nhs}. Global economic cost of pneumonia has estimated at \$17 billion annually \cite{cost}.
+Pneumonia is swelling (inflammation) of the tissue in one or both lungs. It is usually formed at the end of breathing tubes of the lungs and cause these tubes to inflame and fill up with fluid. In the UK, pneumonia effects around 8 in 1000 adults each year \cite{nhs}. Global economic cost of pneumonia has estimated at \$17 billion annually \cite{cost}. Currently detecting pneumonia cases heavily relies on chest X-ray image examination which requires expert radiologists to diagnose. Building intelligent system to diagnose the pneumonia can help  health care services to increase efficiency and reduce costs and could help increase early diagnoses in countries with inadequate access to health care.
+
+\subsection{Related Work}
+
+There are number of research has been published about chest X-ray pathology related detection. Most prevalent ones are the CheXNet \cite{CheXNetRP} and ChestX-ray14 \cite{ChestX-ray8}, both of these research carried out by training on same dataset CheX-ray14 \cite{ChestX-ray8}. ChestX-ray14 comprises of 112,120 frontal view chest X-ray images labelled by extracting information from the accompanied radiologists notes with using variety of different NLP (Natural language processing) techniques. 
+
+\clearpage
+\section{Dataset}
 
 \clearpage
 
