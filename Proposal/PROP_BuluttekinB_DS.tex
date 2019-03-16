@@ -47,6 +47,8 @@ showstringspaces=false            %
 \definecolor{deepgreen}{rgb}{0,0.5,0}
 
 \usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{float}
 
 \usepackage{biblatex}
 
@@ -128,18 +130,34 @@ and text goes on.\\
 
 \tableofcontents
 \thispagestyle{empty}
-\clearpage
+\cleardoublepage
+    
 
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
 
 \section{Introduction}
+
 Pneumonia is swelling (inflammation) of the tissue in one or both lungs. It is usually formed at the end of breathing tubes of the lungs and cause these tubes to inflame and fill up with fluid. In the UK, pneumonia effects around 8 in 1000 adults each year \cite{nhs}. Global economic cost of pneumonia has estimated at \$17 billion annually \cite{cost}. Currently detecting pneumonia cases heavily relies on chest X-ray image examination which requires expert radiologists to diagnose. Building intelligent system to diagnose the pneumonia can help  health care services to increase efficiency and reduce costs and could help increase early diagnoses in countries with inadequate access to health care.
 
 \subsection{Related Work}
 
-There are number of research has been published about chest X-ray pathology related detection. Most prevalent ones are the CheXNet \cite{CheXNetRP} and ChestX-ray8 \cite{ChestX-ray8}, both of these research carried out by training on same dataset ChestX-ray8 \cite{ChestX-ray8}. ChestX-ray8 comprises of approximately 115,000 frontal view chest X-ray images labelled by extracting information from the accompanied radiologists notes with using variety of different NLP (Natural language processing) techniques. 
+There are number of research has been published about lung diseases related detection. Most prevalent ones are the CheXNet \cite{CheXNetRP} and ChestX-ray8 \cite{ChestX-ray8}, both of these research carried out by training on same dataset ChestX-ray8 \cite{ChestX-ray8}. ChestX-ray8 comprises of approximately 100,000 frontal view chest X-ray images labelled by extracting information from the accompanied radiologists notes with using variety of different NLP (Natural language processing) techniques from the openi\cite{openi} database. ChestX-ray8 authored by researchers from National Institute of Health (NIH) and published at 2018.
+Most profound effect of this paper is the creation of the ChestX-ray8 dataset which has become one of the widely used dataset in computer vision research related to lung diseases. More detailed information about the dataset can be found in dataset section of this proposal. 
+
+CheXNet is another related article authored by researchers from Stanford University ML group. Prediction of lung diseases achieved by 121 layer convolutional neural network and designed to predict 14 pathologies in the ChestX-ray8 dataset. One of the major importance of this paper is the setting the setting benchmark for human level detection for chest X-ray images. One of the most fundamental difference of the X-ray related disease prediction is the definition of human level accuracy. Due to the nature of required expertise in X-ray images leaves general public out of the scope when it comes to human level performance of these pathologies. Anyone who have not been trained in radiology will not be able to detect any lung diseases in the Chest X-ray images. For example the image below is sample of two chest X-ray images almost indistinguishable to general audience.
+
+\begin{figure}[H]%
+    \centering
+    \subfloat{{\includegraphics[width=.4\textwidth]{img/chest_xray_train_NORMAL_IM-0133-0001.jpeg} }}%
+    \qquad
+    \subfloat{{\includegraphics[width=.4\textwidth]{img/chest_xray_train_PNEUMONIA_person1007_virus_1690.jpeg} }}%
+    \caption{Two sample X-ray Chest images.}%
+    \label{fig:sample}%
+\end{figure}
+
+
 
 \clearpage
 \section{Dataset}
@@ -150,12 +168,12 @@ In this section I have highlighted my reasons for deciding on the dataset of cho
 \begin{enumerate}
     \item \textbf{Reproducibility: }Dataset of choice must allow reader to reproduce the work in order to assess all the points discussed in the report. That would require dataset to be public.
     \item \textbf{Labelled: }Dataset must contain labels of patients state. Such as being diagnosed with pneumonia or not.
-    \item \textbf{License: }Dataset should have a license that permits for research.
+    \item \textbf{License: }Dataset should have a license that permits research.
 \end{enumerate}
 I will be evaluating dataset available while considering general guidelines outlined above.
 
 \subsection{ChestX-ray8}
-This dataset 
+This dataset created part of the ChestX-ray8\cite{ChestX-ray8} paper. Original source of this dataset is OpenI\cite{openi} medical database. OpenI database is a hospital-size knowledge database that contains X-ray images along with radiologists notes for reference. Radiologists notes often in format of guidance for doctors rather than diagnoses and was not fit for training large scale neural network algorithm that was planned to train in the ChestX-ray8 article.
 
 \clearpage
 
