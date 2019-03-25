@@ -173,7 +173,7 @@ Given this challenge authors of the CheXNet conduct a test to establish benchmar
      \end{tabular}
      \caption{Radiologist prediction performances from CheXNet.}
      \label{table:radiologist}
-    \end{table}
+\end{table}
 
 Importance of this test is that it gives us a rough estimate for human level accuracy benchmark to assess the model performance for new detection models.
 
@@ -193,13 +193,15 @@ I will be evaluating dataset available while considering general guidelines outl
 
 \subsection{OpenI Database}
 
-\subsection{ChestX-ray8}
-This dataset created part of the ChestX-ray8\cite{ChestX-ray8} paper. Original source of this dataset is OpenI\cite{openi} medical database. OpenI database is a hospital-size knowledge database that contains X-ray images along with radiologists notes for reference. Radiologists notes often in format of guidance for doctors rather than diagnoses and was not fit for training large scale neural network algorithm that was planned to train in the ChestX-ray8 article.
+OpenI\cite{openi} is a database that is service of National Library of Medicine. It enables search for medical images, graphs and charts through text as well as image query. As of writing of this proposal it has over 3.7 million images, and 3,955 radiology reports. It is the main source for ChestX-ray8 dataset mentioned previously in Related Work section. Despite the fact it contains very large data for chest X-rays, this source is not suitable for this project due to the fact that images does not includes labels for the patients state (e.g., Pneumonia or normal). Chest X-ray data in this database is the image accompanied by radiologist report which is advisory to doctors.
 
-\subsection{Mendeley Research Group}
+\subsection{ChestX-ray8}
+This dataset created part of the ChestX-ray8\cite{ChestX-ray8} paper. Original source of this dataset is OpenI\cite{openi} medical database as mentioned in previous subsection.
+
+\subsection{Cell Press Research}
 \clearpage
 
-\section{Neural Networks}
+\section{Computer Vision}
 \subsection{Convolutional Neural Networks (CNN's)}
 \subsection{Prominent Computer Vision Architectures}
 \subsection{AlexNet}
@@ -215,6 +217,7 @@ This dataset created part of the ChestX-ray8\cite{ChestX-ray8} paper. Original s
 \clearpage
 
 \section{Project Plan}
+Early draft to be completed later.
 \clearpage
 
 \printbibliography
