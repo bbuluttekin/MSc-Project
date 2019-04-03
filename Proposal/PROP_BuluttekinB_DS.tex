@@ -83,7 +83,7 @@ showstringspaces=false            %
 
             \vfill
 
-            \large \textit{A thesis submitted in fulfillment of the requirements\\ for the degree of MSc Data Science}\\[0.3cm] % University requirement text
+            \large \textit{A project proposal submitted in fulfillment of the requirements\\ for the degree of MSc Data Science}\\[0.3cm] % University requirement text
             \textit{in the}\\[0.4cm]
             Department of Computer Science\\[2cm] % Research group name and department name
  
@@ -99,33 +99,20 @@ showstringspaces=false            %
 \cleardoublepage
 
 \pagenumbering{roman}
-\section*{Abstract}
-\addcontentsline{toc}{section}{Abstract}
-This is placeholder text. To add more information type it after this line.\\
-\clearpage
-
 
 \section*{Declaration}
 \addcontentsline{toc}{section}{Declaration}
-I hearby declare this file a text.
 
-\begin{python}
-    import pymongo as pm
-    import json
-    # line comment
-    with open("DSTA/Lab/mongo.json") as f:
-    url = json.load(f)
-    """ Comment 1"""
-    "Comment 2"
+\vfill
+\textit{I have read and understood the sections of plagiarism in the College Policy on assessment offences and confirm that the work is my own, with the work of others clearly acknowledged. I give my permission to submit my report to the plagiarism testing database that the College is using and test it using plagiarism detection software, search engines or meta- searching software.}
+\vfill
 
-    c = pm.MongoClient(url["url"])
+\clearpage
 
-    def Myfunc(x):
-        print(x)
+\section*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
 
-    print(c.admin)
-\end{python}
-and text goes on.\\
+
 \clearpage
 
 \tableofcontents
@@ -226,17 +213,31 @@ Convolutional neural networks are generally a good option for image or time seri
 In this project I will be taking advantage of the well known network architectures for computer vision for general benchmarking purposes. These architecture generally known for their good performance in image classification competitions hence, any new design should perform better than these designs to be considered. 
 
 \subsection{LeNet-5}
-LeNet-5 \cite{Lenet5} is 7 layered neural network build for classifying hand written digits in checks. Numbers in checks turned into  $32 \times 32$ pixel images.
+LeNet-5 \cite{Lenet5} is 7 layered neural network build for classifying hand written digits in checks. Numbers in checks turned into  $32 \times 32$ pixel images and feed into the network for image classification task. LeNet-5 is the first successful application for combination of CNN and backpropagation. Network representation illustration and full specification of the network outlined below.
 
 \begin{figure}[H]%
     \centering
     \includegraphics[width=\textwidth]{img/lenet-5.png}%
-    \caption{Network architecture of LeNet-5.}%
+    \caption{Network architecture of LeNet-5.\\Credit: LeNet-5 \cite{Lenet5}}%
     \label{fig:lenet5}%
 \end{figure}
 
+
 \subsection{AlexNet}
+AlexNet \cite{Alexnet} designed and named after Alex Krizhevsky, and published with collaboration of Ilya Sutskever and Geoffrey Hinton (advisor). It was designed for ImageNet challenge \cite{imagenet} and utilized the idea of combining neural networks with graphics processing units (GPU) for high performance. This combination overcome the restriction of high computational demanding nature of neural networks and proved that current computational techniques are sufficient for training neural networks in even very large dataset such as the ImageNet. Another important implication is that AlexNet brought neural networks back to spotlight for research community after long break from LeNet-5's results. 
+
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=\textwidth]{img/alexnet.png}%
+    \caption{Network architecture of AlexNet.\\Credit: AlexNet \cite{Alexnet}}%
+    \label{fig:alexnet}%
+\end{figure}
+
 \subsection{VGGNet}
+VGGNet \cite{vggnet} designed by Visual Geometry Group (VGG) from University of Oxford, this architecture also participated in ImageNet challenge \cite{imagenet} for the year 2014. This research investigated the depth of the convolution neural networks effect on their accuracy. Doing so article walks through their general layout for experimenting different depth and characteristic of neural networks with comparison. Trial error approach they assumed, presents useful methodology for network prototyping this project will use. After obtaining high accuracy from this new deeper neural network inspired many similar high depth neural network architectures to be build. Success of these deep neural networks also get popular which lead the new popular term \textit{Deep Learning}.
+
+\subsection{Computer Vision Technique For This Project}
+This section in computer vision intended for short introduction and history of the neural networks. Main reasoning behind this introduction is this project chosen neural networks as primary algorithm for the image classification problem. Reasons for that decision is the achievements of the neural networks withing the machine learning field, specifically within the image classification. So far neural network approach achieved near human level image classification, speech recognition, machine translation and more. Although decision to choose neural network for primary method for this project established, classification accuracy will be compered with other machine learning techniques throughout this project.
 \clearpage
 
 \section{Project Aims and Objectives}
@@ -262,7 +263,7 @@ Open source projects and their intended form of usage in this project fallows:
     \item \textbf{Pandas \cite{pandas}: }For general data manipulation.
     \item \textbf{Tensorflow \cite{tensorflow} or PyTorch \cite{pytorch}: }For the implementation of the neural network.
     \item \textbf{Matplotlib \cite{matplotlib} and Seaborn \cite{seaborn}: }Visualizing data and calculations.
-    \item \textbf{Keras \cite{keras}: }Keras will be used to implement benchmark architectures such as LeNet-5 or AlexNet.
+    \item \textbf{Keras \cite{keras}: }Keras will be used to implement benchmark architectures such as LeNet-5 or AlexNet for the ease of prototyping.
 \end{itemize}
 \clearpage
 
