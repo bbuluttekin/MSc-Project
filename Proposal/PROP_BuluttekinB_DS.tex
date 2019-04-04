@@ -50,6 +50,8 @@ showstringspaces=false            %
 \usepackage{subfig}
 \usepackage{float}
 
+\usepackage{pgfgantt}
+
 \usepackage{biblatex}
 
 \addbibresource{references.bib}
@@ -111,7 +113,7 @@ showstringspaces=false            %
 
 \section*{Abstract}
 \addcontentsline{toc}{section}{Abstract}
-
+This Data Science project will be focusing on classification of X-ray images labelled based on patients with or without pneumonia. This proposal document will outline logistics and decisions made for the project in sequential order. First section of the proposal will give general facts about pneumonia and highlight important details about the related work carried out within the industry. More specifically related pneumonia detection research will be examined and how this research effected decisions of this project. Second section of the proposal will give reasoning of the dataset of choice and explains why this specific dataset is chosen amongst others. Section third will give a quick introduction to artificial neural networks (ANN's) and some background information about the benchmark neural network architectures as well as answers the question of why this specific machine learning field is chosen. Section 4 will give clear definition for the aims and objectives of this project. Fifth section list the tools and techniques considered to be used and some brief reasoning behind them. Lastly, final section will layout time frame for the execution of the project. 
 
 \clearpage
 
@@ -269,6 +271,24 @@ Open source projects and their intended form of usage in this project fallows:
 
 \section{Project Plan}
 Early draft to be completed later.
+
+\begin{center}
+\begin{ganttchart}[
+    title/.append style={fill=black!10},
+    title label font=\tiny,
+    x unit=5pt,
+     time slot format=isodate,
+    ]{2019-06-17}{2019-09-15}
+
+    \gantttitlecalendar{year, month=name, week} \\
+
+    \ganttbar{Task 1}{2019-06-18}{2019-07-01} \\
+    \ganttbar{Writing}{2019-06-18}{2019-09-14} \\
+
+
+\end{ganttchart}
+\end{center}
+
 \clearpage
 
 \printbibliography
