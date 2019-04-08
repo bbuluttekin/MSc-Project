@@ -46,6 +46,8 @@ showstringspaces=false            %
 \definecolor{deepred}{rgb}{0.6,0,0}
 \definecolor{deepgreen}{rgb}{0,0.5,0}
 
+\usepackage{xcolor} % For highlighting changes
+
 \usepackage{graphicx}
 \usepackage{subfig}
 \usepackage{float}
@@ -63,7 +65,7 @@ showstringspaces=false            %
         \vspace*{.06\textheight}{\scshape\LARGE Birkbeck, University of London\par}\vspace{1.5cm} % University name
         \rule[0.5ex]{\linewidth}{2pt}\vspace*{-\baselineskip}\vspace*{3.2pt}
         \rule[0.5ex]{\linewidth}{1pt}\\[\baselineskip]
-        \huge{\bfseries Pneumonia Detection from Chest X-Ray Images\\ Draft}\\[4mm]
+        \huge{\bfseries Pneumonia Detection from Chest X-Ray Images}\\[4mm]
         \rule[0.5ex]{\linewidth}{1pt}\vspace*{-\baselineskip}\vspace{3.2pt}
         \rule[0.5ex]{\linewidth}{2pt}\\
         [1.5cm]
@@ -130,7 +132,7 @@ This Data Science project will be focusing on classification of X-ray images lab
 
 Pneumonia is swelling (inflammation) of the tissue in one or both lungs. It is usually formed at the end of breathing tubes of the lungs and cause these tubes to inflame and fill up with fluid. In the UK, pneumonia effects around 8 in 1000 adults each year \cite{nhs}. Global economic cost of pneumonia has estimated at \$17 billion annually \cite{cost}. Currently detecting pneumonia cases heavily relies on chest X-ray image examination which requires expert radiologists to diagnose. Building intelligent system to diagnose the pneumonia can help  health care services to increase efficiency, reduce costs and could help increase early diagnoses in countries with inadequate access to health care.
 
-\subsection{Related Work}
+\subsection{Related work}
 
 There are number of research has been published about lung diseases related detection. Most prevalent ones are the CheXNet \cite{CheXNetRP} and ChestX-ray8 \cite{ChestX-ray8}, both of these research carried out by training on same dataset ChestX-ray8 \cite{ChestX-ray8}. ChestX-ray8 comprises of approximately 100,000 frontal view chest X-ray images labelled by extracting information from the accompanied radiologists notes with using variety of different NLP (Natural language processing) techniques from the openi\cite{openi} database. ChestX-ray8 authored by researchers from National Institute of Health (NIH) and published at 2018.
 Most profound effect of this paper is the creation of the ChestX-ray8 dataset which has become one of the widely used dataset in computer vision research related to lung diseases. More detailed information about the dataset can be found in dataset section of this proposal. 
@@ -171,7 +173,7 @@ Importance of this test is that it gives us a rough estimate for human level acc
 \section{Dataset}
 Choosing and processing dataset have a crucial importance on success of the any machine learning task. There are several dataset available online that relate to chest X-Ray images. Given the large number of choices for selecting the dataset there are few criteria important to check while deciding the final dataset.
 
-\subsection{General Guidelines While Deciding on the Dataset}
+\subsection{General guidelines while deciding on the dataset}
 In this section I have highlighted my reasons for deciding on the dataset of choice for this research project. Main points for decision are:
 \begin{enumerate}
     \item \textbf{Reproducibility: }Dataset of choice must allow reader to reproduce the work in order to assess all the points discussed in the report. That would require dataset to be public.
@@ -180,14 +182,14 @@ In this section I have highlighted my reasons for deciding on the dataset of cho
 \end{enumerate}
 I will be evaluating dataset available while considering general guidelines outlined above.
 
-\subsection{OpenI Database}
+\subsection{OpenI database}
 
 OpenI\cite{openi} is a database that is service of National Library of Medicine. It enables search for medical images, graphs and charts through text as well as image query. As of writing of this proposal it has over 3.7 million images, and 3,955 radiology reports. It is the main source for ChestX-ray8 dataset mentioned previously in Related Work section. Despite the fact it contains very large data for chest X-rays, this source is not suitable for this project due to the fact that images does not includes labels for the patients state (e.g., Pneumonia or normal). Chest X-ray data in this database is the image accompanied by radiologist report which is advisory document. Mainly because the lack of labels this dataset is not suitable for this project where the choice will be a supervised classification task.
 
 \subsection{ChestX-ray8}
 This dataset created part of the ChestX-ray8\cite{ChestX-ray8} paper (Also known as ChestX-ray14). Original source of this dataset is OpenI\cite{openi} medical database as mentioned in previous subsection. Authors first short-listed eight common thoracic pathologies subsequently related X-rays searched from the database based on these pathology keywords. Most positive quality of this dataset amongst the other options is the sheer quantity of the data points which is by far the largest in size. This attribute especially important when it comes to certain computer vision techniques such as Neural Networks due to the fact that large datasets increases the variance and enables better generalization. Despite this positive points, quality of the labelling of this dataset has come to questioning by radiologists\cite{counterray8}. Due to this considerable labelling inconsistencies this dataset have not been chosen for this project.
 
-\subsection{Cell Press Research}
+\subsection{Cell press research}
 Shortcomings of first two datasets compelled me to searched further for new dataset that does not have the problems I point out previously. Research from Cell Press\cite{dataset}, together with the data that made public, provided a solution to these problems. Dataset the team released contains 5856 hand labelled X-ray chest images from children aged between one to five years old. X-ray images collected as part of the routine clinical care at the Guangzhou Women and Children’s Medical Center, Guangzhou, China. All images screened for quality control and low quality or unreadable x-rays discarded. Labels of the images also checked by two expert physician and only approved images included in the dataset. Finally this dataset released under Creative Commons license Attribution 4 (CC BY 4.0) that allow copy, distribution of the material as well as transform and building upon material for any purposes. In light of all these attributes I choose this dataset for my project.
 
 \clearpage
@@ -202,7 +204,7 @@ Importance of X-ray image analysis in pneumonia diagnoses clearly highlights tha
     \label{fig:neocognitron}%
 \end{figure}
 
-\subsection{Convolutional Neural Networks (CNN's)}
+\subsection{Convolutional neural networks (CNN's)}
 Although Neocognitron formed the general idea of the convolutional neural networks, it did not used the method called backpropagation that CNN's use today. Backpropagation is technique used in neural networks to propagate errors through the layers of neural network. First CNN that have the attributes same as current CNN's was build in Bell Labs in 1989 to recognize the hand written digits of the zip codes \cite{cnnzipcodes}. Convolutional neural network name indicates that network uses mathematical operation called \textbf{convolution}. Explaining in a simple way using definition in the Deep Learning book \cite{deeplearningbook}:
 
 \begin{quote}
@@ -211,7 +213,7 @@ Although Neocognitron formed the general idea of the convolutional neural networ
 
 Convolutional neural networks are generally a good option for image or time series data problems because of the sliding window approach capturing the underlying signal.
 
-\subsection{Prominent Computer Vision Architectures}
+\subsection{Prominent computer vision architectures}
 In this project I will be taking advantage of the well known network architectures for computer vision for general benchmarking purposes. These architecture generally known for their good performance in image classification competitions hence, any new design should perform better than these designs to be considered. 
 
 \subsection{LeNet-5}
@@ -238,20 +240,58 @@ AlexNet \cite{Alexnet} designed and named after Alex Krizhevsky, and published w
 \subsection{VGGNet}
 VGGNet \cite{vggnet} designed by Visual Geometry Group (VGG) from University of Oxford, this architecture also participated in ImageNet challenge \cite{imagenet} for the year 2014. This research investigated the depth of the convolution neural networks effect on their accuracy. Doing so article walks through their general layout for experimenting different depth and characteristic of neural networks with comparison. Trial error approach they assumed, presents useful methodology for network prototyping this project will use. After obtaining high accuracy from this new deeper neural network inspired many similar high depth neural network architectures to be build. Success of these deep neural networks also get popular which lead the new popular term \textit{Deep Learning}.
 
-\subsection{Computer Vision Technique For This Project}
+\subsection{Computer vision technique for this project}
 This section in computer vision intended for short introduction and history of the neural networks. Main reasoning behind this introduction is this project chosen neural networks as primary algorithm for the image classification problem. Reasons for that decision is the achievements of the neural networks withing the machine learning field, specifically within the image classification. So far neural network approach achieved near human level image classification, speech recognition, machine translation and more. Although decision to choose neural network for primary method for this project established, classification accuracy will be compered with other machine learning techniques throughout this project.
 \clearpage
 
 \section{Project Aims and Objectives}
-\indent Objective of this project is to lay out and highlight general roadmap for computer vision problems, specifically it relates to classification along with the prototyping and experimenting of different neural network models. Highest possible accuracy will be aimed but due to highly iterative and time consuming nature of the neural network research, its not very likely that it will beat general benchmark set by most recent research.
+\textcolor{blue}{Aim of this project is to build a fully functional chest x-ray image classification pipeline that implements CI/CD principals to experimentation and deployment. Main classification algorithm I will use for this project is the neural networks, specifically convolutional neural networks. Highest possible accuracy will be aimed but due to highly iterative and time consuming nature of the neural network research, its not very likely that it will beat general benchmark set by most recent research.}
 
-Fallowing sub-objectives will also be attempted if the time permits:
+\subsection{Objectives}
+Project will be implemented with execution of fallowing objectives:
 \begin{itemize}
-    \item Discovery of both economically and computationally efficient deployment methods.
-    \item Application of different deployment models and their comparison.
-    \item Fully functional pipeline that implements CI/CD principles to experimentation and deployment.
+    \color{blue}
+    \item Carrying out general data exploration.
+    \item Data pre-processing and augmentation.
+    \item Building baseline model with well known neural network architectures from section 3.
+    %\item Model improvement and hyper parameter tuning
+    \item Using pre-trained network to increase model performance
+    \item Visualizing neural network to ensure learning 
+    \item Saving trained model for deployment
+    \item Experiment with different deployment options
 \end{itemize}
 \clearpage
+
+
+\section{Methodology}
+\subsection{General data exploration}
+\textcolor{blue}{I will start with high level checks on data. This step involves general data exploration such as checking if there is a class inbalance in the dataset or size and quality related issues in some images.}
+
+\subsection{Data pre-processing and augmentation}
+\textcolor{blue}{Many images can have inherent sources of variance that can effect the performance of the classification tasks. Some example to these sources of variance are, angle variance, contrast variance and positional variance. Process such as histogram equalization will be apply to images to increase contrast in the images. This process will lead to information difference between bone any different tissues being more prominent. Various image processing tool available in the keras \cite{keras} and scikit-image \cite{skimage} libraries. 
+It is also advisable to apply some classic data augmentation techniques to avoid over-fitting. One of the most common technique is to flip the images left and right also flip them 0, 90, 180, or 270 degrees.}
+
+\subsection{Building baseline model with neural network architecture}
+\textcolor{blue}{Apart from using the CheXNet \cite{CheXNetRP} radiologist accuracy benchmark, architectures from section 3 will be trained to set a baseline benchmark accuracy. Because of their well established position in the machine learning field detailed specifications of these architectures are widely available. In fact keras library \cite{keras} includes some of these models implemented in the library.}
+
+%\subsection{Model improvement and hyper parameter tuning}
+
+\subsection{Using pre-trained neural network to increase model performance}
+\textcolor{blue}{A common and effective technique in computer vision is to use pre-trained network to train a new network. This approach especially successful when the dataset is small. Pre-train network is usually trained in another large scale image classification such as ImageNet \cite{imagenet}. Features learned from this dataset acts as a generic model and help training of the new network. General way this process works is to keep the convolutional layers (also referred as convolutional base) of the pre-trained network and train it with classifier top that is usually a dense layer (fully connected).}
+
+\subsection{Visualizing neural network to ensure learning}
+\textcolor{blue}{
+Wide range of different visualization approaches available for visualizing convolution networks. Three most useful ones are the fallowing:
+\begin{itemize}
+    \item \textit{Visualizing intermediate convolution network outputs.} Generally useful for understating how convolution networks transform their input.
+    \item \textit{Visualizing convolution network filters.} For discovering what visual pattern each filter in convolution network is receptive to.
+    \item \textit{Heatmaps of class activation.} This visualization technique is most relevant to x-ray image classification. It emphasize part of the image identified as belong to certain class which is way of localize objects in the image. 
+\end{itemize}
+}
+
+\subsection{Saving trained model for deployment}
+
+\subsection{Experiment with different deployment options}
 
 \section{Tools and Techniques}
 For the implementation of the aims of this project python programming language is chosen as a main programming language. Reasons for this decision is two fold, first part of the reasoning is need of high level programming language. Low level programming languages such as Java or C++ are not well suited for computer vision tasks such as this project due to reason of their time consuming prototyping cycles. Second part of the decision python being de facto language of choice for majority users which enables more tools and techniques being available for application. 
@@ -270,13 +310,13 @@ Open source projects and their intended form of usage in this project fallows:
 \clearpage
 
 \section{Project Plan}
-Early draft to be completed later.
+Early draft to be completed later.\\
 
-\begin{center}
+\noindent\resizebox{\textwidth}{!}{
 \begin{ganttchart}[
     title/.append style={fill=black!10},
     title label font=\tiny,
-    x unit=5pt,
+    x unit=4pt,
      time slot format=isodate,
     ]{2019-06-17}{2019-09-15}
 
@@ -287,7 +327,7 @@ Early draft to be completed later.
 
 
 \end{ganttchart}
-\end{center}
+}
 
 \clearpage
 
