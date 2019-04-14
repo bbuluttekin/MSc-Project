@@ -115,7 +115,7 @@ showstringspaces=false            %
 
 \section*{Abstract}
 \addcontentsline{toc}{section}{Abstract}
-This Data Science project will be focusing on classification of X-ray images labelled based on patients with or without pneumonia. This proposal document will outline logistics and decisions made for the project in sequential order. \textcolor{blue}{Section one, two and three introduce background information about the project.} First section of the proposal will give general facts about pneumonia and highlight important details about the related work carried out within the industry. More specifically related pneumonia detection research will be examined and how this research effected decisions of this project. Second section of the proposal will give reasoning of the dataset of choice and explains why this specific dataset is chosen amongst others. Section third will give a quick introduction to artificial neural networks (ANN's) and some background information about the benchmark neural network architectures as well as answers the question of why this specific machine learning field is chosen. Section 4 will give clear definition for the aim and objectives of this project. \textcolor{blue}{Section five details each objectives and explains how they will be implemented.} Sixth section list the tools and techniques considered to be used and some brief reasoning behind them. Lastly, final section will layout time frame for the execution of the project. 
+This Data Science project will be focusing on classification of X-ray images labelled based on patients with or without pneumonia. This proposal document will outline logistics and decisions made for the project in sequential order. Section one, two and three introduce background information about the project. First section of the proposal will give general facts about pneumonia and highlight important details about the related work carried out within the industry. More specifically related pneumonia detection research will be examined and how this research effected decisions of this project. Second section of the proposal will give reasoning of the dataset of choice and explains why this specific dataset is chosen amongst others. Section third will give a quick introduction to artificial neural networks (ANN's) and some background information about the benchmark neural network architectures as well as answers the question of why this specific machine learning field is chosen. Section 4 will give clear definition for the aim and objectives of this project. Section five details each objectives and explains how they will be implemented. Sixth section list the tools and techniques considered to be used and some brief reasoning behind them. Lastly, final section will layout time frame for the execution of the project. 
 
 \clearpage
 
@@ -167,9 +167,28 @@ Given this challenge authors of the CheXNet conduct a test to establish benchmar
 \end{table}
 
 Importance of this test is that it gives us a rough estimate for human level accuracy benchmark to assess the model performance for new detection models.
-
-
 \clearpage
+
+\section{Project Aim and Objectives}
+\subsection{Aim}
+Aim of this project is to build a fully functional chest x-ray image classification pipeline that implements CI/CD principals to experimentation and deployment. Main classification algorithm I will use for this project is the neural networks, specifically convolutional neural networks. Highest possible accuracy will be aimed but due to highly iterative and time consuming nature of the neural network research, its not very likely that it will beat general benchmark set by most recent research.
+
+\subsection{Objectives}
+Project will be implemented with execution of fallowing objectives:
+\begin{itemize}
+    \item \textbf{Carrying out general data exploration: }This part involves general check on dataset.
+    \item \textbf{Data pre-processing and augmentation: }Preparing the data for model ready state.
+    \item \textbf{Building baseline model with well known neural network architectures: }This step involves setting additional benchmarks with out of the box models from section 3.
+    \item \textbf{Using pre-trained network to increase model performance: }Using pre-trained networks to help training and accuracy of the model.
+    %\item Model improvement and hyper parameter tuning
+    \item \textbf{Visualizing neural network to ensure learning quality: } For making sure model learning as intended and focusing on correct parts of the image.
+    \item \textbf{Ensemble different models: }Using ensemble method with different neural network architectures.
+    %\item \textbf{Model refinement: } Prototyping for improved model thorough hyper-parameter tuning.
+    %\item Saving trained model for deployment
+    \item \textbf{Apply different deployment options: } Implementation of different deployment options. Based on their trade offs. 
+\end{itemize}
+\clearpage
+
 \section{Dataset}
 Choosing and processing dataset have a crucial importance on success of the any machine learning task. There are several dataset available online that relate to chest X-Ray images. Given the large number of choices for selecting the dataset there are few criteria important to check while deciding the final dataset.
 
@@ -239,68 +258,50 @@ AlexNet \cite{Alexnet} designed and named after Alex Krizhevsky, and published w
 
 \subsection{VGGNet}
 VGGNet \cite{vggnet} designed by Visual Geometry Group (VGG) from University of Oxford, this architecture also participated in ImageNet challenge \cite{imagenet} for the year 2014. This research investigated the depth of the convolution neural networks effect on their accuracy. Doing so article walks through their general layout for experimenting different depth and characteristic of neural networks with comparison. Trial error approach they assumed, presents useful methodology for network prototyping this project will use. After obtaining high accuracy from this new deeper neural network inspired many similar high depth neural network architectures to be build. Success of these deep neural networks also get popular which lead the new popular term \textit{Deep Learning}.
-
-\subsection{Computer vision technique for this project}
-This section in computer vision intended for short introduction and history of the neural networks. Main reasoning behind this introduction is this project chosen neural networks as primary algorithm for the image classification problem. Reasons for that decision is the achievements of the neural networks withing the machine learning field, specifically within the image classification. So far neural network approach achieved near human level image classification, speech recognition, machine translation and more. Although decision to choose neural network for primary method for this project established, classification accuracy will be compered with other machine learning techniques throughout this project.
-\clearpage
-
-\section{Project Aim and Objectives}
-\subsection{Aim}
-\textcolor{blue}{Aim of this project is to build a fully functional chest x-ray image classification pipeline that implements CI/CD principals to experimentation and deployment. Main classification algorithm I will use for this project is the neural networks, specifically convolutional neural networks. Highest possible accuracy will be aimed but due to highly iterative and time consuming nature of the neural network research, its not very likely that it will beat general benchmark set by most recent research.}
-
-\subsection{Objectives}
-Project will be implemented with execution of fallowing objectives:
-\begin{itemize}
-    \color{blue}
-    \item \textbf{Carrying out general data exploration: }This part involves general check on dataset.
-    \item \textbf{Data pre-processing and augmentation: }Preparing the data for model ready state.
-    \item \textbf{Building baseline model with well known neural network architectures: }This step involves setting additional benchmarks with out of the box models from section 3.
-    \item \textbf{Using pre-trained network to increase model performance: }Using pre-trained networks to help training and accuracy of the model.
-    %\item Model improvement and hyper parameter tuning
-    \item \textbf{Visualizing neural network to ensure learning quality: } For making sure model learning as intended and focusing on correct parts of the image.
-    \item \textbf{Ensemble different models: }Using ensemble method with different neural network architectures.
-    %\item \textbf{Model refinement: } Prototyping for improved model thorough hyper-parameter tuning.
-    %\item Saving trained model for deployment
-    \item \textbf{Apply different deployment options: } Implementation of different deployment options. Based on their trade offs. 
-\end{itemize}
 \clearpage
 
 
 \section{Methodology}
+
+\subsection{Computer vision technique for this project}
+In this project neural networks chosen as primary algorithm for the image classification problem. Reasons for that decision is the achievements of the neural networks withing the machine learning field, specifically within the image classification. So far neural network approach achieved near human level image classification, speech recognition, machine translation and more. Although decision to choose neural network for primary method for this project established, classification accuracy will be compered with other machine learning techniques throughout this project.
+
+
 \subsection{General data exploration}
-\textcolor{blue}{I will start with high level checks on data. This step involves general data exploration such as checking if there is a class inbalance in the dataset or size and quality related issues in some images.}
+As a first step I will start with high level checks on data. This step involves general data exploration such as checking if there is a class imbalance in the dataset or size and quality related issues in some images.
 
 \subsection{Data pre-processing and augmentation}
-\textcolor{blue}{Many images can have inherent sources of variance that likely to effect the performance of the classification tasks. Some example to these sources of variance are, angle variance, contrast variance and positional variance. Process such as histogram equalization will be apply to images to increase contrast in the images. This process will lead to information difference between bone any different tissues become more prominent. Various image processing tool available in the keras \cite{keras} and scikit-image \cite{skimage} libraries for this processes. 
-I will also make use of some classic data augmentation techniques to avoid over-fitting. One of the most common technique is to flip the images left and right also flip them 90, 180 or 270 degrees.}
+Many images can have inherent sources of variance that likely to effect the performance of the classification tasks. Some example to these sources of variance are, angle variance, contrast variance and positional variance. Process such as histogram equalization will be apply to images to increase contrast in the images. This process will lead to information difference between bone any different tissues become more prominent. Various image processing tool available in the keras \cite{keras} and scikit-image \cite{skimage} libraries for this processes. 
+I will also make use of some classic data augmentation techniques to avoid over-fitting. One of the most common technique is to flip the images left and right also flip them 90, 180 or 270 degrees.
 
 \subsection{Building baseline model with neural network architecture}
-\textcolor{blue}{Apart from using the CheXNet \cite{CheXNetRP} radiologist accuracy benchmark, architectures from section 3 will be trained to set a baseline benchmark accuracy. Because of their well established position in the machine learning field detailed specifications of these architectures are widely available. In fact keras library \cite{keras} have readily available implementation of these models.}
+Apart from using the CheXNet \cite{CheXNetRP} radiologist accuracy benchmark, architectures from section 3 will be trained to set a baseline benchmark accuracy. Because of their well established position in the machine learning field detailed specifications of these architectures are widely available. In fact keras library \cite{keras} have readily available implementation of these models.
 
 %\subsection{Model improvement and hyper parameter tuning}
 
 \subsection{Using pre-trained neural network to increase model performance}
-\textcolor{blue}{A common and effective technique in computer vision is to use pre-trained network to train a new network. This approach especially successful when the dataset is relatively small. Pre-trained network is usually trained in another large scale image classification data such as ImageNet \cite{imagenet}. Features learned from this dataset acts as a high level model and help training of the new network. General way this process works is to keep the convolutional layers (also referred as convolutional base) of the pre-trained network and connect that layers to a dense (fully connected) layer thats not been trained. Then this newly designed network will be trained on the x-ray images.}
+A common and effective technique in computer vision is to use pre-trained network to train a new network. This approach especially successful when the dataset is relatively small. Pre-trained network is usually trained in another large scale image classification data such as ImageNet \cite{imagenet}. Features learned from this dataset acts as a high level model and help training of the new network. General way this process works is to keep the convolutional layers (also referred as convolutional base) of the pre-trained network and connect that layers to a dense (fully connected) layer thats not been trained. Then this newly designed network will be trained on the x-ray images.
 
 \subsection{Visualizing neural network to ensure learning}
-\textcolor{blue}{
 It is import to visualize the neural net to identify which parts of the image it's emphasize. Wide range of different visualization approaches available for visualizing convolution networks. Two selected approach that to be applied are the fallowing:
 \begin{itemize}
     \item \textit{Visualizing intermediate convolution network outputs.} Generally useful for understating how convolution networks transform their input.
-    \item \textit{Heatmaps of class activation.} This visualization technique is most relevant to x-ray image classification. It emphasize part of the image identified as member to certain class which is way of localize objects in the image. 
+    \item \textit{Heatmaps of class activation mapping (CAM).} This visualization technique is most relevant to x-ray image classification. It emphasize part of the image identified as member to certain class which is way of localize objects in the image. 
 \end{itemize}
-}
+
+\textcolor{blue}{More specifically \textit{Gradient-weighted Class Activation Mapping (Grad-CAM)} \cite{heatmap} method will be applied to see right part of the image is emphasized by the network and not the unrelated noise within it. This method is derived from proposal of \textit{Zhou et al.} \cite{cam} called \textit{Class Activation Mapping}.}
 
 %\subsection{Saving trained model for deployment}
 \subsection{Ensemble different models}
-\textcolor{blue}{Ensemble is a classic machine learning method where different models will used together in prediction to gain better result. Main assumption of the ensemble method is independent models will bring different bias to overall prediction where the individual mistakes of the models will be mitigated by the prediction of other models. Effective application of ensemble requires different models to be trained on data and not having simply using different initialization in of the same neural network. In this project different architectures will be trained to form an ensemble model. Method for the ensemble will be averaging and weighted average of the models. In weighted average, weights will chosen based on their accuracy. In other words highly accurate model will be given high weight.}
+Ensemble is a classic machine learning method where different models will used together in prediction to gain better result. Main assumption of the ensemble method is independent models will bring different bias to overall prediction where the individual mistakes of the models will be mitigated by the prediction of other models. Effective application of ensemble requires different models to be trained on data and not having simply using different initialization in of the same neural network. In this project different architectures will be trained to form an ensemble model. Method for the ensemble will be averaging and weighted average of the models. In weighted average, weights will chosen based on their accuracy. In other words highly accurate model will be given high weight.
 
 \subsection{Apply different deployment options}
-\textcolor{blue}{This is a very broad topic with many different deployment options and design choices available. It is not possible to cover all available options within the scope of this project. Therefore selected deployment options will be implemented.}
+This is a very broad topic with many different deployment options and design choices available. It is not possible to cover all available options within the scope of this project. Therefore selected deployment options will be implemented.
 
-\textcolor{blue}{After the training of model completed project moves proceeds to saving the trained model in standalone file that could be used to make predictions. Most cost effective and computationally cheap option is to let prediction happen in the client side of the user. This can be achieved by using JavaScript in the web page that will be served to end user. All modern browsers support JavaScript code to be run in the browser which will enable code and model prediction to run in users device. This option is within reach of the project due to the software packages like TensorFlow.js \cite{tensorjs} that enables trained model to be converted into JavaScript completable file that will be served in static website. Although this option cheap and easy way to provide smart solutions to everyone, it is not suitable for commercial initiatives due to fact that anyone can extract the trained model from source code of the page and use it without creators knowledge.}
+After the training of model completed project moves proceeds to saving the trained model in standalone file that could be used to make predictions. Most cost effective and computationally cheap option is to let prediction happen in the client side of the user. This can be achieved by using JavaScript in the web page that will be served to end user. All modern browsers support JavaScript code to be run in the browser which will enable code and model prediction to run in users device. This option is within reach of the project due to the software packages like TensorFlow.js \cite{tensorjs} that enables trained model to be converted into JavaScript completable file that will be served in static website. Although this option cheap and easy way to provide smart solutions to everyone, it is not suitable for commercial initiatives due to fact that anyone can extract the trained model from source code of the page and use it without creators knowledge.
 
-\textcolor{blue}{Most widely used option when it comes to deployment machine learning models is building RESTful API to serve incoming requests from a central server(s).  This deployment will be build using open source server implemented on the cloud. Reason for choosing the RESTful approach is to building system loosely coupled from the front end design and to enable it to be implemented third part systems.}
+Most widely used option when it comes to deployment machine learning models is building RESTful API to serve incoming requests from a central server(s).  This deployment will be build using open source server implemented on the cloud. Reason for choosing the RESTful approach is to building system loosely coupled from the front end design and to enable it to be implemented third part systems.
+\clearpage
 
 \section{Tools and Techniques}
 For the implementation of the aims of this project python programming language is chosen as a main programming language. Reasons for this decision is two fold, first part of the reasoning is need of high level programming language. Low level programming languages such as Java or C++ are not well suited for computer vision tasks such as this project due to reason of their time consuming prototyping cycles. Second part of the decision python being de facto language of choice for majority users which enables more tools and techniques being available for application. 
@@ -319,10 +320,9 @@ Open source projects and their intended form of usage in this project fallows:
 \clearpage
 
 \section{Project Plan}
-\textcolor{blue}{Fallowing task are based on the project objectives that explained in detail in methodology section. Project will begin on June 14th and continue until 16th of September which is deadline for report submission day. } 
+Fallowing task are based on the project objectives that explained in detail in methodology section. Project will begin on June 14th and continue until 16th of September which is deadline for report submission day.
 
 \begin{itemize}
-    \color{blue}
     \item \textbf{Task 1: }Carrying out general data exploration. (1 - 2 days)
     \item \textbf{Task 2: }Data pre-processing and augmentation. (2 - 4 days)
     \item \textbf{Task 3: }Building baseline model with well known neural network architectures. (10 - 12 days)
