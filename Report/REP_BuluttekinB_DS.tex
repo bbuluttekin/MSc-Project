@@ -1,0 +1,98 @@
+\documentclass[12pt, twoside, a4paper]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+
+\usepackage[margin=1in,left=1.5in,includefoot, a4paper]{geometry}
+
+\usepackage{pythonhighlight}
+\usepackage{listings}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot{}
+\fancyhead{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[LE]{\thepage}
+\fancyfoot[RO]{\thepage}
+%\fancyfoot[LE,RO]{\thepage}
+
+% Custom colors
+\usepackage{color}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
+\usepackage{xcolor} % For highlighting changes
+
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{float}
+
+\usepackage{pgfgantt}
+
+%Biblatex
+\usepackage{biblatex}
+%\addbibresource{references.bib}
+
+\usepackage{amsmath}
+
+\begin{document}
+
+\begin{titlepage}
+    \begin{center}
+        \vspace*{.06\textheight}{\scshape\LARGE Birkbeck, University of London\par}\vspace{1.5cm} % University name
+        \rule[0.5ex]{\linewidth}{2pt}\vspace*{-\baselineskip}\vspace*{3.2pt}
+        \rule[0.5ex]{\linewidth}{1pt}\\[\baselineskip]
+        \huge{\bfseries Pneumonia Detection from Chest X-Ray Images}\\[4mm]
+        \rule[0.5ex]{\linewidth}{1pt}\vspace*{-\baselineskip}\vspace{3.2pt}
+        \rule[0.5ex]{\linewidth}{2pt}\\
+        [1.5cm]
+
+
+        \begin{minipage}[t]{0.4\textwidth}
+        \begin{flushleft} \large
+        \emph{Author:}\\
+        {Baran Buluttekin} 
+        \end{flushleft}
+        \end{minipage}
+        \begin{minipage}[t]{0.4\textwidth}
+        \begin{flushright} \large
+        \emph{Supervisor:} \\
+        {Dr. George Magoulas}   
+        \end{flushright}
+        \end{minipage}\\
+        [2cm] 
+        \includegraphics[scale=0.05]{img/birkbeck-shield.png}
+            \vfill
+
+            \large \textit{A project report submitted in fulfillment of the requirements\\ for the degree of MSc Data Science}\\[0.3cm] 
+            \textit{in the}\\[0.4cm]
+            Department of Computer Science\\[2cm] 
+ 
+            \vfill
+
+            {\large \today}\\[4cm] 
+            
+ 
+            \vfill
+    \end{center}
+\end{titlepage}    
+\thispagestyle{empty}
+\cleardoublepage
+
+\pagenumbering{roman}
+
+\section*{Declaration}
+\addcontentsline{toc}{section}{Declaration}
+
+\vfill
+\textit{I have read and understood the sections of plagiarism in the College Policy on assessment offences and confirm that the work is my own, with the work of others clearly acknowledged. I give my permission to submit my report to the plagiarism testing database that the College is using and test it using plagiarism detection software, search engines or meta- searching software.}
+
+\textit{The proposal may be freely copied and distributed provided the source is explicitly acknowledged.}
+\vfill
+
+\clearpage
+
+\end{document}
