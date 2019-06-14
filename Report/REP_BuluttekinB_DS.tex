@@ -9,6 +9,16 @@
 \usepackage{pythonhighlight}
 \usepackage{listings}
 
+\usepackage{titlesec}
+
+\titleformat{\chapter}[display]
+{\normalfont\Large\filcenter}
+{}
+{0pc}
+{
+\LARGE\bfseries
+}
+
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyfoot{}
@@ -17,6 +27,7 @@
 \fancyfoot[LE]{\thepage}
 \fancyfoot[RO]{\thepage}
 %\fancyfoot[LE,RO]{\thepage}
+\usepackage{emptypage}
 
 % Custom colors
 \usepackage{color}
@@ -84,8 +95,8 @@
 
 \pagenumbering{roman}
 
-\section*{Declaration}
-\addcontentsline{toc}{section}{Declaration}
+\chapter*{Declaration}
+\addcontentsline{toc}{chapter}{Declaration}
 
 \vfill
 \textit{I have read and understood the sections of plagiarism in the College Policy on assessment offences and confirm that the work is my own, with the work of others clearly acknowledged. I give my permission to submit my report to the plagiarism testing database that the College is using and test it using plagiarism detection software, search engines or meta- searching software.}
@@ -95,8 +106,16 @@
 
 \clearpage
 
-\input{chapters/introduction.tex}
+\input{chapters/abstract.tex}
+\addcontentsline{toc}{chapter}{Abstract}
 
 \tableofcontents
+\thispagestyle{empty}
+\cleardoublepage
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\input{chapters/introduction.tex}
 
 \end{document}
