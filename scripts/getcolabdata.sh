@@ -12,4 +12,5 @@ unzip chest-xray-pneumonia.zip
 unzip chest_xray.zip
 rm chest-xray-pneumonia.zip
 rm chest_xray.zip
-#rm -rf __MACOSX/
+rm -rf __MACOSX/
+rm -rf sample_data/
