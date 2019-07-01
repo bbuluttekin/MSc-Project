@@ -10,9 +10,7 @@ from matplotlib.pyplot import figure
 data_dir = Path("/content/chest_xray")
 
 train_dir = data_dir / "train"
-
 test_dir = data_dir / "test"
-
 val_dir = data_dir / "val"
 
 train_dir_normal = train_dir / "NORMAL"
@@ -24,17 +22,28 @@ test_dir_pne = test_dir / "PNEUMONIA"
 normal_val = val_dir / "NORMAL"
 val_dir_pne = val_dir / "PNEUMONIA"
 
+# Choosing one image from the directory
 img = load_img(str(list(normal_val.glob('*.jpeg'))[1]))
+# Turning it into array
 img_array = img_to_array(img)
-
-s = expand_dims(img_array, 0)
-
-datagen = ImageDataGenerator(horizontal_flip=True)
 
 
 def display_augmented_img(img, transformation):
+    """
+    Plots the augmented image with original image side by side for comparison.
+
+    Parameters
+    ==========
+    img : array, Representation of the image
+    transformation : keras data generator object, chosen transformation
+
+    Returns
+    =======
+    None : Shows visualization.
+    """
     figure(num=None, figsize=(14, 12), dpi=80, facecolor='w', edgecolor='k')
     datagen = transformation
+    # Expands the array from vector to matrix
     s = expand_dims(img, 0)
     it = datagen.flow(s, batch_size=1)
     pyplot.subplot(1, 2, 1)
