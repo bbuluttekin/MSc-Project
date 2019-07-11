@@ -33,6 +33,9 @@ IMAGE_SIZE = 225
 
 
 def img_to_array(path_for_class_one, path_for_class_zero):
+    """
+    Documentation needed.
+    """
     X = []
     y = []
 
