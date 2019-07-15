@@ -34,7 +34,18 @@ IMAGE_SIZE = 225
 
 def img_to_array(path_for_class_one, path_for_class_zero):
     """
-    Documentation needed.
+    Function to turn images to numpy array.
+
+    Parameters:
+    ===========
+    path_for_class_one: Relative path to folder of images that will
+    be saved as class one. Type:Path object.
+    path_for_class_zero: Relative path to folder of images that will
+    be saved as class zero. Type:Path object.
+
+    Returns:
+    ========
+    X, y: Train data and corresponding labels, Type: Tuple. 
     """
     X = []
     y = []
