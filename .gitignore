@@ -1,3 +1,4 @@
 /.vscode/
 kaggle.json
 __pycache__
+.pytest_cache/
