@@ -12,8 +12,8 @@ class GetDataset:
         self.width, self.height = image_dims
         self.autotune = tf.data.experimental.AUTOTUNE
 
-    def get_class_names(self, exclude_file='.DS_Store'):
-        classes = [f.name for f in self.path_dir.glob(
+    def get_class_names(self, path_dir, exclude_file='.DS_Store'):
+        classes = [f.name for f in path_dir.glob(
             '*') if f.name != exclude_file]
         return np.array(classes)
 
@@ -35,7 +35,7 @@ class GetDataset:
         return tf.image.resize(img, [self.width, self.height])
 
     def process_path(self, file_path):
-        label = self.get_binary_label(
+        label = self.get_array_label(
             file_path,
             class_names=["NORMAL", "PNEUMONIA"]
         )
