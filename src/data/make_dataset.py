@@ -64,7 +64,25 @@ class GetDataset:
         labelled_data = labelled_data.prefetch(buffer_size=self.autotune)
         return labelled_data
 
-    def make_augmented_dataset(self, path_dir):
+    def image_flip_left_right(self, image):
+        return tf.image.flip_left_right(image)
+
+    def image_adjust_saturation(self, image, factor=3):
+        return tf.image.adjust_saturation(image, saturation_factor=factor)
+
+    def image_adjust_brightness(self, image, delta=0.4):
+        return tf.image.adjust_brightness(image, delta=delta)
+
+    def image_rot90(self, image):
+        return tf.image.rot90(image)
+
+    def image_central_crop(self, image, fraction=0.9):
+        return tf.image.central_crop(image, central_fraction=fraction)
+
+    def image_flip_up_down(self, image):
+        return tf.image.flip_up_down(image)
+
+    def make_augmented_dataset(self, path_dir, transformations):
         raise NotImplementedError
 
     def make_test_dataset(self, path_dir):
