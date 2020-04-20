@@ -43,6 +43,16 @@ class GetDataset:
         img = self.decode_image(img)
         return img, label
 
+    def aug_process_path(self, file_path, transformation):
+        label = self.get_array_label(
+            file_path,
+            class_names=["NORMAL", "PNEUMONIA"]
+        )
+        img = tf.io.read_file(file_path)
+        img = self.decode_image(img)
+        img = transformation(img)
+        return img, label
+
     def make_train_data(
         self,
         path_dir,
@@ -51,7 +61,7 @@ class GetDataset:
     ):
         list_path = tf.data.Dataset.list_files(str(path_dir / "*/*.jpeg"))
         labelled_data = list_path.map(
-            process_path,
+            self.process_path,
             num_parallel_calls=self.autotune)
         if cache:
             if isinstance(cache, str):
@@ -82,8 +92,26 @@ class GetDataset:
     def image_flip_up_down(self, image):
         return tf.image.flip_up_down(image)
 
-    def make_augmented_dataset(self, path_dir, transformations):
-        raise NotImplementedError
+    def make_augmented_dataset(
+        self,
+        path_dir,
+        transformations,
+        shuffle_buffer_size=2000
+    ):
+        list_path = tf.data.Dataset.list_files(str(path_dir / "*/*.jpeg"))
+        labelled_data = list_path.map(
+            self.process_path,
+            num_parallel_calls=self.autotune)
+        for i in transformations:
+            augmented = list_path.map(
+                lambda x: self.aug_process_path(x, i),
+                num_parallel_calls=self.autotune)
+            labelled_data = labelled_data.concatenate(augmented)
+        labelled_data = labelled_data.cache()
+        labelled_data = labelled_data.shuffle(buffer_size=shuffle_buffer_size)
+        labelled_data = labelled_data.batch(self.batch_size)
+        labelled_data = labelled_data.prefetch(buffer_size=self.autotune)
+        return labelled_data
 
     def make_test_dataset(self, path_dir):
         raise NotImplementedError
