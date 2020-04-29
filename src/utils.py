@@ -1,3 +1,5 @@
+import datetime
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -19,7 +21,7 @@ def display_images_from_dataset(dataset, n=9):
 
 
 def visualize_augmented_images(original, augmented):
-    fig = plt.figure()
+    fig = plt.figure(figsize=(30, 30))
     plt.subplot(1, 2, 1)
     plt.title('Original image')
     plt.imshow(original)
@@ -27,3 +29,5 @@ def visualize_augmented_images(original, augmented):
     plt.subplot(1, 2, 2)
     plt.title('Augmented image')
     plt.imshow(augmented)
+    plt.show()
+    plt.savefig(f"augmented-image-{int(datetime.datetime.now().timestamp())}")
