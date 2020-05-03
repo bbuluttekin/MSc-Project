@@ -21,13 +21,13 @@ def display_images_from_dataset(dataset, n=9):
 
 
 def visualize_augmented_images(original, augmented):
-    fig = plt.figure(figsize=(30, 30))
+    fig = plt.figure(figsize=(10, 10))
     plt.subplot(1, 2, 1)
-    plt.title('Original image')
+    plt.title('Original image', fontsize=15)
     plt.imshow(original)
 
     plt.subplot(1, 2, 2)
-    plt.title('Augmented image')
+    plt.title('Augmented image', fontsize=15)
     plt.imshow(augmented)
-    plt.show()
-    plt.savefig(f"augmented-image-{int(datetime.datetime.now().timestamp())}")
+    plt.savefig(f"augmented-image-{int(datetime.datetime.now().timestamp())}",
+                dpi=100)
