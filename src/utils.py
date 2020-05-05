@@ -24,15 +24,17 @@ def visualize_augmented_images(original, augmented):
     fig = plt.figure(figsize=(10, 10))
     plt.subplot(1, 2, 1)
     plt.title('Original image', fontsize=15)
+    plt.axis('off')
     plt.imshow(original)
 
     plt.subplot(1, 2, 2)
     plt.title('Augmented image', fontsize=15)
+    plt.axis('off')
     plt.imshow(augmented)
     plt.savefig(f"augmented-image-{int(datetime.datetime.now().timestamp())}",
                 dpi=100,
                 bbox_inches='tight',
-                pad_inches=0)
+                pad_inches=0.1)
 
 
 def plot_training_curves(training, validation, title, subplot):
