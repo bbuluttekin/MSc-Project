@@ -38,7 +38,7 @@ def visualize_augmented_images(original, augmented):
 
 
 def plot_training_curves(training, validation, title, subplot):
-    if subplot % 10 == 1:  # set up the subplots on the first call
+    if subplot % 10 == 1:
         plt.subplots(figsize=(10, 10), facecolor='#F0F0F0')
         plt.tight_layout()
     ax = plt.subplot(subplot)
