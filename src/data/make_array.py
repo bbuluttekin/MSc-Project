@@ -23,6 +23,7 @@ def img_to_array(path_for_class_one, path_for_class_zero, image_size=225):
             image, target_size=(image_size, image_size))
         img = keras.preprocessing.image.img_to_array(img)
         img = np.array(img).ravel()
+        img = img / 255
         X.append(img)
         y.append(1)
 
@@ -31,6 +32,7 @@ def img_to_array(path_for_class_one, path_for_class_zero, image_size=225):
             image, target_size=(image_size, image_size))
         img = keras.preprocessing.image.img_to_array(img)
         img = np.array(img).ravel()
+        img = img / 255
         X.append(img)
         y.append(0)
 
