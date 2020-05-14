@@ -23,8 +23,8 @@ class GetDataset:
 
     def get_binary_label(self, file_path, class_names):
         parts = tf.strings.split(file_path, os.path.sep)
-        label = class_names.index(parts[-2])
-        return tf.constant(label, tf.float32)
+        label = parts[-2] == "PNEUMONIA"
+        return label
 
     def decode_image(self, img, rgb=True):
         if rgb:
