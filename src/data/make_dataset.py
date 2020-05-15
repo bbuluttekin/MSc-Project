@@ -22,8 +22,10 @@ class GetDataset:
         return parts[-2] == class_names
 
     def get_binary_label(self, file_path, class_names):
+        if len(class_names) != 2:
+            raise ValueError("Number of classes can not be diffrent than 2.")
         parts = tf.strings.split(file_path, os.path.sep)
-        label = parts[-2] == "PNEUMONIA"
+        label = parts[-2] == class_names[1]
         return label
 
     def decode_image(self, img, rgb=True):
