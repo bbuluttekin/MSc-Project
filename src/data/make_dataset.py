@@ -37,7 +37,7 @@ class GetDataset:
         return tf.image.resize(img, [self.width, self.height])
 
     def process_path(self, file_path):
-        label = self.get_array_label(
+        label = self.get_binary_label(
             file_path,
             class_names=["NORMAL", "PNEUMONIA"]
         )
@@ -46,7 +46,7 @@ class GetDataset:
         return img, label
 
     def aug_process_path(self, file_path, transformation):
-        label = self.get_array_label(
+        label = self.get_binary_label(
             file_path,
             class_names=["NORMAL", "PNEUMONIA"]
         )
