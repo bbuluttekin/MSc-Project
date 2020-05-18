@@ -25,12 +25,19 @@ class CloudTrainer:
             tf.config.experimental_connect_to_cluster(self.tpu)
             tf.tpu.experimental.initialize_tpu_system(self.tpu)
             self.strategy = tf.distribute.experimental.TPUStrategy(self.tpu)
+            # Batch size reminder
+            print(
+                f"Recomenden batch size: {16 * self.strategy.num_replicas_in_sync}")
         elif len(self.gpu) > 0:
             self.strategy = tf.distribute.MirroredStrategy(self.gpu)
             print('Running on ', len(self.gpu), ' GPU(s) ')
         else:
             self.strategy = tf.distribute.get_strategy()
             print('Running on CPU')
+
+    def add_callbacks(self, callbacks):
+        for callback in callbacks:
+            self.callbacks.append(callback)
 
     def add_keras_seq_model(self, model):
         self.model = model
