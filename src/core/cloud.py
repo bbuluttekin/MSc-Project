@@ -1,3 +1,4 @@
+import os
 import tensorflow as tf
 
 
@@ -45,13 +46,64 @@ class CloudTrainer:
     def add_keras_functional_model(self, model):
         self.model = model
 
-    def compile(self, optimizer, loss, metrics):
+    def compile(self, optimizer, loss, metrics, **kwargs):
         if self.model:
             with self.strategy.scope():
                 self.model.compile(
                     optimizer=optimizer,
                     loss=loss,
-                    metrics=metrics
+                    metrics=metrics,
+                    **kwargs
                 )  # Add args
         else:
             raise ValueError("Define model needs to be added")
+
+    def fit(
+        self,
+        x=None,
+        y=None,
+        batch_size=None,
+        epochs=1,
+        verbose=1,
+        validation_split=0.0,
+        validation_data=None,
+        shuffle=True,
+        class_weight=None,
+        sample_weight=None,
+        initial_epoch=0,
+        steps_per_epoch=None,
+        validation_steps=None,
+        validation_batch_size=None,
+        validation_freq=1,
+        max_queue_size=10,
+        workers=1,
+        use_multiprocessing=False
+    ):
+        if not os.path.isdir(self.main_path):
+            self.history = self.model.fit(
+                x=x,
+                y=y,
+                batch_size=batch_size,
+                epochs=epochs,
+                verbose=verbose,
+                callbacks=self.callbacks,
+                validation_split=validation_split,
+                validation_data=validation_data,
+                shuffle=shuffle,
+                class_weight=class_weight,
+                sample_weight=sample_weight,
+                initial_epoch=initial_epoch,
+                steps_per_epoch=steps_per_epoch,
+                validation_steps=validation_steps,
+                validation_batch_size=validation_batch_size,
+                validation_freq=validation_freq,
+                max_queue_size=max_queue_size,
+                workers=workers,
+                use_multiprocessing=use_multiprocessing
+            )
+        else:
+            # Find the saved model from last epoch
+            # Load the last model weights to model
+            # Set the initial_epoch to last epoch
+            # fit the model
+            raise NotImplementedError
