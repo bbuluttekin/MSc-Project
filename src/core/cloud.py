@@ -8,7 +8,7 @@ class CloudTrainer:
         self.main_path = "drive/My Drive/models"
         self.model_path = f"{self.main_path}/{self.name}"
         self.log_path = f"{self.main_path}/{self.name}/logs"
-        self.ckpt = self.main_path + "/model-{epoch}.ckpt"
+        self.ckpt = self.model_path + "/model-{epoch}.ckpt"
         self.callbacks = [
             tf.keras.callbacks.ModelCheckpoint(self.ckpt),
             tf.keras.callbacks.TensorBoard(
@@ -80,7 +80,7 @@ class CloudTrainer:
         workers=1,
         use_multiprocessing=False
     ):
-        if not os.path.isdir(self.main_path):
+        if not os.path.isdir(self.model_path):
             self.history = self.model.fit(
                 x=x,
                 y=y,
@@ -102,10 +102,10 @@ class CloudTrainer:
                 workers=workers,
                 use_multiprocessing=use_multiprocessing
             )
-            self.model.save(f"{self.main_path}/final_model.h5")
+            self.model.save(f"{self.model_path}/final_model.h5")
         else:
             # Find the saved model from last epoch
-            latest_ckpt = tf.train.latest_checkpoint(self.main_path)
+            latest_ckpt = tf.train.latest_checkpoint(self.model_path)
             print(f"Found a checkpoint for the experiment: {latest_ckpt}")
             init_epoch = int(str(latest_ckpt).split("-")[1].split(".")[0])
             # Load the last model weights to model
@@ -133,4 +133,4 @@ class CloudTrainer:
                 workers=workers,
                 use_multiprocessing=use_multiprocessing
             )
-            self.model.save(f"{self.main_path}/final_model.h5")
+            self.model.save(f"{self.model_path}/final_model.h5")
