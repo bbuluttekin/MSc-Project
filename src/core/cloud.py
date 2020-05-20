@@ -18,7 +18,7 @@ class CloudTrainer:
         # TPU detection
         try:
             self.tpu = tf.distribute.cluster_resolver.TPUClusterResolver()
-            print('Running on TPU ', tpu.master())
+            print('Running on TPU ', self.tpu.master())
         except ValueError:
             self.tpu = None
             self.gpu = tf.config.experimental.list_logical_devices("GPU")
