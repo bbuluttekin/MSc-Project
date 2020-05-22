@@ -48,7 +48,7 @@ class CloudTrainer:
         self.model_pointer = model
 
     def compile(self, optimizer, loss, metrics, **kwargs):
-        if self.model:
+        if self.model_pointer:
             with self.strategy.scope():
                 self.model = self.model_pointer()
                 self.model.compile(
