@@ -42,14 +42,15 @@ class CloudTrainer:
             self.callbacks.append(callback)
 
     def add_keras_seq_model(self, model):
-        self.model = model
+        self.model_pointer = model
 
     def add_keras_functional_model(self, model):
-        self.model = model
+        self.model_pointer = model
 
     def compile(self, optimizer, loss, metrics, **kwargs):
         if self.model:
             with self.strategy.scope():
+                self.model = self.model_pointer()
                 self.model.compile(
                     optimizer=optimizer,
                     loss=loss,
