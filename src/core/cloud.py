@@ -10,7 +10,8 @@ class CloudTrainer:
         self.log_path = f"{self.main_path}/{self.name}/logs"
         self.ckpt = self.model_path + "/model-{epoch}.ckpt"
         self.callbacks = [
-            tf.keras.callbacks.ModelCheckpoint(self.ckpt),
+            tf.keras.callbacks.ModelCheckpoint(self.ckpt,
+                                               save_weights_only=True),
             tf.keras.callbacks.TensorBoard(
                 log_dir=self.log_path
             )
