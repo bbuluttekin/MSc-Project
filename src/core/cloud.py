@@ -3,7 +3,7 @@ import tensorflow as tf
 
 
 class CloudTrainer:
-    def __init__(self, experiment_name, environment="default", env_path=None):
+    def __init__(self, experiment_name, environment="default", env_path=None, gpu_strategy="auto"):
         self.name = experiment_name
         if environment == "default":
             if env_path:
@@ -38,7 +38,14 @@ class CloudTrainer:
             print(
                 f"Recomenden batch size: {16 * self.strategy.num_replicas_in_sync}")
         elif len(self.gpu) > 0:
-            self.strategy = tf.distribute.MirroredStrategy(self.gpu)
+            if gpu_strategy == "auto":
+                self.strategy = tf.distribute.get_strategy()
+            elif gpu_strategy == "mirrored":
+                self.strategy = tf.distribute.MirroredStrategy(self.gpu)
+            else:
+                raise ValueError(
+                    "Only auto and mirrored strategies available for GPU(s)"
+                )
             print('Running on ', len(self.gpu), ' GPU(s) ')
         else:
             self.strategy = tf.distribute.get_strategy()
