@@ -3,12 +3,18 @@ import tensorflow as tf
 
 
 class CloudTrainer:
-    def __init__(self, experiment_name):
+    def __init__(self, experiment_name, environment="default", env_path=None):
         self.name = experiment_name
-        self.main_path = "drive/My Drive/models"
-        self.model_path = f"{self.main_path}/{self.name}"
-        self.log_path = f"{self.main_path}/{self.name}/logs"
-        self.ckpt = self.model_path + "/model-{epoch}.ckpt"
+        if environment == "default":
+            if env_path:
+                self.main_path = env_path
+            else:
+                self.main_path = "drive/My Drive/models"
+            self.model_path = f"{self.main_path}/{self.name}"
+            self.log_path = f"{self.main_path}/{self.name}/logs"
+            self.ckpt = self.model_path + "/model-{epoch}.ckpt"
+        elif environment == "s3":
+            raise NotImplementedError
         self.callbacks = [
             tf.keras.callbacks.ModelCheckpoint(self.ckpt,
                                                save_weights_only=True),
