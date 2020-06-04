@@ -1,4 +1,6 @@
+import json
 import os
+
 import tensorflow as tf
 
 
@@ -117,6 +119,8 @@ class CloudTrainer:
                 workers=workers,
                 use_multiprocessing=use_multiprocessing
             )
+            with open(f"{self.model_path}/history.json", "w") as f:
+                json.dump(self.history.history, f)
             self.model.save(f"{self.model_path}/final_model.h5")
         else:
             # Find the saved model from last epoch
@@ -148,4 +152,6 @@ class CloudTrainer:
                 workers=workers,
                 use_multiprocessing=use_multiprocessing
             )
+            with open(f"{self.model_path}/history.json", "w") as f:
+                json.dump(self.history.history, f)
             self.model.save(f"{self.model_path}/final_model.h5")
