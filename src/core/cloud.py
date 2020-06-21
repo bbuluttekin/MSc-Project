@@ -5,7 +5,14 @@ import tensorflow as tf
 
 
 class CloudTrainer:
-    def __init__(self, experiment_name, environment="default", env_path=None, gpu_strategy="auto"):
+    def __init__(
+        self,
+        experiment_name,
+        environment="default",
+        env_path=None,
+        gpu_strategy="auto",
+        save_freq=5
+    ):
         self.name = experiment_name
         if environment == "default":
             if env_path:
@@ -18,12 +25,23 @@ class CloudTrainer:
         elif environment == "s3":
             raise NotImplementedError
         self.callbacks = [
-            tf.keras.callbacks.ModelCheckpoint(self.ckpt,
-                                               save_weights_only=True),
             tf.keras.callbacks.TensorBoard(
                 log_dir=self.log_path
             )
         ]
+        if save_freq:
+            if type(save_freq) != int:
+                raise TypeError("Save frequency must be an integer")
+            self.callbacks.append(
+                tf.keras.callbacks.ModelCheckpoint(self.ckpt,
+                                                   save_weights_only=True,
+                                                   period=save_freq)
+            )
+        else:
+            self.callbacks.append(
+                tf.keras.callbacks.ModelCheckpoint(self.ckpt,
+                                                   save_weights_only=True)
+            )
         # TPU detection
         try:
             self.tpu = tf.distribute.cluster_resolver.TPUClusterResolver()
