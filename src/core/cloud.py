@@ -22,6 +22,8 @@ class CloudTrainer:
             self.model_path = f"{self.main_path}/{self.name}"
             self.log_path = f"{self.main_path}/{self.name}/logs"
             self.ckpt = self.model_path + "/model-{epoch}.ckpt"
+
+        # TODO: implement the s3 model save and load
         elif environment == "s3":
             raise NotImplementedError
         self.callbacks = [
@@ -56,7 +58,7 @@ class CloudTrainer:
             self.strategy = tf.distribute.experimental.TPUStrategy(self.tpu)
             # Batch size reminder
             print(
-                f"Recomenden batch size: {16 * self.strategy.num_replicas_in_sync}")
+                f"Recommended batch size: {16 * self.strategy.num_replicas_in_sync}")
         elif len(self.gpu) > 0:
             if gpu_strategy == "auto":
                 self.strategy = tf.distribute.get_strategy()
