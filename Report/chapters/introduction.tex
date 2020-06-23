@@ -21,11 +21,11 @@ Project will be implemented with execution of fallowing objectives:
 \end{itemize}
 
 \section{CI/CD Pipeline}
-In this section I will give a brief introduction CI/CD pipeline to explain what CI/CD is and why it is chosen as a way to build this project.
+In this section, I will give a brief introduction CI/CD pipeline to explain what CI/CD is and why it is chosen as a preferred way of build this project.
 
 Continuous integration (CI) is a workflow strategy that helps ensure everyone's changes will integrate with the current version of the project in the typical software engineering team. This lets member of the team to catch bugs, reduce merge conflicts, and increase overall confidence of your software is working. While the details may vary depending on the development environment, most CI systems feature the same basic tools and processes. In most scenarios, a team will practice CI in conjunction with automated testing using a dedicated server or CI service. Whenever a developer adds new work to a branch, the server will automatically build and test the code to determine whether it works and can be integrated with the code on the main development branch. The CI server will produce output containing the results of the build and an indication of whether or not the branch passes all the requirements for integration into the main development branch. By exposing build and test information for every commit on every branch, CI paves the way for what's known as continuous delivery, or CD, as well as a related process called continuous deployment. Difference between continuous delivery and continuous deployment is that CD is the practice of developing software in such a way that you could release it at any time. When coupled with CI, continuous delivery lets you develop features with modular code in more manageable increments. Continuous development is an extension of continuous delivery. It's a process that allows you to actually deploy newly developed features into production with confidence, and experience little, if any, downtime. Even though benefits of using CI/CD pipelines more prominent in the software teams, integration automated testing will help even individual project such as this by reducing time for debugging.
 
-In more granular detail, this system works with central version control services and in this project central version control service used is Github. GitHub uses what are called \emph{webhooks} to send messages to external systems about activity and events that occur in the project. For each event type, subscribers will receive message related to the event. Generally events refer to action involving the software such as new commit push or pull (merge) request and more. In this case whenever new commit is pushed to the any branch of the project. Message from Github will be send out to third party system called \emph{travis}~\footnote{https://travis-ci.org/}. Travis is a hosted CI service that allow build and test software hosted in version control services. Upon completing the build and test travis then passes the test results via Github API which will be visible to the developer. 
+In more granular detail, this system works with central version control services and in this project central version control service used is Github. GitHub uses communication tool called \emph{webhooks} to send messages to external systems about activities and events that occurred in the project. For each event type, subscribers will receive message related to the event. Generally events refer to action involving the software such as new commit push or pull (merge) request and more. In this case whenever new commit is pushed to the any branch of the project, message from Github will be send out to third party system called \emph{travis}~\footnote{https://travis-ci.org/} and travis will fetch the most recent version of the project and run the tests associated with it. When test runs completed with the latest version of the software, test results will send back to relevant commit as status information. Travis is a hosted CI service that allow build and test software hosted in version control services. Upon completing the build and test travis then passes the test results via Github API which will be visible to the developer. 
 
 \section{Engineering Related Challenges}
 Role of hardware accelerators. Debugging related challenges of Neural Networks
@@ -34,6 +34,13 @@ Role of hardware accelerators. Debugging related challenges of Neural Networks
 Overall project design such as folders and library interactions.
 
 \section{Reproducibility Guidance}
+Reproducibility is a fundamental 
+
+As a scientific project, it is very important that anyone can reproduce the experiments and findings in this project to verify the conclusions reached are accurate. \cite{dataset}
+
+
+to reproduce the experiments and findings in this project to verify the conclusions reached are accurate.
+
 Parts to consider before reproducing.
 Repo is not public
 Most runs carried out in colab 
