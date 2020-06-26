@@ -20,7 +20,7 @@ Project will be implemented with execution of fallowing objectives:
     \item \textbf{Applying different deployment options: } Implementation of different deployment options. Based on their trade offs. 
 \end{itemize}
 
-\section{CI/CD Pipeline}
+\section{CI/CD Pipeline} \label{sec:cicd}
 In this section, I will give a brief introduction CI/CD pipeline to explain what CI/CD is and why it is chosen as a preferred way of build this project.
 
 Continuous integration (CI) is a workflow strategy that helps ensure everyone's changes will integrate with the current version of the project in the typical software engineering team. This lets member of the team to catch bugs, reduce merge conflicts, and increase overall confidence of your software is working. While the details may vary depending on the development environment, most CI systems feature the same basic tools and processes. In most scenarios, a team will practice CI in conjunction with automated testing using a dedicated server or CI service. Whenever a developer adds new work to a branch, the server will automatically build and test the code to determine whether it works and can be integrated with the code on the main development branch. The CI server will produce output containing the results of the build and an indication of whether or not the branch passes all the requirements for integration into the main development branch. By exposing build and test information for every commit on every branch, CI paves the way for what's known as continuous delivery, or CD, as well as a related process called continuous deployment. Difference between continuous delivery and continuous deployment is that CD is the practice of developing software in such a way that you could release it at any time. When coupled with CI, continuous delivery lets you develop features with modular code in more manageable increments. Continuous development is an extension of continuous delivery. It's a process that allows you to actually deploy newly developed features into production with confidence, and experience little, if any, downtime. Even though benefits of using CI/CD pipelines more prominent in the software teams, integration automated testing will help even individual project such as this by reducing time for debugging.
@@ -28,13 +28,13 @@ Continuous integration (CI) is a workflow strategy that helps ensure everyone's 
 In more granular detail, this system works with central version control services and in this project central version control service used is Github. GitHub uses communication tool called \emph{webhooks} to send messages to external systems about activities and events that occurred in the project. For each event type, subscribers will receive message related to the event. Generally events refer to action involving the software such as new commit push, pull (merge) request or other software related action. In this case whenever new commit is pushed to the any branch of the project, message from Github will be send out to third party system called \emph{travis.}~\footnote{https://travis-ci.org/} Travis is a hosted CI service that allow build and test software hosted in version control services. When travis receives the webhook call it will fetch the most recent version of the project and run the tests associated with it. When test runs completed with the latest version of the software, test results will send back to relevant commit as status information using GitHub API. This information can either be used by developer for making decisions such as whether to accept the pull request versus reject it or if applicable can be used by service to initiate the deployment process for the software. In all cases CI/CD will work as an automation for software quality assurance process to speed up the development and improve the over all reliability of the software.
  
 
-\section{Engineering Related Challenges Specific to Machine Learning Systems}
+\section{Engineering Related Challenges Specific to Machine Learning Systems} \label{sec:engchallenge}
 Role of hardware accelerators. Debugging related challenges of Neural Networks
 
-\section{Project layout and design}
+\section{Project layout and design} \label{sec:projectlayout}
 Overall project design such as folders and library interactions.
 
-\section{Reproducibility Guidance}
+\section{Reproducibility Guidance} \label{sec:reproducibility}
 Reproducibility is a fundamental 
 
 As a scientific project, it is very important that anyone can reproduce the experiments and findings in this project to verify the conclusions reached are accurate. \cite{dataset}
