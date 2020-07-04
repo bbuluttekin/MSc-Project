@@ -37,10 +37,11 @@ In more granular detail, this system works with central version control services
 \end{figure}
  
 
-\section{Engineering Related Challenges Specific to Machine Learning Systems} \label{sec:engchallenge}
-Role of hardware accelerators. Debugging related challenges of Neural Networks
 
-\section{Project layout and design} \label{sec:projectlayout}
+\section{Project specification and design} \label{sec:projectlayout}
+This project I aimed to keep code and reporting together to provide easy reproduction. Codebase design to be extendable and modular. Therefore, I assign a sub-folder for all the project-specific code under the name \emph{src}. Having a module in the same directory level with the other components allows the ability to use the code in notebook experiment as well as in the tests in the CI integration.
+Both project proposal and report developed using the LaTeX typesetting system and documents kept in the version controlling to allow easy changes and rolling back to best version.
+
 Overall project design such as folders and library interactions.
 
 \dirtree{%
@@ -55,6 +56,8 @@ Overall project design such as folders and library interactions.
 .3 Main project latex files.
 .2 scripts.
 .3 Utility scripts.
+.2 notebooks.
+.3 Experiment notebooks.
 .2 src.
 .3 Python library files.
 .2 tests.
