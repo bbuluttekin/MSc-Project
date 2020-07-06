@@ -40,10 +40,9 @@ In more granular detail, this system works with central version control services
 
 
 \section{Project specification and design} \label{sec:projectlayout}
-This project I aimed to keep code and reporting together to provide easy reproduction. Codebase design to be extendable and modular. Therefore, I assign a sub-folder for all the project-specific code under the name \emph{src}. Having a module in the same directory level with the other components allows the ability to use the code in notebook experiment as well as in the tests in the CI integration.
-Both project proposal and report developed using the LaTeX typesetting system and documents kept in the version controlling to allow easy changes and rolling back to best version.
-
-Overall project design such as folders and library interactions.
+This project I aimed to keep code and reporting together to provide easy reproduction. Codebase design to be extendable and modular. Therefore, I assign a sub-folder for all the project-specific code under the name \emph{src}. Having a module in the same directory level with the other components allows the ability to use the code in notebook experiment as well as with the tests in the CI integration.
+Both project proposal and report developed using the LaTeX typesetting system and documents kept in the version controlling to allow easy changes and rolling back to the desired version. Finally, root-level files such as \emph{.travis.yml} and \emph{requirements.txt} is instrumental in defining which steps to take in CI runs and constructing a near-identical environment for software dependencies.
+Below I added a directory tree to serve as a guide for navigating and finding project files.
 
 \dirtree{%
 .1 .
@@ -64,20 +63,19 @@ Overall project design such as folders and library interactions.
 .2 tests.
 .3 Test files.
 .2 .gitignore.
-.2 .travis.
+.2 .travis.yml.
 .2 README.md.
 .2 requirements.txt.
 }
 
 \section{Reproducibility Guidance} \label{sec:reproducibility}
-Reproducibility is a fundamental 
-
-As a scientific project, it is very important that anyone can reproduce the experiments and findings in this project to verify the conclusions reached are accurate. \cite{dataset}
+As a scientific project, it is very important that anyone can reproduce the experiments and findings in this project to verify the conclusions reached are accurate. Main components of reproducible research are open code, open data and repeatable software runtime specification. Open code component is the most straightforward among the other components as the source-code produced part of this project will be shared with the project reviewers and will be made public in GitHub~\footnote{https://github.com/bbuluttekin/MSc-Project} once the assessment of the project is completed. Dataset~\cite{dataset} used in this project is also available through the website URL and hosted in online data science community called Kaggle~\footnote{https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia}. I have used Kaggle as the main source of accessing this data for two reasons, one for its functionality of allowing API calls to retrieve data and two for managing the data versioning for the user. Having version controlling in data will allow anyone attempting to run the experiments to use the same data. The current version of the dataset as of the writing of this project is version 2.
 
 
 to reproduce the experiments and findings in this project to verify the conclusions reached are accurate.
 
 Parts to consider before reproducing.
+version of the data can be tracked from kaggle
 Repo is not public
 Most runs carried out in colab 
 notebooks should be positioned in same level as the src library
