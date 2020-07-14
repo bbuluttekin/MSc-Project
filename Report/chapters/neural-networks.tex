@@ -7,7 +7,14 @@ Because of the weakness described earlier, Artificial Neural Networks emerges as
 
 
 \section{Building Blocks of ANN}
-The idea of Artificial Neural Networks inspired from the neural cells of the human brain. Earliest known research for ANNs dates back to 1943 as a multi disciplinary work of phycology and mathematics by Warren McCulloch and Walter Pitts~\cite{firstann}. It covered how computational logic might model complex neural cells activities. 
+The idea of Artificial Neural Networks inspired from the neural cells of the human brain. Earliest known research for ANNs dates back to 1943 as a multi disciplinary work of phycology and mathematics by Warren McCulloch and Walter Pitts~\cite{firstann}. Their work covered how computational logic could model complex neural cells activities. However, first development that reshaped the way for current generally accepted practices of ANNs was the work of Frank Rosenblatt's  \emph{"The Perceptron: A Probabilistic Model for Information Storage and Organization in The Brain"}~\cite{perceptron}. Perceptron, is simplest linear ANN that always converge to hyper-plane when there is two set of classes that can be linearly separable. Like the current single neurons generally used in modern ANNs, for producing output it calculates the sum of weighted input and applies a \emph{step function} to that sum. For example, let the input \textbf{\textit{x}} be n-dimensional input vector, Perceptron first calculates \(z = w_1x_1 + w_2x_2 + \ldots + w_nx_n = x^Tw\) then pass this weighted sum of inputs to step function \(h(x)\) below to calculate final output. 
+\[
+h(z)=
+\begin{cases}
+    0, & \text{if } z< 0\\
+    1, & \text{if } z\geq 0
+\end{cases}    
+\]
 
 \section{Exploding and Vanishing Gradients}
 
