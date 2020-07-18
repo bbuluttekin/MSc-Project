@@ -1,4 +1,4 @@
-\chapter{Background Material}
+\chapter{Background Material} \label{chap:background}
 Generally, the first part of every machine learning project is to choosing the algorithm to tackle the problem in hand. As I stated in the proposal of this project, I choose to apply specific machine learning algorithms called Artificial Neural Networks (ANNs) to tackle the classification challenge of detecting pneumonia in X-ray images. The first part of this chapter I would like to provide some information to justify that decision. 
 
 The objective of the algorithm in this report is to classify X-ray images with or without pneumonia. Classification is a task of determining what is the defined class of an example given its data associated with it. In our case, we defined our classes for prediction to the person in the example image having pneumonia or not. In order to achieve that goal, machine learning algorithm must produce a function that outputs the class within defined finite possible classes such as \(f:\mathbb{R}^n \rightarrow \{1, \ldots, k\ \}\) which in this case k is equal to 2. In essence all machine learning algorithms will map input representation of the data \textbf{\textit{x}} to prediction output $\hat{y}=f(x)$. The only difference is how each algorithm is representing the data distribution with a model $f$. Which consequently leads to the question of which algorithm is the best algorithm for machine learning or which algorithm to choose to find the best model representation. According to \textbf{no free lunch theorem}~\cite{nofreelunch} there is no such algorithm exist that will consistently achieve low error rate averaged over all possible distributions. In other words, no model is universally any better than any other machine learning model. Luckily, the objective in this project is not to find the universally best algorithm but rather to find the algorithm that will find the best representation for the data distribution of healthy and pneumonia X-ray images. 
@@ -6,7 +6,7 @@ Historically, traditional machine learning algorithms often performed poorly on 
 Because of the weakness described earlier, Artificial Neural Networks emerges as a clear choice for image classification and object detection task which became evident with the performance of AlexNet~\cite{Alexnet}, VGGNet~\cite{vggnet} and ResNet~\cite{resnet} in the ILSVRC~\cite{imagenet}.  
 
 
-\section{Building Blocks of ANN}
+\section{Building Blocks of ANN} \label{sec:bbann}
 The idea of Artificial Neural Networks inspired by the neural cells of the human brain. Earliest known research for ANNs dates back to 1943 as a multidisciplinary work of phycology and mathematics by Warren McCulloch and Walter Pitts~\cite{firstann}. Their work covered how computational logic could model complex neural cells activities. However, first development that reshaped the way for current generally accepted practices of ANNs was the work of Frank Rosenblatt's  \emph{"The Perceptron: A Probabilistic Model for Information Storage and Organization in The Brain"}~\cite{perceptron}. Perceptron is the simplest linear ANN that always converges to hyper-plane when there are two sets of classes that can be linearly separable. Like the current single neurons generally used in modern ANNs, for producing output it calculates the sum of weighted inputs and applies a \emph{step function} to that sum. For example, let the input \textbf{\textit{x}} be n-dimensional input vector, Perceptron first calculates \(z = w_1x_1 + w_2x_2 + \ldots + w_nx_n = x^Tw\) then pass this weighted sum of inputs to step function \(h(z)\) below to calculate final output. 
 
 \begin{equation} \label{eq:stepfunc21}
@@ -21,7 +21,8 @@ Current ANN units also have same properties with the exception of the use of ste
 
 Despite its robust nature Perceptron is ultimately a linear model which implies that it can only be effective for the data distributions that can be linearly separable.
 The popularity of the algorithm is faded as the limitations such as not being able to separate logical operation exclusive OR~\cite{marvinperceptrons} (also know as XOR) is discovered.
-However, later on, it is discovered that these limitations can be eliminated by just using layers of many Perceptrons together as a single model and the resulting model is called \emph{Multilayer Perceptron} (MLP).
+However, later on, it is discovered that these limitations can be eliminated by just using layers of many Perceptrons together as a single model and the resulting model is called \emph{Multilayer Perceptron} (MLP). 
+(\emph{Feedforward Network} is another term that usually used interchangeably with Multilayer Perceptron.)
 MLPs uses a concept called layer which is useful for calculation and managing the architecture of the model.
 In a nutshell, a layer is the combination of neurons with bias neuron stack together (with exception of output layer) that have the same input source.
 Concept of a layer is used in many different architectures, for example, a layer with each neuron that connected to each unit in previous and next later is known as \emph{Fully connected layer} or \emph{Dense layer} whereas layer with pre-defined convolution operation is called \emph{Convolutional layer}. 
@@ -76,13 +77,13 @@ Concept of a layer is used in many different architectures, for example, a layer
 \caption{Illustration of a MLP model.} \label{fig:mlp}
 \end{figure}
 
-\section{Exploding and Vanishing Gradients}
+\section{Exploding and Vanishing Gradients} \label{sec:gradients}
 
-\section{Optimization}
+\section{Optimization} \label{sec:optimization}
 
-\section{Regularization and Over-fitting}
+\section{Regularization and Over-fitting} \label{sec:regularization}
 
-\section{Convolutional Networks}
+\section{Convolutional Networks} \label{sec:convnets}
 
 \section{Software Challenges Specific to 
 Machine Learning Systems} \label{sec:engchallenge}
