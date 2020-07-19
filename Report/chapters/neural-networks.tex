@@ -78,6 +78,13 @@ Concept of a layer is used in many different architectures, for example, a layer
 \end{figure}
 
 \section{Exploding and Vanishing Gradients} \label{sec:gradients}
+Having the sequential architecture described in section \ref{sec:bbann} MLPs faces additional challenge that is not common in traditional machine learning, the difficulty of training. 
+The typical training process for the machine learning algorithm is at a very high level is a standard procedure.  
+The first step is to feeding input data to model to produce an output, then based on desired output for the input loss value can be calculated.
+Loss value is a quantitative calculation of how much the output is further away from the desired output. 
+Based on this loss value we can approximate weight updates with the help of the optimization algorithm until the loss value converges to a certain level.
+Even though the training process is also same for the MLPs there is more complexity involved giving that instead of dealing with one model we have chained of each neurons that have its own weights. 
+
 
 \section{Optimization} \label{sec:optimization}
 
