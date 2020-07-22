@@ -78,31 +78,31 @@ Concept of a layer is used in many different architectures, for example, a layer
 \end{figure}
 
 \section{Exploding and Vanishing Gradients} \label{sec:gradients}
-Having the sequential architecture described in section \ref{sec:bbann} MLPs faces an additional challenge that is not common in traditional machine learning, the difficulty of training. 
+Having the sequential architecture described in section \ref{sec:bbann} MLPs faces an additional implementation challenge that is not common in traditional machine learning, the difficulty of training. 
 The typical training process for the machine learning algorithm is at a very high level is a standard procedure.  
 The first step is to feeding input data to model and produce an output, then based on desired output for the input loss value can be calculated.
 Loss value is a calculation of how much the output is further away from the desired output. 
 Using this loss value we can approximate weight updates with the help of the optimization algorithm until the model weights converge.
 Even though the training process is also the same for the MLPs there is more complexity involved in MLPs giving that instead of dealing with one model we have layers of neurons chained together that each has its own weights. 
-For those reasons training MLPs was a challenge until the influential \emph{backpropagation} paper~\cite{backprop}is published. In this paper efficient technique of calculating the gradients using forward and backwards passes demonstrated.
+For those reasons training MLPs was a challenge until the influential \emph{backpropagation} paper~\cite{backprop} is published. In this paper efficient technique of calculating the gradients using forward and backwards passes demonstrated.
 Utilizing the chain rule of calculus, the backpropagation algorithm was able to calculate the update for each weight in every neuron.
 
-Notwithstanding help of the backpropagation algorithm, as the need for training deeper networks increased difficulty of training such networks remained a problem.
-Part of the problem is, as the gradients get smaller and smaller as the gradient flowed down to lower layers (layers close to the input layer) of the network. 
+Notwithstanding help of the backpropagation algorithm, as the need for training deeper networks increased, the difficulty of training such networks remained a problem.
+Part of the problem was, as the gradients get smaller and smaller as the gradient flowed down to lower layers (layers close to the input layer) of the network. 
 When the gradient updates get close to very small values some of the lower layer weights do not updated enough and consequently not converging model to appropriate representation.
 This phenomenon is usually referred to as \emph{vanishing gradients} problem.
 Similarly, some network such as recurrent neural networks can have an opposite problem that resulting in gradients getting larger and larger which pushes weights to be a very large number. 
 Similarly, this phenomenon referred to as the \emph{exploding gradients} problem.
 Later on, this unstable gradient flow problems are shown to be the combination of choice for weight initialization and the characteristic of the activation functions that widely used~\cite{vanishgrads}.
-Previously, activation function often get used was the sigmoid (also known as logistic function) \(\sigma(x) = \frac{1}{1 + e^{-x}}\) and the hyperbolic tangent function \(tanh(x) = 2\sigma(2x) -1\) have a flatten tails where \textbf{\textit{x}} get very large or very small. 
+Previously, activation function often get used was the sigmoid (also known as logistic function) \(\sigma(x) = \frac{1}{1 + e^{-x}}\) and the hyperbolic tangent function ()\(tanh(x) = 2\sigma(2x) -1\)) have a flatten tails where \textbf{\textit{x}} get very large or very small. 
 Giving that the chain rule states that the derivative of a variable is equal to the product of the partial derivatives of the composite function with respect to output, neurons that produce an output very large and very small will not likely to be updated. 
-For example lets suppose \(\hat{y} = \sigma(z)\) and \(z = wx + b\). Then chain rule states that
+For example lets suppose \(\hat{y} = \sigma(z(w, b))\) and \(z(w, b) = wx + b\). Then chain rule states that
 
 \begin{equation} \label{eq:chain}
-  \frac{\partial{\hat{y}}}{\partial{x}} = \frac{\partial{\hat{y}}}{\partial{\sigma}} . \frac{\partial{\sigma}}{\partial{x}}
+  \frac{\partial{\hat{y}}}{\partial{w}} = \frac{\partial{\hat{y}}}{\partial{\sigma}} . \frac{\partial{\sigma}}{\partial{w}}
 \end{equation}
 
-It is clear that the gradient of \textbf{\textit{x}} is predicated on the gradient of the $\sigma$ is not being zero.
+It is clear that the gradient update of \textbf{\textit{w}} is predicated on the gradient of the $\sigma$ is not being zero.
 While the sigmoid and hyperbolic tangent functions derivatives get close to zero when the functions are on the saturating region. 
 
 \begin{figure}[H]
@@ -115,7 +115,7 @@ While the sigmoid and hyperbolic tangent functions derivatives get close to zero
 Due to these properties, \emph{Rectified Linear Unit} (ReLU) activation function emerges as a good alternative to train deeper neural networks.
 ReLU behaves like a linear function for the non-negative values ($f(x) = max(0, x)$) and outputs zero for the negative input values.
 With that characteristic gradient of the ReLU will be either zero for the input values less than or equal to zero and one for any other values.
-Because of consistent properties of the non-saturating functions, it is always better to use such activation functions for hidden layers to ensure the gradient flow is faster and Network will converge faster to end result.
+Because of consistent properties of the non-saturating functions, it is always better to use such activation functions for hidden layers to ensure the gradient flow is faster and Network will converge faster as a result.
 
 \section{Optimization} \label{sec:optimization}
 
