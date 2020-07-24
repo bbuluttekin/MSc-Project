@@ -99,7 +99,7 @@ Giving that the chain rule states that the derivative of a variable is equal to 
 For example lets suppose \(\hat{y} = \sigma(z(w, b))\) and \(z(w, b) = wx + b\). Then chain rule states that
 
 \begin{equation} \label{eq:chain}
-  \frac{\partial{\hat{y}}}{\partial{w}} = \frac{\partial{\hat{y}}}{\partial{\sigma}} . \frac{\partial{\sigma}}{\partial{w}}
+  \frac{\partial{\hat{y}}}{\partial{w}} = \frac{\partial{\hat{y}}}{\partial{\sigma}}  \frac{\partial{\sigma}}{\partial{w}}
 \end{equation}
 
 It is clear that the gradient update of \textbf{\textit{w}} is predicated on the gradient of the $\sigma$ is not being zero.
@@ -118,6 +118,7 @@ With that characteristic gradient of the ReLU will be either zero for the input 
 Because of consistent properties of the non-saturating functions, it is always better to use such activation functions for hidden layers to ensure the gradient flow is faster and Network will converge faster as a result.
 
 \section{Optimization} \label{sec:optimization}
+Most machine learning algorithms utilize some sort of optimization. Main objective of the optimization algorithms is to find maximum or minimum point for the function in hand with respect to one or more variable. Task of searching minimum or maximum can be used interchangeably as finding minimum point of the function $f$ may also be found by getting maximum of inverse function of the same function ($f^{-1}$).
 
 \section{Regularization and Over-fitting} \label{sec:regularization}
 
