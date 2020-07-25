@@ -94,7 +94,7 @@ This phenomenon is usually referred to as \emph{vanishing gradients} problem.
 Similarly, some network such as recurrent neural networks can have an opposite problem that resulting in gradients getting larger and larger which pushes weights to be a very large number. 
 Similarly, this phenomenon referred to as the \emph{exploding gradients} problem.
 Later on, this unstable gradient flow problems are shown to be the combination of choice for weight initialization and the characteristic of the activation functions that widely used~\cite{vanishgrads}.
-Previously, activation function often get used was the sigmoid (also known as logistic function) \(\sigma(x) = \frac{1}{1 + e^{-x}}\) and the hyperbolic tangent function ()\(tanh(x) = 2\sigma(2x) -1\)) have a flatten tails where \textbf{\textit{x}} get very large or very small. 
+Previously, activation function often get used was the sigmoid (also known as logistic function) \(\sigma(x) = \frac{1}{1 + e^{-x}}\) and the hyperbolic tangent function (\(tanh(x) = 2\sigma(2x) -1\)) have a flatten tails where \textbf{\textit{x}} get very large or very small. 
 Giving that the chain rule states that the derivative of a variable is equal to the product of the partial derivatives of the composite function with respect to output, neurons that produce an output very large and very small will not likely to be updated. 
 For example lets suppose \(\hat{y} = \sigma(z(w, b))\) and \(z(w, b) = wx + b\). Then chain rule states that
 
