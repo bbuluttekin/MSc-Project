@@ -70,7 +70,7 @@ Concept of a layer is used in many different architectures, for example, a layer
   \foreach \j in {1,...,1}
     \draw [->] (hidden-\i) -- (output-\j);
 
-\foreach \l [count=\x from 0] in {Input, Hidden, Ouput}
+\foreach \l [count=\x from 0] in {Input, Hidden, Output}
   \node [align=center, above] at (\x*2,2) {\l \\ layer};
 
 \end{tikzpicture}
@@ -118,9 +118,29 @@ With that characteristic gradient of the ReLU will be either zero for the input 
 Because of consistent properties of the non-saturating functions, it is always better to use such activation functions for hidden layers to ensure the gradient flow is faster and Network will converge faster as a result.
 
 \section{Optimization} \label{sec:optimization}
-Most machine learning algorithms utilize some sort of optimization. Main objective of the optimization algorithms is to find maximum or minimum point for the function in hand with respect to one or more variable. Task of searching minimum or maximum can be used interchangeably as finding minimum point of the function $f$ may also be found by getting maximum of inverse function of the same function ($f^{-1}$).
+Most machine learning algorithms utilize some sort of optimization. 
+The main objective of the optimization algorithms is to find the maximum or the minimum point for the function in hand with respect to one or more variable. 
+For the machine learning domain, we would like to optimize the loss function (also known as a cost function) to the global minimum for having a model that is most representative of the data.
+The task of searching minimum or maximum can be used interchangeably as finding the minimum point of the function $f$ may also be found by getting maximum of the inverse function of the same function ($f^{-1}$).
+In essence, the process is achieved by taking derivative of the function which will give us a slope for the given point, the moving opposite to the slope with the small increments until we reach to the minimum point where the gradient is zero.
+The process also known as \emph{gradient descent}.
+Gradient descent used in machine learning field for a long time, however depending on the complexity of the function space this process could take a significantly long time. 
+For mitigating this problem new set of algorithms called \emph{momentum optimizers} created.
+The difference between these algorithms and gradient descent is simply, gradient descent will take small consistent steps regularly throughout the optimization process. 
+How these momentum-based algorithms works are they generally pay attention to the previous gradients and accelerate the updates based on gradients and the slope at the point of the gradient. 
+This will help the optimization to converge to global minimum faster when there is a lot of plateau areas in the function surface.
+Later on, momentum algorithms expanded to include taking the steepest dimension of the gradient to point updates more toward to the global minimum, a new family of optimizers named as \emph{adaptive} optimizers. 
+Most well know algorithms of this category is AdaGrad~\cite{adagrad}, RMSProp~\cite{rmsprop}, Adam~\cite{adam} and Nadam~\cite{nadam}.
+Despite the fact, these adaptive optimizers usually converge to good solutions faster research by Ashia C. Wilson et al~\cite{optimize-ashia}. showed that in some cases these optimizers can lead to poor generalization result depending on the dataset.
+It might be good practice to try adaptive and momentum-based optimizers in the training job to observe their effect in generalization.
+
 
 \section{Regularization and Over-fitting} \label{sec:regularization}
+Generally fundamental challenge in machine learning is that our model should perform well on previously unseen data points.
+During the training of the machine learning model we utilize the training set where we can calculate training loss and performance metrics of the training data. 
+Utilizing the optimization techniques I detailed earlier, we can reduce the loss we initially had. 
+However that would just be optimization, what separate optimization from machine learning is how well the model perform when predicting for the new unseen data points. 
+
 
 \section{Convolutional Networks} \label{sec:convnets}
 
@@ -128,4 +148,5 @@ Most machine learning algorithms utilize some sort of optimization. Main objecti
 Machine Learning Systems} \label{sec:engchallenge}
 Role of hardware accelerators. Debugging related challenges of Neural Networks
 Talk about core modules and how it will fit into general experimentations. 
+Touch on the resilience of the training because of failure in compute environment.
 \clearpage
