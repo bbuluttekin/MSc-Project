@@ -137,7 +137,7 @@ It might be good practice to try adaptive and momentum-based optimizers in the t
 
 \section{Regularization and Over-fitting} \label{sec:regularization}
 Generally fundamental challenge in machine learning is that our model should perform well on previously unseen data points.
-During the training of the machine learning model we utilize the training set where we can calculate training loss and performance metrics of the training data. 
+During the training of the machine learning model we worked with the training set where we can calculate training loss and performance metrics of the training data. 
 Utilizing the optimization techniques I detailed earlier, we can reduce the loss we initially had. 
 However that would just be optimization, what separate optimization from machine learning is how well the model perform when predicting for the new unseen data points. 
 
@@ -146,6 +146,29 @@ However that would just be optimization, what separate optimization from machine
 
 \section{Software Challenges Specific to 
 Machine Learning Systems} \label{sec:engchallenge}
+Training deep neural networks is a difficult task as I touch on some main problems that could be faced in earlier section. 
+One particular reason of difficulty when applying ANNs to new fields is identifying the problem when getting bad scores from the model. 
+Because unlike tradition software development it is difficult to know whether there is a bug in the implementation of the software or the model itself is not suitable to represent the underlying data distribution.
+
+Due to iterative nature of the machine learning it is vital that the experimentation for the task will run in sufficiently quick that the improvement the model can be identified quickly and progressed to further stages. 
+However, standard ANNs usually have millions of parameters that need to be updated with hundreds of thousand if not millions of training examples. 
+Considering average training process will need a multiple passes on the entire dataset, need for high computation power becomes evident.
+Thats why most training is done with the help of hardware accelerators such as GPUs or TPUs.
+Choice of computation environment for this project luckily includes such hardware accelerators but these special hardware must be detected and enabled so the calculation can take advantage of this compute power.
+
+
+Trainig library included the fallowing attributes to overcome the challenges described earlier
+
+\begin{itemize}
+  \item Ability to detect and set the hardware accelerators
+  \item Choosing training strategy suitable to the hardware accelerator
+  \item Logging performance metrics persistently
+  \item Saving model persistently in case of compute failure and continue where the training left previously.
+  \item Extract final model with runtime data.
+\end{itemize}
+ 
+
+
 Role of hardware accelerators. Debugging related challenges of Neural Networks
 Talk about core modules and how it will fit into general experimentations. 
 Touch on the resilience of the training because of failure in compute environment.
