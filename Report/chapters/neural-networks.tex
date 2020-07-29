@@ -166,6 +166,9 @@ Some of the feature that made possible by this module is:
   \item Extract final model with runtime data.
 \end{itemize}
  
+Possibly one of the most important feature of the helper library is providing resilient training. Some large models takes hours or days to train and my choice of computation environment allows only twelve hour training before terminating. Not to mention virtual machines power that environment might disconnect or terminate much earlier. In the case of such event if all the previous training is lost, time spend on training will be wasted. If similar events happens many more times it could even risk not completing all the experimentations on time for this project deadline. To eliminate that risk, I have implemented process that will save model weight to storage outside the compute environment regularly. If such failure happens, module will pick up the last saved weights and continue to training where it left of previously. In addition to starting the training with previous model, by using naming conventions, module is able to initialize the epoch number for the training accordingly and allow accurate comparison between other models. In other words, if first training attempt is failed in epoch number 23 restarting training will start with the epoch number 23.
+
+
 
 
 Role of hardware accelerators. Debugging related challenges of Neural Networks
