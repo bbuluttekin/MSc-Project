@@ -143,13 +143,29 @@ However that would just be optimization, what separate optimization from machine
 
 
 \section{Convolutional Networks} \label{sec:convnets}
+For the definition of Convolutional Neural Networks (CNNs), I used the definition from Deep Learning book~\cite{deeplearningbook} in the proposal of this project which I believe makes a very good job of explaining the concept. 
+To quote that definition again CNNs are:
+\begin{quote}
+  "Convolutional networks are simply neural networks that use convolution in place of general matrix multiplication in at least one of their layers."
+\end{quote}
 
 \section{Software Challenges Specific to 
 Machine Learning Systems} \label{sec:engchallenge}
 It is clear from some of the problems mentioned earlier, training deep neural networks is a difficult task. 
 One particular reason for difficulty when applying ANNs to new fields is identifying the problem when getting bad scores from the model. 
 Because unlike tradition software development it is difficult to know whether there is a bug in the implementation of the software or the model itself is not suitable to represent the underlying data distribution.
+For overcoming this challenge I am employing a diagnosis and debugging check list that will help identify and eliminate any bugs that can occur in the implementation phase.
+Where applicable checklist points are:
 
+\begin{itemize}
+  \item Overfit to sample data to ensure no optimization mistakes made.
+  \item Monitor training loss during training and make sure it is declining throughout the training.
+  \item Check the input and output shapes are correct.
+  \item Make minor changes to models and only add addition changes after ensuring there is no bug in the system.
+  \item Monitor wights 
+\end{itemize}
+
+Another challenge is computationally expensive nature of the training.
 Due to the iterative nature of the machine learning, it is vital that the experimentation for the task will run sufficiently quick that the improvement for the model can be identified quickly and progressed to further stages. 
 However, standard ANNs usually have millions of parameters that need to be updated while training with hundreds of thousands if not millions of training examples to train on. 
 Considering the average training process will need multiple passes on the entire dataset, the need for high computation power becomes evident.
