@@ -1,6 +1,43 @@
 \chapter{Data} \label{chap:data}
-Reminder of the dataset.~\cite{openi} 
-Data set comprises of jpeg files stored in classification based folders.
+Dataset~\cite{dataset} for the project is X-ray images that collected at Guangzhou Women and Children’s Medical Center, Guangzhou from pediatric patients aged between one to five.
+All X-ray images are in JPEG format and organized into folder based structure.
+Main sub-structures in the dataset are train, validation and the test folders.
+All main folders also broken into sub-folders that named \emph{Normal} and \emph{Pneumonia} to indicate their classification.
+All X-rays have graded by expert physicians and check individually, damaged or un-readable X-rays discarded.
+Below are the illustrative examples from both classes of the X-ray.
+
+\begin{figure}[H]%
+    \centering
+    \subfloat[X-ray without Pnuemonia]{{\includegraphics[width=.4\textwidth]{img/chest_xray_train_NORMAL_IM-0133-0001.jpeg} }}%
+    \qquad
+    \subfloat[X-ray with Pnuemonia]{{\includegraphics[width=.4\textwidth]{img/chest_xray_train_PNEUMONIA_person1007_virus_1690.jpeg} }}%
+    \caption{Two sample X-ray Chest images with and without pneumonia.}%
+    \label{fig:sample}%
+\end{figure}
+
+For more detailed understanding of the data, I have checked the content of the each train, validation and test datasets. 
+There is a significant imbalance in between Pneumonia and Normal classes for train and the test datasets.
+Detailed breakdown of each dataset are given in the table \ref{table:dataset}.
+
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{||c c c c||} 
+    \hline
+    Dataset Name & No of images & Pneumonia & Normal \\ [0.5ex] 
+    \hline\hline
+    Train & 5216 & 3875 & 1341 \\ 
+    \hline
+    Validation & 16 & 8 & 8 \\
+    \hline
+    Test & 624 & 390 & 234 \\ [1ex] 
+    \hline
+    \end{tabular}
+    \caption{Breakdown of images for each classification folder}
+    \label{table:dataset}
+\end{table}
+
+
 
 \section{Data Augmentation}
 Data augmentations applied and example results of the augmentation.
