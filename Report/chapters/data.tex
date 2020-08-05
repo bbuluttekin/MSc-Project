@@ -58,15 +58,58 @@ Train machine learning model with samples of number nine labelled as six will in
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{img/augmented-image-1588951790.png}
-    \caption{Flipping an image upside down is not applied in CAD context}
+    \caption{Flipping an image upside down is not appreciable in CAD context}
     \label{fig:upsidedownxray}
   \end{figure}
 
+\subsection{Horizontal flip}
+This data augmentation is achieved by reversing the pixel values horizontally.
+Resulting image would look like mirror flip from left to right of the same image.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{img/augmented-image-1588951788.png}
+    \caption{Horizontal flip augmentation}
+    \label{fig:horizontalflipxray}
+  \end{figure}
+
+\subsection{Random zoom augmentation}
+Also knows as random cropping augmentation.
+This argumentation done by randomly sampling certain percentage of the original image and either adding a padding to sampled area or rescale the sampled area with interpolation to produce an image of same shape as the original image.
+It is important to choose an appropriate percentage for this argumentation.
+Percentage should be chosen in a way that it would not omit the area of interest in the image.
+For the purpose of my project this argumentation must be applied such a way that it would not leave any part of the lungs outside of the image. 
+As an example figure \ref{fig:randomzoomxray} is applied with 90\% of random zoom and it is a considerable level for this dataset.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{img/augmented-image-1588951794.png}
+    \caption{Random zoom augmentation}
+    \label{fig:randomzoomxray}
+  \end{figure}
+
+\subsection{Changing brightness or saturation}
+These argumentations either change the brightness or saturation of the image to create an augmented image.
+Saturation is done by converting RGB images to HSV (Hue Saturation Value) then multiplying saturation channel with saturation factor chosen for the augmentation.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{img/augmented-image-1596666691.png}
+    \caption{Brightness augmentation example}
+    \label{fig:brightedxray}
+  \end{figure}
 
 Data augmentations applied and example results of the augmentation.
 
 \section{Limitations of the Dataset}
 Issues related to validation set size. Variance of the image resolution.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{img/image_dims_density.png}
+    \caption{Density plot of image dimensions}
+    \label{fig:imagedimensions}
+  \end{figure}
 
 \section{Data Procession}
 Information about tf.data processing pipeline and advantages compare to other data feeds.
