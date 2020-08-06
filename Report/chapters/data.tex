@@ -58,7 +58,7 @@ Train machine learning model with samples of number nine labelled as six will in
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{img/augmented-image-1588951790.png}
-    \caption{Flipping an image upside down is not appreciable in CAD context}
+    \caption{Flipping an image upside down is not applicable in CAD context}
     \label{fig:upsidedownxray}
   \end{figure}
 
@@ -71,7 +71,7 @@ Resulting image would look like mirror flip from left to right of the same image
     \includegraphics[width=\textwidth]{img/augmented-image-1588951788.png}
     \caption{Horizontal flip augmentation}
     \label{fig:horizontalflipxray}
-  \end{figure}
+\end{figure}
 
 \subsection{Random zoom augmentation}
 Also knows as random cropping augmentation.
@@ -86,20 +86,41 @@ As an example figure \ref{fig:randomzoomxray} is applied with 90\% of random zoo
     \includegraphics[width=\textwidth]{img/augmented-image-1588951794.png}
     \caption{Random zoom augmentation}
     \label{fig:randomzoomxray}
-  \end{figure}
+\end{figure}
 
 \subsection{Changing brightness or saturation}
 These argumentations either change the brightness or saturation of the image to create an augmented image.
 Saturation is done by converting RGB images to HSV (Hue Saturation Value) then multiplying saturation channel with saturation factor chosen for the augmentation.
+
+Brightness augmentation also work similar way.
+RGB values of the image is converted to float representation then applied brightness factor to the values.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{img/augmented-image-1596666691.png}
     \caption{Brightness augmentation example}
     \label{fig:brightedxray}
-  \end{figure}
+\end{figure}
 
-Data augmentations applied and example results of the augmentation.
+
+\section{Data Representation}
+Original and augmented images needs to be turned into representations that machine learning algorithms can process.
+Normality, images represented as pixel values for red, green and blue (RGB) colors and values for each pixels ranges between 0 to 255.
+For the traditional machine learning techniques where all dimension of the data is processed by the weight that assigned to it.
+Pixel values for each color channel should be turned into array by flattening each row of pixel values.
+After applying same step to each channel flattened channel arrays should be appended one after another to get the final array for the image.
+Given that the model size cannot change during training each image should be resized to same shape before representational array created.
+In this context term array used as synonym for algebraic entity vector. (e.g. $\textbf{\textit{x}} = [x_1, x_2, \ldots, x_n]$)
+
+Representation for CNNs however require different processing because the convolution operation requires locality of the data points to be taken into consideration.
+Therefore most common approach is to represent each color channel of the image as an array of vectors which commonly know as \emph{matrix}.
+Because colored image has three color channels each matrix for the channels should be combine as multi dimension matrix.
+This multi dimensional matrix representation usually get referred as \emph{tensor}.
+
+Much like input data, label for the each image should also be represented in appropriate mathematical entity to be able to processed in training.
+Because this problem have only two classification most used method is to encode each class in binary (e.g. 1 for pneumonia and 0 for normal).
+However it can also be represented in one hot encoding, which will return a vector for each label includes binary values for each class (e.g. $[0, 1]$ for pneumonia and $[1, 0]$ for normal).
+
 
 \section{Limitations of the Dataset}
 Issues related to validation set size. Variance of the image resolution.
