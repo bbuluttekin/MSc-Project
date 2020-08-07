@@ -1,8 +1,8 @@
 \chapter{Data} \label{chap:data}
-Dataset~\cite{dataset} for the project is X-ray images that collected at Guangzhou Women and Children’s Medical Center, Guangzhou from pediatric patients aged between one to five.
-All X-ray images are in JPEG format and organized into folder based structure.
+Dataset~\cite{dataset} for the project is X-ray images collected at Guangzhou Women and Children’s Medical Center, Guangzhou from pediatric patients aged between one to five.
+All X-ray images are in JPEG format and organized into a folder-based structure.
 Main sub-structures in the dataset are train, validation and the test folders.
-All main folders also broken into sub-folders that named \emph{Normal} and \emph{Pneumonia} to indicate their classification.
+All main folders also are broken into sub-folders that named \emph{Normal} and \emph{Pneumonia} to indicate their classification.
 All X-rays have graded by expert physicians and check individually, damaged or un-readable X-rays discarded.
 Below are the illustrative examples from both classes of the X-ray.
 
@@ -15,9 +15,9 @@ Below are the illustrative examples from both classes of the X-ray.
     \label{fig:sample}%
 \end{figure}
 
-For more detailed understanding of the data, I have checked the content of the each train, validation and test datasets. 
+For a more detailed understanding of the data, I have checked the content of each train, validation and test datasets. 
 There is a significant imbalance in between Pneumonia and Normal classes for train and the test datasets.
-Detailed breakdown of each dataset is given in the table \ref{table:dataset}.
+A detailed breakdown of each dataset is given in table \ref{table:dataset}.
 
 
 \begin{table}[H]
@@ -39,21 +39,21 @@ Detailed breakdown of each dataset is given in the table \ref{table:dataset}.
 
 
 
-\section{Data Augmentation}
+\section{Data Augmentation} \label{sec:dataaug}
 Data augmentation is a process of producing additional training instances by modifying existing training data points.
 Process of data argumentation is very common within the computer vision field.
-Generally because it is well understood that the images could be modified some way without having tp loose the classification of the image.
+Generally, because it is well understood that the images could be modified some way without having to lose the classification of the image.
 For example image of a cat on the table can be cropped such a way that will still contain the cat on the table but without the background that is not relevant.
-Resulting image from this cropping will also be an image classified as a cat image.
+The resulting image from this cropping will also be an image classified as a cat image.
 
-There are similarity set of transformation that could be applied to images to create labelled data instances. 
+There are similar sets of transformation that could be applied to images to create labelled data instances. 
 It is import to choose which augmentation to apply and which one to abandon.
-Example to highlight some argumentation that is not appropriate is flipping image upside down. 
+Example to highlight some argumentation that is not appropriate is flipping the image upside down. 
 Even though flipping upside down is acceptable some cases like the cat image example we considered earlier. 
-It would not be useful in the setting of Pneumonia classification because considering upside down X-rays is not natural occurrence in the field of medical diagnosis.
-Perhaps most striking example of area that this argumentation technique should not be used is hand written digits classification. 
-Reason for that is although upside number one is still an image of number one, in the case for number six it will result images labelled as six but in content they will appear as number nine. 
-Train machine learning model with samples of number nine labelled as six will indeed hinder the accurate of the model instead of helping it.
+It would not be useful in the setting of Pneumonia classification because considering upside down X-rays is not a natural occurrence in the field of medical diagnosis.
+Perhaps the most striking example of an area that this argumentation technique should not be used is handwritten digits classification. 
+Reason for that is although upside number one is still an image of number one, in the case for number six it will result in images labelled as six but in content, they will appear as number nine. 
+Train machine learning model with samples of number nine labelled as six will indeed hinder the accuracy of the model instead of helping it.
 
 \begin{figure}[H]
     \centering
@@ -62,9 +62,9 @@ Train machine learning model with samples of number nine labelled as six will in
     \label{fig:upsidedownxray}
   \end{figure}
 
-\subsection{Horizontal flip}
+\subsection{Horizontal flip} \label{subsec:horizontalflip}
 This data augmentation is achieved by reversing the pixel values horizontally.
-Resulting image would look like mirror flip from left to right of the same image.
+The resulting image would look like a mirror flip from left to right of the same image.
 
 \begin{figure}[H]
     \centering
@@ -73,13 +73,13 @@ Resulting image would look like mirror flip from left to right of the same image
     \label{fig:horizontalflipxray}
 \end{figure}
 
-\subsection{Random zoom augmentation}
+\subsection{Random zoom augmentation} \label{subsec:randomzoom}
 Also knows as random cropping augmentation.
-This argumentation done by randomly sampling certain percentage of the original image and either adding a padding to sampled area or rescale the sampled area with interpolation to produce an image of same shape as the original image.
+This argumentation applied by randomly sampling a certain percentage of the original image and either adding padding to a sampled area or rescale the sampled area with interpolation to produce an image of the same shape as the original image.
 It is important to choose an appropriate percentage for this argumentation.
-Percentage should be chosen in a way that it would not omit the area of interest in the image.
-For the purpose of my project this argumentation must be applied such a way that it would not leave any part of the lungs outside of the image. 
-As an example figure \ref{fig:randomzoomxray} is applied with 90\% of random zoom and it is a considerable level for this dataset.
+The percentage should be chosen in a way that it would not omit the area of interest in the image.
+For the purpose of my project, this argumentation must be applied such a way that it would not leave any part of the lungs outside of the image. 
+As an example figure \ref{fig:randomzoomxray}, is applied with 90\% of random zoom and it is a considerable level for this dataset.
 
 \begin{figure}[H]
     \centering
@@ -88,12 +88,12 @@ As an example figure \ref{fig:randomzoomxray} is applied with 90\% of random zoo
     \label{fig:randomzoomxray}
 \end{figure}
 
-\subsection{Changing brightness or saturation}
+\subsection{Changing brightness or saturation} \label{subsec:brightness}
 These argumentations either change the brightness or saturation of the image to create an augmented image.
 Saturation is done by converting RGB images to HSV (Hue Saturation Value) then multiplying saturation channel with saturation factor chosen for the augmentation.
 
-Brightness augmentation also work similar way.
-RGB values of the image is converted to float representation then applied brightness factor to the values.
+Brightness augmentation also works a similar way.
+RGB values of the image are converted to float representation then applied brightness factor to the values.
 
 \begin{figure}[H]
     \centering
@@ -103,26 +103,26 @@ RGB values of the image is converted to float representation then applied bright
 \end{figure}
 
 
-\section{Data Representation}
-Original and augmented images needs to be turned into representations that machine learning algorithms can process.
-Normality, images represented as pixel values for red, green and blue (RGB) colors and values for each pixels ranges between 0 to 255.
-For the traditional machine learning techniques where all dimension of the data is processed by the weight that assigned to it.
-Pixel values for each color channel should be turned into array by flattening each row of pixel values.
-After applying same step to each channel flattened channel arrays should be appended one after another to get the final array for the image.
-Given that the model size cannot change during training each image should be resized to same shape before representational array created.
+\section{Data Representation} \label{sec:datarepresentation}
+Original and augmented images need to be turned into representations that machine learning algorithms can process.
+Normality, images represented as pixel values for red, green and blue (RGB) colours and values for each pixel ranges between 0 to 255.
+For the traditional machine learning techniques where all dimension of the data is processed by the weight assigned to it.
+Pixel values for each colour channel should be turned into an array by flattening each row of pixel values.
+After applying the same step to each channel flattened channel arrays should be appended one after another to get the final array for the image.
+Given that the model size cannot change during training each image should be resized to the same shape before representational array created.
 In this context term array used as synonym for algebraic entity vector. (e.g. $\textbf{\textit{x}} = [x_1, x_2, \ldots, x_n]$)
 
-Representation for CNNs however require different processing because the convolution operation requires locality of the data points to be taken into consideration.
-Therefore most common approach is to represent each color channel of the image as an array of vectors which commonly know as \emph{matrix}.
-Because colored image has three color channels each matrix for the channels should be combine as multi dimension matrix.
-This multi dimensional matrix representation usually get referred as \emph{tensor}.
+Representation for CNNs, however, require different processing because the convolution operation requires locality of the data points to be taken into consideration.
+Therefore the most common approach is to represent each colour channel of the image as an array of vectors which commonly know as \emph{matrix}.
+Because the coloured image has three colour channels each matrix for the channels should be combined as a multi-dimension matrix.
+This multi-dimensional matrix representation usually get referred to as \emph{tensor}.
 
-Much like input data, label for the each image should also be represented in appropriate mathematical entity to be able to processed in training.
-Because this problem have only two classification most used method is to encode each class in binary (e.g. 1 for pneumonia and 0 for normal).
-However it can also be represented in one hot encoding, which will return a vector for each label includes binary values for each class (e.g. $[0, 1]$ for pneumonia and $[1, 0]$ for normal).
+Much like input data, the label for each image should also be represented in appropriate mathematical entity to be able to process in training.
+Because this problem has only two classifications most used method is to encode each class in binary (e.g. 1 for pneumonia and 0 for normal).
+However it can also be represented in one-hot encoding, which will return a vector for each label includes binary values for each class (e.g. $[0, 1]$ for pneumonia and $[1, 0]$ for normal).
 
 
-\section{Limitations of the Dataset}
+\section{Limitations of the Dataset} \label{sec:datalimitations}
 Issues related to validation set size. Variance of the image resolution.
 
 \begin{figure}[H]
@@ -132,7 +132,7 @@ Issues related to validation set size. Variance of the image resolution.
     \label{fig:imagedimensions}
   \end{figure}
 
-\section{Data Procession}
+\section{Data Processing} \label{sec:dataprocessing}
 Information about tf.data processing pipeline and advantages compare to other data feeds.
 
 Information about data processing for scikit-learn models.
