@@ -104,13 +104,12 @@ RGB values of the image are converted to float representation then applied brigh
 
 
 \section{Data Representation} \label{sec:datarepresentation}
-Original and augmented images need to be turned into representations that machine learning algorithms can process.
-Normality, images represented as pixel values for red, green and blue (RGB) colours and values for each pixel ranges between 0 to 255.
-For the traditional machine learning techniques where all dimension of the data is processed by the weight assigned to it.
-Pixel values for each colour channel should be turned into an array by flattening each row of pixel values.
-After applying the same step to each channel flattened channel arrays should be appended one after another to get the final array for the image.
-Given that the model size cannot change during training each image should be resized to the same shape before representational array created.
-In this context term array used as synonym for algebraic entity vector. (e.g. $\textbf{\textit{x}} = [x_1, x_2, \ldots, x_n]$)
+Original and augmented images need to be turned into data representations that machine learning algorithms can process.
+Normally, colored images represented with pixel values for red, green and blue (RGB) color channels and values for each pixel in any given channel ranges between 0 to 255.
+For the traditional machine learning techniques, each data point should be represented in one vector.
+Additionally pixel values for each color channel needs to be turned into a vector by flattening each row of pixel values for particular color channel.
+After applying the same step to each channel flattened, channel vectors should be appended one after another to get the final vector for the image.
+Given that the model size cannot change during training each image should be resized to the same shape before representational vector is created (e.g. $\textbf{\textit{x}} = [x_1, x_2, \ldots, x_n]$).
 
 Representation for CNNs, however, require different processing because the convolution operation requires locality of the data points to be taken into consideration.
 Therefore the most common approach is to represent each colour channel of the image as an array of vectors which commonly know as \emph{matrix}.
@@ -123,14 +122,25 @@ However it can also be represented in one-hot encoding, which will return a vect
 
 
 \section{Limitations of the Dataset} \label{sec:datalimitations}
-Issues related to validation set size. Variance of the image resolution.
+Although dataset I have choose is well designed and validated, some aspects of data has undesired properties.
+First of such property is the size of the validation data.
+As I mentioned earlier dataset has a folder where it hosts validation files.
+Within this folder there is sixteen images where each class have eight images each.
+This is significantly small validation dataset and would reduce the bins for each available accuracy step significantly.
+For example making one error in validation data will result accuracy declining from 100\% to 93.75\%.
+
+Second undesired property is the high variance of the image resolutions.
+Having such a high variance in image resolution makes it difficult to choose right resolution to resize all the images.
+To show the variance within the data I have added a density plot that illustrates the height and width of the images and their distribution in Figure \ref{fig:imagedimensions}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{img/image_dims_density.png}
     \caption{Density plot of image dimensions}
     \label{fig:imagedimensions}
-  \end{figure}
+\end{figure}
+
+This graph gives an insight for what resolution for the image should be chosen to have minimal informal loss and distortion in the final image.
 
 \section{Data Processing} \label{sec:dataprocessing}
 Information about tf.data processing pipeline and advantages compare to other data feeds.
