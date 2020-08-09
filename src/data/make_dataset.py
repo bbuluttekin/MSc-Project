@@ -115,5 +115,39 @@ class GetDataset:
         labelled_data = labelled_data.prefetch(buffer_size=self.autotune)
         return labelled_data
 
+    def make_balaced_dataset(
+        self,
+        majority_class,
+        minority_class,
+        transformations,
+        shuffle_buffer_size=2000
+    ):
+        mjr_number = int(len(list(Path(majority_class).glob("*.jpeg"))))
+        mnr_number = int(len(list(Path(minority_class).glob("*.jpeg"))))
+
+        path = tf.data.Dataset.list_files(
+            f"{str(Path(majority_class).parent)}/*/*.jpeg")
+        mnr_path = tf.data.Dataset.list_files(f"{minority_class}/*.jpeg")
+        data = path.map(
+            self.process_path,
+            num_parallel_calls=self.autotune)
+        aug_data = mnr_path.map(
+            lambda x: self.aug_process_path(x, transformations[0]),
+            num_parallel_calls=self.autotune
+        )
+        for i in transformations[1:]:
+            augmented = mnr_path.map(
+                lambda x: self.aug_process_path(x, i),
+                num_parallel_calls=self.autotune)
+            aug_data = aug_data.concatenate(augmented)
+        aug_data = aug_data.take(mjr_number - mnr_number)
+        labelled_data = data.concatenate(aug_data)
+        labelled_data = labelled_data.cache()
+        labelled_data = labelled_data.shuffle(
+            buffer_size=shuffle_buffer_size)
+        labelled_data = labelled_data.batch(self.batch_size)
+        labelled_data = labelled_data.prefetch(buffer_size=self.autotune)
+        return labelled_data
+
     def make_test_dataset(self, path_dir):
         raise NotImplementedError
