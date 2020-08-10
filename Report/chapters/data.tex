@@ -143,6 +143,15 @@ To show the variance within the data I have added a density plot that illustrate
 This graph gives an insight for what resolution for the image should be chosen to have minimal informal loss and distortion in the final image.
 
 \section{Data Processing} \label{sec:dataprocessing}
+In line with the information provided in section \ref{sec:datarepresentation}, I have designed two separate data processing pipeline.
+First pipeline created for data processing of so-called traditional machine learning algorithms such as Random forest or Support vector machine (SVM) that wii be used in performance benchmarking.
+This pipeline does the flattening of the X-ray images discussed and depends on open source software libraries keras~\cite{keras} and numpy~\cite{numpy}.
+
+Second pipeline is created for pre-processing of CNN models which would be used in majority of the time in training and testing.
+Module is design to be light weight with minimal dependencies. Only third party open source libraries used are, Numpy and the Tensorflow~\cite{tensorflow}.
+
+
+
 Information about tf.data processing pipeline and advantages compare to other data feeds.
 
 Information about data processing for scikit-learn models.

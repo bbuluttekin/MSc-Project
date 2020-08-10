@@ -20,7 +20,7 @@ h(z)=
 Current ANN units also have same properties with the exception of the use of step function. Instead current ANN units uses set of non-linear functions that generally called \emph{activation functions}. 
 
 Despite its robust nature Perceptron is ultimately a linear model which implies that it can only be effective for the data distributions that can be linearly separable.
-The popularity of the algorithm is faded as the limitations such as not being able to separate logical operation exclusive OR~\cite{marvinperceptrons} (also know as XOR) is discovered.
+The popularity of the algorithm is faded as the limitations such as not being able to separate logical operation exclusive OR (also know as XOR) is discovered~\cite{marvinperceptrons}.
 However, later on, it is discovered that these limitations can be eliminated by just using layers of many Perceptrons together as a single model and the resulting model is called \emph{Multilayer Perceptron} (MLP). 
 (\emph{Feedforward Network} is another term that usually used interchangeably with Multilayer Perceptron.)
 MLPs uses a concept called layer which is useful for calculation and managing the architecture of the model.
@@ -165,7 +165,7 @@ Where applicable checklist points are:
   \item Monitor wights 
 \end{itemize}
 
-Another challenge is computationally expensive nature of the training.
+Another challenge is the computationally expensive nature of the training.
 Due to the iterative nature of the machine learning, it is vital that the experimentation for the task will run sufficiently quick that the improvement for the model can be identified quickly and progressed to further stages. 
 However, standard ANNs usually have millions of parameters that need to be updated while training with hundreds of thousands if not millions of training examples to train on. 
 Considering the average training process will need multiple passes on the entire dataset, the need for high computation power becomes evident.
@@ -185,17 +185,11 @@ Some of the other features that made possible with this module are:
 Possibly one of the most important features of the helper library is providing resilient training. 
 Some large models take hours or days to train and my choice of computation environment allows only twelve-hour training before terminating. 
 Not to mention virtual machines power that environment might disconnect or terminate much earlier. 
-In the case of such an event, if all the previous training is lost, time spend on training will be wasted. 
+In the case of such an event, if all the previous training is lost, time spent on training will be wasted. 
 If similar events happen many more times it could even risk not completing all the experimentations on time for this project deadline. 
 To eliminate that risk, I have implemented a process that will save model weight to storage outside the compute environment regularly. 
 If such failure happens, the module will pick up the last saved weights and continue to training where it left of previously.
 In addition to starting the training with the previous model, by using naming conventions, the module can initialize the epoch number for the training accordingly and allow accurate comparison between other models. 
 In other words, if the first training attempt is failed in epoch number 23 restarting training will start with the epoch number 23.
 
-
-
-
-Role of hardware accelerators. Debugging related challenges of Neural Networks
-Talk about core modules and how it will fit into general experimentations. 
-Touch on the resilience of the training because of failure in compute environment.
 \clearpage
