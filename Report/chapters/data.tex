@@ -143,15 +143,27 @@ To show the variance within the data I have added a density plot that illustrate
 This graph gives an insight for what resolution for the image should be chosen to have minimal informal loss and distortion in the final image.
 
 \section{Data Processing} \label{sec:dataprocessing}
-In line with the information provided in section \ref{sec:datarepresentation}, I have designed two separate data processing pipeline.
-First pipeline created for data processing of so-called traditional machine learning algorithms such as Random forest or Support vector machine (SVM) that wii be used in performance benchmarking.
+Inline with the information provided in section \ref{sec:datarepresentation}, I have designed two separate data processing pipeline.
+First pipeline created for data processing for so-called traditional machine learning algorithms such as Random forest or Support vector machine (SVM) that wii be used in performance benchmarking.
 This pipeline does the flattening of the X-ray images discussed and depends on open source software libraries keras~\cite{keras} and numpy~\cite{numpy}.
 
 Second pipeline is created for pre-processing of CNN models which would be used in majority of the time in training and testing.
 Module is design to be light weight with minimal dependencies. Only third party open source libraries used are, Numpy and the Tensorflow~\cite{tensorflow}.
+Although Tensorflow has high level keras module that allows easier implementation for data pipeline, I have decided on building data processing pipeline in tf.data module of the Tensorflow library.
+Building my pipeline in tf.data meant that I have to build all of the implementation from scratch myself but it also allowed me to build more flexible and more performant pipeline I could have had than the alternative. 
+Goal of having faster training runs and ultimately having shorter prototyping time only achievable if the training is fast enough to feed data into powerful hardware accelerators.
+Otherwise process will become a bottleneck in the training because the processing unit whether its GPU or any other device will remain idle until the data fed to the system.
+Tf.data designed with parallelization in mind that carries out the process of fetching next data batch while the training for current batch in progress so the next batch can be ready as soon as the training is finished.
+Providing that all the augmentations and pre-porcessing will be done in CPU while GPU is training on the previous batch in effect means all the augmentations are computationally free.
+
+
+In the beginning of this chapter I point out that the dataset for this project has an imbalance problem.
+Building the data pipeline with the tf.data also meant that I am able to eliminate this issue by making custom pipeline operation that creates balanced training set.
+With the flexibility provided, I was able to apply the augmentations to only minority class of the dataset and add this new training example to training set until I have the same number of examples for the both classes.
 
 
 
+%%%%%%%%%%%%%%%%%%%%%
 Information about tf.data processing pipeline and advantages compare to other data feeds.
 
 Information about data processing for scikit-learn models.
