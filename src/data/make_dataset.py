@@ -7,6 +7,14 @@ import tensorflow as tf
 
 class GetDataset:
     def __init__(self, image_dims, batch_size=64, seed=123):
+        """Dataset generator based on tf.data.
+
+        Args:
+            image_dims (tuple): Desired shape of the output image.
+                                (e.g. (224, 224))
+            batch_size (int, optional): Batch size. Defaults to 64.
+            seed (int, optional): Random seed for reproduction. Defaults to 123.
+        """
         self.seed = seed
         self.batch_size = batch_size
         self.width, self.height = image_dims
@@ -89,7 +97,8 @@ class GetDataset:
         return tf.image.rot90(image)
 
     def image_central_crop(self, image, fraction=0.9):
-        return tf.image.central_crop(image, central_fraction=fraction)
+        img = tf.image.central_crop(image, central_fraction=fraction)
+        return tf.image.resize(img, [self.width, self.height])
 
     def image_flip_up_down(self, image):
         return tf.image.flip_up_down(image)
