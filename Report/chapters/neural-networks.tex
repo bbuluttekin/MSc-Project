@@ -1,4 +1,4 @@
-\chapter{Background Material} \label{chap:background}
+\chapter{Background} \label{chap:background}
 Generally, the first part of every machine learning project is to choosing the algorithm to tackle the problem in hand. As I stated in the proposal of this project, I choose to apply specific machine learning algorithms called Artificial Neural Networks (ANNs) to tackle the classification challenge of detecting pneumonia in X-ray images. The first part of this chapter I would like to provide some information to justify that decision. 
 
 The objective of the algorithm in this report is to classify X-ray images with or without pneumonia. Classification is a task of determining what is the defined class of an example given its data associated with it. In our case, we defined our classes for prediction to the person in the example image having pneumonia or not. In order to achieve that goal, machine learning algorithm must produce a function that outputs the class within defined finite possible classes such as \(f:\mathbb{R}^n \rightarrow \{1, \ldots, k\ \}\) which in this case k is equal to 2. In essence all machine learning algorithms will map input representation of the data \textbf{\textit{x}} to prediction output $\hat{y}=f(x)$. The only difference is how each algorithm is representing the data distribution with a model $f$. Which consequently leads to the question of which algorithm is the best algorithm for machine learning or which algorithm to choose to find the best model representation. According to \textbf{no free lunch theorem}~\cite{nofreelunch} there is no such algorithm exist that will consistently achieve low error rate averaged over all possible distributions. In other words, no model is universally any better than any other machine learning model. Luckily, the objective in this project is not to find the universally best algorithm but rather to find the algorithm that will find the best representation for the data distribution of healthy and pneumonia X-ray images. 
@@ -136,14 +136,34 @@ It might be good practice to try adaptive and momentum-based optimizers in the t
 
 
 \section{Regularization and Over-fitting} \label{sec:regularization}
-Generally fundamental challenge in machine learning is that our model should perform well on previously unseen data points.
-During the training of the machine learning model we worked with the training set where we can calculate training loss and performance metrics of the training data. 
-Utilizing the optimization techniques I detailed earlier, we can reduce the loss we initially had. 
-However that would just be optimization, what separate optimization from machine learning is how well the model perform when predicting for the new unseen data points. 
+Generally, the fundamental challenge in machine learning is that our model should perform well on previously unseen data points which is also referred to as generalization.
+If the scope of the model is sufficiently large (model with a large number of parameters) optimization techniques described previously could enable the model to capture noise that specific to training records. 
+In other words \emph{overfitting} is where the model will focus on individual nuances of data records instead of focusing on general pattern overall.
+However, there are numerous regularization techniques available to mitigate the overfitting in ANNs.
+Just like traditional machine learning \textit{l} regularization (norm) can be applied to the artificial neural networks.
+In general form $l_p$ norm is given by
+
+\begin{equation}
+  \left\lVert x \right\rVert_p = \left(\sum_i \left\lvert x_i \right\rvert^p \right) ^{\frac{1}{p}}
+\end{equation}
+
+for vector \textbf{\textit{x}} and $p \in \mathbb{R}$, $p \geq 1$.
+
+Most frequently used $l$ norms are $l_1$ and $l_2$ regularization.
+The $l_1$ norm usually used when the difference between elements are important. 
+This regularization seldom referred to as \emph{Manhatten distance} in the literature.
+Similarly, another norm get used often is $l_2$ norm, also known as \emph{Euclidean distance}, is the geometric distance between points and could be calculated simply as $x^Tx$
+
+In addition to $l_p$ norms \emph{dropout}~\cite{dropout} emerges as a popular regularization technique specific to the ANNs.
+Dropout is a process of removing a fraction of the units from a neural network layer by setting the weight of the unit to zero during training.
+This technique reduces the reliance of each unit for the prediction.
+In each training iteration fraction of the neurons dropped randomly so the remain neurons are forced to train in the absence of the neurons picked.
+Although dropout has proven to improve generalization in many machine learning tasks, due to its unstable nature time it takes for the network to converge usually increases.
+
 
 
 \section{Convolutional Networks} \label{sec:convnets}
-For the definition of Convolutional Neural Networks (CNNs), I used the definition from Deep Learning book~\cite{deeplearningbook} in the proposal of this project which I believe makes a very good job of explaining the concept. 
+For the definition of Convolutional Neural Networks (CNNs), I used the definition from Deep Learning book~\cite{deeplearningbook} in the proposal of this project that I believe summarize the concept very well. 
 To quote that definition again CNNs are:
 \begin{quote}
   "Convolutional networks are simply neural networks that use convolution in place of general matrix multiplication in at least one of their layers."
