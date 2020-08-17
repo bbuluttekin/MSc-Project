@@ -163,11 +163,17 @@ Although dropout has proven to improve generalization in many machine learning t
 
 
 \section{Convolutional Networks} \label{sec:convnets}
-For the definition of Convolutional Neural Networks (CNNs), I used the definition from Deep Learning book~\cite{deeplearningbook} in the proposal of this project that I believe summarize the concept very well. 
+In the proposal of this project, I used the definition from Deep Learning book~\cite{deeplearningbook} for the definition of Convolutional Neural Networks (CNNs) that I believe summarize the concept very well. 
 To quote that definition again CNNs are:
 \begin{quote}
   "Convolutional networks are simply neural networks that use convolution in place of general matrix multiplication in at least one of their layers."
 \end{quote}
+
+In CNNs neurons replaced by units usually called as kernel or filter.
+These units are rectangular matrix span over the layers of the input data. 
+The way this unit calculate its output by positioning the each kernel item to pixels on the image and calculate the element vise multiplication between them. 
+Kernel then slide over the res of the image until all image covered. 
+The area that processed by the image is called \emph{receptive field} and operating this way by calculating each area in image CNNs are able to capture information about the locality of the image as oppose to flattening.
 
 \section{Software Challenges Specific to 
 Machine Learning Systems} \label{sec:engchallenge}
@@ -182,7 +188,6 @@ Where applicable checklist points are:
   \item Monitor training loss during training and make sure it is declining throughout the training.
   \item Check the input and output shapes are correct.
   \item Make minor changes to models and only add addition changes after ensuring there is no bug in the system.
-  \item Monitor wights 
 \end{itemize}
 
 Another challenge is the computationally expensive nature of the training.
