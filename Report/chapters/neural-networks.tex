@@ -169,11 +169,21 @@ To quote that definition again CNNs are:
   "Convolutional networks are simply neural networks that use convolution in place of general matrix multiplication in at least one of their layers."
 \end{quote}
 
-In CNNs neurons replaced by units usually called as kernel or filter.
+In CNNs neurons replaced by units usually called kernel or filter.
 These units are rectangular matrix span over the layers of the input data. 
 The way this unit calculate its output by positioning the each kernel item to pixels on the image and calculate the element vise multiplication between them. 
-Kernel then slide over the res of the image until all image covered. 
+Kernel then slide over the rest of the image until all image covered. 
 The area that processed by the image is called \emph{receptive field} and operating this way by calculating each area in image CNNs are able to capture information about the locality of the image as oppose to flattening.
+Output of the operation depends on the design of the convolution operation.
+There are two main concept defines the operation, one is stride or how many pixel the kernel will be moved to complete the operation, and the size of the padding.
+Padding is zero value pixels that get placed around the image to centralize the items at the edge of the image in kernels.
+
+Output of the convolutional network can be calculated easily to ensure no bug is introduced to the model during implementation.
+Given the volume size of the input image (\textbf{\textit{I}}), kernel size of CNN (\textbf{\textit{K}}), stride which is applied (\textbf{\textit{S}}), and the amount of zero padding applied is (\textbf{\textit{P}}). We can calculate the output as:
+
+\begin{equation}
+  output = \frac{(I - K + 2P)}{S} + 1  
+\end{equation}
 
 \section{Software Challenges Specific to 
 Machine Learning Systems} \label{sec:engchallenge}
