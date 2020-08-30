@@ -1,6 +1,47 @@
 \chapter{Methodology} \label{chap:methodology}
+This chapter lays out methodical steps I took while implementing the project.
+Main steps for implementing this project falls into four general category.
+These four categories are:
+\begin{itemize}
+    \item Establishing a baseline benchmark
+    \item Improving metrics beyond baseline benchmark
+    \item Ensuring model interpretability is maintained
+    \item Deploying the final model to production
+\end{itemize}
+
+Further sections will provide a breakdown details to these main categories.
 
 \section{Establishing a benchmark}
+The first step to every machine learning project is that model produced is perform better than any random or naive solution.
+Although random guess in any binary classification suggest that the minimum accuracy should be greater or equal than 50\%, because of the imbalance in the test dataset actually requires higher accuracy for this project.
+Mainly because we have 390 pneumonia images in the 624 total images in the test dataset dummy classifier that predict pneumonia for any given image will achieve 62.5\% accuracy.
+However, given the imbalance of the test dataset accuracy would not be a good metrics choice for assessing the performance.
+For that reason on any experiment I collect metrics for precision, recall as well as f1 score.
+Precision is calculated by dividing true positives (tp) in predictions to true positives and false positives (fp).
+
+\begin{equation}
+    Precision = \frac{tp}{tp + fp}
+\end{equation}
+
+Recall is calculated by dividing true positives to true positives and false negatives (fn).
+
+\begin{equation}
+    Recall = \frac{tp}{tp + fn}
+\end{equation}
+
+To capture the correct performance of the classifier we need to consider both precision and recall.
+F1 score provides ability to consider both precision and recall for the same classification problem, because it is calculated by getting a harmonic mean of the precision and recall.
+
+\begin{equation}
+    F_1 = \frac{2}{\frac{1}{precision} + \frac{1}{recall}} = 2 \times \frac{precision \times recall}{precision + recall}
+\end{equation}
+
+
+Next part for the benchmarking is choosing which algorithms to train on the data for benchmarking.
+Given we don't know the distribution of the data, training fundamental machine learning algorithms together with the neural network algorithms is a cautious step to take. 
+For that reason I have chosen to train two fundamental machine learning algorithm, namely the Random Forest classifier and the Support vector classifier as a part of establishing benchmark.
+
+
 \subsection{Random Forest Classifier}
 
 \subsection{SVM Classifier}
@@ -8,10 +49,6 @@
 \subsection{LeNet-5}
 
 \subsection{AlexNet}
-base (https://tensorboard.dev/experiment/p2mkNoLORACZlCXL2UQRbg)
-
-
-augmented (https://tensorboard.dev/experiment/dmQIbMeJQtqF70MhQQqySA)
 
 \subsection{VGGNet}
 
