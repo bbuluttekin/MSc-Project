@@ -9,14 +9,15 @@ These four categories are:
     \item Deploying the final model to production
 \end{itemize}
 
-Further sections will provide a breakdown details to these main categories.
+Further sections will provide a detail for these four main categories.
 
 \section{Establishing a benchmark}
 The first step to every machine learning project is that model produced is perform better than any random or naive solution.
 Although random guess in any binary classification suggest that the minimum accuracy should be greater or equal than 50\%, because of the imbalance in the test dataset actually requires higher accuracy for this project.
 Mainly because we have 390 pneumonia images in the 624 total images in the test dataset dummy classifier that predict pneumonia for any given image will achieve 62.5\% accuracy.
 However, given the imbalance of the test dataset accuracy would not be a good metrics choice for assessing the performance.
-For that reason on any experiment I collect metrics for precision, recall as well as f1 score.
+For that reason on any experiment conducted, collecting precision, recall as well as calculating f1 score will be utilized.
+If I introduce these metrics in more detail.
 Precision is calculated by dividing true positives (tp) in predictions to true positives and false positives (fp).
 
 \begin{equation}
@@ -43,12 +44,102 @@ For that reason I have chosen to train two fundamental machine learning algorith
 
 
 \subsection{Random Forest Classifier}
+For the past years, tree based algorithms have been very popular in the academic community as well as in the industry with numerous papers demonstrated in ICML, NIPS and JMLR.
+Random forest emerges in this category as a very strong algorithm by Breiman~\cite{randomforest} that achieves remarkable performance in small to medium dataset.
+Final baseline will be determined by finding optimal number of estimators and maximum features using cross validation.
+
 
 \subsection{SVM Classifier}
+In addition to Random Forest secondary main stream machine learning algorithm is Support Victor Machine classifier~\cite{svm}.
+Biggest factor for choosing this algorithm was its robustness in detecting non-linear features in the data using kernel trick.
+Similarly to Random Forest hyper-parameters chosen with cross validation.
 
 \subsection{LeNet-5}
+LeNet-5~\cite{Lenet5} is the first one of the well known CNNs that I will apply to this problem to set a baseline benchmark.
+I kept the attributes of the network as close to origin network as possible but some characteristic of the network had to be changed when it is trained on this classification problem.
+First difference in this project needed in input and output layers, MNIST dataset have ten classes therefore required ten dense neurons at the output layer in the original network but in this project there is two classes to be predict which can be achieve by having one dense output neuron instead.
+Input layer also changed because $32 \times 32$ is not suitable resolution for the pneumonia detection and changed to $224 \times 224$ for better representation.
+Another changed made to this model is using relu activation function rather than hyperbolic tangent function (tanh) because of the less than ideal gradient flow in saturated tanh function prevented model to converge to good solution.
+Detail of the model summary given below for reference.
+
+\begin{verbatim}
+    Model: "LeNet-5"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d_6 (Conv2D)            (None, 220, 220, 6)       456       
+_________________________________________________________________
+average_pooling2d_4 (Average (None, 110, 110, 6)       0         
+_________________________________________________________________
+conv2d_7 (Conv2D)            (None, 106, 106, 16)      2416      
+_________________________________________________________________
+average_pooling2d_5 (Average (None, 53, 53, 16)        0         
+_________________________________________________________________
+conv2d_8 (Conv2D)            (None, 49, 49, 120)       48120     
+_________________________________________________________________
+flatten_2 (Flatten)          (None, 288120)            0         
+_________________________________________________________________
+dense_6 (Dense)              (None, 120)               34574520  
+_________________________________________________________________
+dense_7 (Dense)              (None, 84)                10164     
+_________________________________________________________________
+dense_8 (Dense)              (None, 1)                 85        
+=================================================================
+Total params: 34,635,761
+Trainable params: 34,635,761
+Non-trainable params: 0
+_________________________________________________________________
+\end{verbatim}
 
 \subsection{AlexNet}
+Similar to LeNet-5, AlexNet~\cite{Alexnet} also aimed to kept original structure as much as possible.
+AlexNet comprise of eight layers, five of those were convolution layers where some of them connected to max-pooling layer. 
+Despite the fact the architect is preserve almost same as the original implementation additional steps such as adding local response normalization or PCA augmentation is not applied because of the ad hoc nature of the process and limited affect of this processes in the final performance.
+AlexNet is ultimately a very influential paper that steer the direction for how the CNNs are designed and fueled the adoption of the use of neural networks in many fields.
+Fallowing quote from the paper also explains the reason why neural networks gains so much popularity and pushing the state of the art results year after year.
+\begin{quote}
+    \textit{"All of our experiments suggest that our results
+can be improved simply by waiting for faster GPUs and bigger datasets to become available."}
+\end{quote}
+
+\begin{verbatim}
+    Model: "AlexNet"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d_10 (Conv2D)           (None, 54, 54, 96)        34944     
+_________________________________________________________________
+max_pooling2d_6 (MaxPooling2 (None, 26, 26, 96)        0         
+_________________________________________________________________
+conv2d_11 (Conv2D)           (None, 26, 26, 256)       614656    
+_________________________________________________________________
+max_pooling2d_7 (MaxPooling2 (None, 12, 12, 256)       0         
+_________________________________________________________________
+conv2d_12 (Conv2D)           (None, 12, 12, 384)       885120    
+_________________________________________________________________
+conv2d_13 (Conv2D)           (None, 12, 12, 384)       1327488   
+_________________________________________________________________
+conv2d_14 (Conv2D)           (None, 12, 12, 256)       884992    
+_________________________________________________________________
+max_pooling2d_8 (MaxPooling2 (None, 5, 5, 256)         0         
+_________________________________________________________________
+flatten_2 (Flatten)          (None, 6400)              0         
+_________________________________________________________________
+dense_6 (Dense)              (None, 4096)              26218496  
+_________________________________________________________________
+dropout_4 (Dropout)          (None, 4096)              0         
+_________________________________________________________________
+dense_7 (Dense)              (None, 4096)              16781312  
+_________________________________________________________________
+dropout_5 (Dropout)          (None, 4096)              0         
+_________________________________________________________________
+dense_8 (Dense)              (None, 1)                 4097      
+=================================================================
+Total params: 46,751,105
+Trainable params: 46,751,105
+Non-trainable params: 0
+_________________________________________________________________
+\end{verbatim}
 
 \subsection{VGGNet}
 
