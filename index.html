@@ -43,39 +43,53 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+    <script src="static/predict.js"></script>
 
-    <script>
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('#blah')
-                        .attr('src', e.target.result)
-                        .width(500)
-                        .height(500);
-                };
-
-                reader.readAsDataURL(input.files[0]);
+    <!-- <script>
+        var loadFile = function (event) {
+            var output = document.getElementById('output');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function () {
+                URL.revokeObjectURL(output.src) // free memory
             }
-        }
-    </script>
+            // $('#spinner').parent().hide()
+        };
+    </script> -->
     <br>
-    <h2 class="text-center">Choose a file for prediction</h2>
+    <h2 class="text-center">Choose an image for prediction</h2>
+    <div class="container mt-5">
+        <div class="d-flex align-items-center" id="spinner">
+            <strong>Please wait model is loading...</strong>
+            <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+        </div>
+    </div>
+
     <br>
     <div class="container mt-5">
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
-            </div>
-            <div class="custom-file">
-                <input type="file" class="custom-file-input" id="inputGroupFile01"
-                    aria-describedby="inputGroupFileAddon01" onchange="readURL(this);">
-                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+        <div class="d-flex justify-content-center">
+            <!-- <input type="file" accept="image/*" onchange="loadFile(event)"> -->
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Upload</span>
+                </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="inputGroupFile01" accept="image/*"
+                        onchange="loadFile(event)">
+                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                </div>
             </div>
         </div>
-        <br>
-        <img id="blah" src="#" alt="your image" class="mx-auto d-block" />
+    </div>
+    <div class="container mt-5">
+        <div class="d-flex justify-content-center">
+            <img id="output" class="mx-auto d-block" width="400" />
+        </div>
+    </div>
+    <div class="container mt-5">
+        <div class="d-flex justify-content-center">
+            <button type="button" class="btn btn-dark" id="predict-btn" onclick="predict()">Predict</button>
+        </div>
     </div>
 
 
