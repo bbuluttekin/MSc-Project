@@ -14,11 +14,10 @@ class GradCAM:
         self.model = model
 
     def img_to_array(self, img_path, size):
-        img = tf.io.read_file(self.img_path)
-        img = tf.image.decode_jpeg(img, channels=3)
-        img = tf.image.resize(img, self.size).numpy()
-        img = np.expand_dims(img, axis=0)
-        return img
+        img = tf.keras.preprocessing.image.load_img(img_path, target_size=size)
+        array = tf.keras.preprocessing.image.img_to_array(img)
+        array = np.expand_dims(array, axis=0)
+        return array
 
     def get_conv_model(self, model, last_convolution_layer):
         output_layer = model.get_layer(last_convolution_layer)
