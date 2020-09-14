@@ -4,7 +4,8 @@ import numpy as np
 
 class GradCAM:
 
-    def __init__(img_path,
+    def __init__(self,
+                 img_path,
                  size,
                  model,
                  last_convolution_layer):
