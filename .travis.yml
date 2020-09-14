@@ -13,15 +13,14 @@ install:
 # command to run tests
 script:
   - pytest tests/
-
-if: branch = gh-pages
-deploy:
-  - provider: script
-    script: bash scripts/convert-model.sh
-    on:
-      branch: gh-pages
-  - provider: pages
-    skip_cleanup: true
-    keep_history: true
-    on:
-      branch: gh-pages
+# if: branch = gh-pages
+# deploy:
+#   - provider: script
+#     script: bash scripts/convert-model.sh
+#     on:
+#       branch: gh-pages
+#   - provider: pages
+#     skip_cleanup: true
+#     keep_history: true
+#     on:
+#       branch: gh-pages
