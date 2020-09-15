@@ -54,7 +54,7 @@ The biggest factor for choosing this algorithm was its robustness in detecting n
 Similarly to Random Forest hyper-parameters chosen with cross-validation.
 
 \subsection{LeNet-5}
-LeNet-5~\cite{Lenet5} is the first one of the well-known CNNs that I will apply to this problem to set a baseline benchmark.
+LeNet-5~\cite{Lenet5} is the first one of the well-known CNNs that I will apply to this problem to consider in baseline benchmark.
 I kept the attributes of the network as close to the origin network as possible but some characteristic of the network had to be changed when it is trained on this classification problem.
 The first difference in this project needed in input and output layers, MNIST dataset have ten classes therefore required ten dense neurons at the output layer in the original network but in this project, there are two classes to predict which can be achieved by having one dense output neuron instead.
 Input layer also changed because $32 \times 32$ is not a suitable resolution for the pneumonia detection and changed to $224 \times 224$ for better representation.
@@ -141,12 +141,70 @@ _________________________________________________________________
 \end{verbatim}
 
 \subsection{VGGNet}
+VGGNet is one of the best performant in 2014 ILSVRC competition that get a best performance in classification and localization task.
+There are two different variation of this network is available namely the VGGNet 19 and VGGNet 16. 
+For this project 16 layered VGGNet 16 is a good choice it has a sufficient capacity given that the dataset is relatively small.
+Main contribution of the VGGNet is that it demonstrated the importance of the network depth to good performance.
+Layer structure of the architecture is straightforward, only performs $3 \times 3$ convolution with $2 \times 2$ pooling.
+Similarly, for the purpose of the benchmarking architecture kept as close to original as possible with only change is made to final layer replaced with one neuron dense layer to accommodate the binary classification task.
+Advantage of using this network is that it is implemented in most of the modern software packages and it also available to initialize with the weights of imagenet. 
+That property will be very useful for comparing the performance when transfer learning is explored in subsection \ref{subsec:transferlearning}.
+Detail of full network listed below.
 
-\subsection{ResNet}
+\begin{verbatim}
+    Model: "VGGNet"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input_4 (InputLayer)         [(None, 224, 224, 3)]     0         
+_________________________________________________________________
+vgg16 (Functional)           (None, 512)               14714688  
+_________________________________________________________________
+dense_3 (Dense)              (None, 4096)              2101248   
+_________________________________________________________________
+dropout_2 (Dropout)          (None, 4096)              0         
+_________________________________________________________________
+dense_4 (Dense)              (None, 4096)              16781312  
+_________________________________________________________________
+dropout_3 (Dropout)          (None, 4096)              0         
+_________________________________________________________________
+dense_5 (Dense)              (None, 1)                 4097      
+=================================================================
+Total params: 33,601,345
+Trainable params: 33,601,345
+Non-trainable params: 0
+
+\end{verbatim}
+
+% \subsection{ResNet}
 
 \section{Improving Performance}
-\subsection{Ensambling Models}
-\subsection{Transfer Learning}
+After establishing a benchmark for minimum acceptable performance, this step of will focus on continuously improving the performance on the problem. 
+Materialize that goal I have chosen two method, applying transfer learning and building custom neural.
+
+\subsection{Transfer Learning} \label{subsec:transferlearning}
+Transfer learning is fundamentally taking weights (or features) learned on one problem, and applying them to similar or new problem that could benefit from it.
+Transfer learning usually considered when the training data is too small to train a deep neural network from a scratch.
+Process for transfer learning is simple, architecture that will be use in problem in hand is initialized with the weights learned from another problem without the top part of the model.
+Here top part is refers to the layer(s) at the end of the model which has got the high level of the features specific to the problem.
+And given that the lower layers of the model contribute to simply features like vertical and horizontal lines or edges, weights in these layers held frozen to allow feature extraction from the images in new problem.
+After that step top part of the model initialized with the random weight to be trained on the new dataset to learn higher level features.
+Transfer learning sometimes get adopted with the concept of \emph{fine-tuning}, which is a process of unfreezing the part of it or the entire model and re-training it with the new data.
+
+Because the dataset of this project is suffering from a small data problem, transfer learning is utilized to discover if generic datasets like imagenet~\cite{imagenet} can be helpful to improve existing model.
+Effectiveness of the transfer learning will be measured by training the VGG16 network with the imagenet weights and comparing the performance against same network with randomly initialized version from the benchmarking experiments.
+
+\subsection{Custom Model Architecture}
+
+\begin{itemize}
+    \item Learning rate $\alpha$
+    \item Momentum term $\beta$
+    \item Number of layers
+    \item Number of units in a layer
+    \item Kernel size for convolution layers
+    \item Learning rate decay
+    \item Mini batch size
+\end{itemize}
 
 \section{Model Interpretability}
 \subsection{GradCAM}
