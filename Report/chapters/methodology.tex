@@ -207,6 +207,16 @@ Effectiveness of the transfer learning will be measured by training the VGG16 ne
 \end{itemize}
 
 \section{Model Interpretability}
+Machine learning models and more specifically neural network usually regarded as black box machines.
+Meaning that reason for their predictions are unknown.
+However there are variety of techniques that design to elaborate the machine learning models emphasis points.
+Before any model put into production it should also be examined for their predictive reasons and because of that I added model interpretability rules before making decision to promote any model to deployment stage.
+One such technique call GradCAM~\cite{heatmap} is designed to highlight the areas in the image that contributes the most for the prediction machine learning outputs.
+
 \subsection{GradCAM}
+GradCAM~\cite{heatmap} is part of the general visualization technique called \emph{class activation map} (CAM).
+It consist of creating a heatmap of activations over the input image space.
+A class activation heatmap is a two dimensional surface of scores for individual class mapped in to the corresponding location. For instance, if the input image is with pneumonia heatmap is indicates the areas that most represent pneumonia like features found and vice versa for images that absent of pneumonia.
+This technique originally designed for softmax output with different classes and to adapt it to binary classification with sigmoid output, additional logic based on assigning classification with probability grater that 0.5 to pneumonia presence and absence of it to those less that 0.5 probability.
 
 \section{Deployments with CI/CD}
