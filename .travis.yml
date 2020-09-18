@@ -4,6 +4,10 @@ branches:
     - master
     - /.*/
 
+os:
+  - linux
+dist: xenial
+
 language: python
 python:
   - "3.6"
