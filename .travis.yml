@@ -1,12 +1,10 @@
+dist: xenial
+
 branches:
   only:
     - gh-pages
     - master
     - /.*/
-
-os:
-  - linux
-dist: xenial
 
 language: python
 python:
@@ -14,12 +12,16 @@ python:
 
 jobs:
   include:
-    - stage: test
+    - name: test
+      language: python
+      python:
+        - "3.6"
       install:
         - pip install -r requirements.txt
       script:
         - pytest tests/
       # Conditional deployment
+    - name: deployment
       if: branch = gh-pages
       deploy:
         - provider: script
