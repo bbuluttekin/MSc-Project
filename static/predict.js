@@ -5,20 +5,7 @@ var loadFile = function (event) {
     output.onload = function () {
         URL.revokeObjectURL(output.src)
     }
-    // $('#spinner').parent().hide()
 };
-
-$("#output").change(function () {
-    let reader = new FileReader();
-    reader.onload = function () {
-        let dataURL = reader.result;
-
-        // $("#selected-image").attr("src", dataURL);
-        // $("#prediction-list").empty();
-    }
-    let file = $("#inputGroupFile01").prop('files')[0];
-    reader.readAsDataURL(file);
-});
 
 
 let model;
@@ -37,9 +24,9 @@ var predict = async function () {
     let prediction = await model.predict(resizedTensor).data();
     if (prediction <= 0.5) {
         // Normal
-        $("#result").text("Result: No Pneumonia detected.")
+        $("#result").text(`Result: Pneumonia not detected. (Probability of pneumonia: ${Number(prediction).toFixed(3)})`);
     } else {
         // Pneumonia 
-        $("#result").text("Result: Pneumonia detected.")
+        $("#result").text(`Result: Pneumonia detected. (Probability of pneumonia: ${Number(prediction).toFixed(3)})`);
     }
 };
