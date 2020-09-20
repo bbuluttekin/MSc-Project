@@ -1,10 +1,24 @@
 \chapter{Design and Experiments}
+Summary of the experiment results and their details laid out in this section.
+Neural network experiment logs are published online for more detailed examination, they are accessible by the url provided in the corresponding footnotes of this section.
+
+\section{Training Specifications}
+Training for traditional machine learning used in this project is fallows two step approach.
+At the first part hyper-parameters for the model is selected by cross validation score then in the second part model is trained on entire dataset with the selected hyper-parameters.
+Final model then evaluated on the test set.
+
+There are many artificial neural networks used in both in benchmarking and the model selection.
+Weights of the networks initialized by random except for the transfer learning models.
+Model used in the transfer learning experiments initialized with the weighs pre-trained on imagenet~\cite{imagenet} dataset.
+Each architecture is trained end-to-end using Adam~\cite{adam} optimizer with the standard parameters ($\beta_1 = 0.9$ \& $\beta_2 = 0.999$).
+I used batch size of 64 for the training, and initial learning rate of 0.001 that decayed by the factor of 10 every time validation loss stagnates after an epoch.
+Each image in the dataset is is downscaled to $224 \times 224$ size and normalized values to between zero to one.
+Data augmentation is applied to minority class in the dataset to create a balanced dataset as explained in section \ref{sec:dataprocessing}.
+Random cropping, changing saturation and horizontal flipping are set of augmentations chosen to create a balanced dataset.
+
 
 \section{Benchmark Experiments}
-base (https://tensorboard.dev/experiment/p2mkNoLORACZlCXL2UQRbg)
 
-
-augmented (https://tensorboard.dev/experiment/dmQIbMeJQtqF70MhQQqySA)
 \subsection{Random Forest Classifier}
 \subsection{SVM Classifier}
 \subsection{LeNet-5}
@@ -15,3 +29,8 @@ augmented (https://tensorboard.dev/experiment/dmQIbMeJQtqF70MhQQqySA)
 \section{Transfer Learning}
 
 \section{Interpreting Model Decisions}
+
+base (https://tensorboard.dev/experiment/p2mkNoLORACZlCXL2UQRbg)
+
+
+augmented (https://tensorboard.dev/experiment/dmQIbMeJQtqF70MhQQqySA)
