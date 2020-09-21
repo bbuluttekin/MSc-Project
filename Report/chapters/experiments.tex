@@ -19,18 +19,69 @@ Random cropping, changing saturation and horizontal flipping are set of augmenta
 
 \section{Benchmark Experiments}
 
-\subsection{Random Forest Classifier}
-\subsection{SVM Classifier}
+\subsection{Random Forest Classifier and SVM}
+Cross validation results of the random forest classifier found the fallowing hyper-parameters achieves the best performance:
+
+\begin{itemize}
+    \item Number of trees: 500
+    \item Information gain criteria: Gini
+    \item Number of max features: Square root
+    \item Bootstrap: allowed
+\end{itemize}
+
+Cross validation for the support vector machine classifier runs suggested the fallowing hyper-parameters will achieve the best metrics:
+
+\begin{itemize}
+    \item Regularization parameter: 10
+    \item Kernel: rbf
+    \item Polynomial degree: 3
+    \item Kernel coefficient $\gamma$: scale
+    \item Tolerance: 0.001
+\end{itemize}
+
+Confusion matrix of these classifiers generated fallowing results.
+
+\begin{figure}[H]%
+    \centering
+    \subfloat[Random forest]{{\includegraphics[width=.4\textwidth]{img/rf-confusion-matrix.png} }}%
+    \qquad
+    \subfloat[SVC]{{\includegraphics[width=.4\textwidth]{img/svm-confusion-matrix.png} }}%
+    \caption{Confusion matrix of the classifiers.}%
+    \label{fig:cmatrix}%
+\end{figure}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{||c c c c c||} 
+    \hline
+    Classifier & Accuracy & Precision & Recall & f1\\ [0.5ex] 
+    \hline\hline
+    Random Forest & 0.7532 & 0.3547 & 0.9650 & 0.5187\\ 
+    \hline
+    SVC & 0.7580 & 0.3718 & 0.9560 & 0.5354\\
+    \hline
+    \end{tabular}
+    \caption{Performance metrics for traditional machine learning algorithms.}
+    \label{table:mlmetrics}
+\end{table}
+
 \subsection{LeNet-5}
 \subsection{AlexNet}
+AlexNet~\footnote{AlexNet Base:https://tensorboard.dev/experiment/PaBawCErSqG6zIef7JPq8g/}
+balanced: https://tensorboard.dev/experiment/7b6W0tdHQQ2RINGt6cYbrA/
+
+\subsection{VGGNet}
+% vggnet https://tensorboard.dev/experiment/IbsPnocxSMKqNjmdJ3CdpA/
+% vgg balanced https://tensorboard.dev/experiment/ABd8GrKdSXyzHgNPDngeEw/
+
 
 \section{Custom NN Architecture}
 
 \section{Transfer Learning}
+% vgg https://tensorboard.dev/experiment/VxxyXkn6TaSMrgKnSP1low/
+% vgg-balanced https://tensorboard.dev/experiment/c1zSx6N0QviARqCVIq3QMw/
 
 \section{Interpreting Model Decisions}
 
-base (https://tensorboard.dev/experiment/p2mkNoLORACZlCXL2UQRbg)
-
-
-augmented (https://tensorboard.dev/experiment/dmQIbMeJQtqF70MhQQqySA)
+% base (https://tensorboard.dev/experiment/p2mkNoLORACZlCXL2UQRbg)
+% augmented (https://tensorboard.dev/experiment/dmQIbMeJQtqF70MhQQqySA)
