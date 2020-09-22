@@ -195,6 +195,10 @@ Because the dataset of this project is suffering from a small data problem, tran
 Effectiveness of the transfer learning will be measured by training the VGG16 network with the imagenet weights and comparing the performance against same network with randomly initialized version from the benchmarking experiments.
 
 \subsection{Custom Model Architecture}
+Another method available to get higher performance in machine learning is to designing custom architect better reflect the data representation.
+Despite the great potential of better performance, this method is usually more complex in nature because of the challenges in hyper-parameter search.
+Modern CNNs have significantly more hyper-parameters compare to traditional machine learning algorithms. 
+For instance, below items are non-exhaustive list of hyper-parameters to consider when designing custom architecture.
 
 \begin{itemize}
     \item Learning rate $\alpha$
@@ -202,8 +206,33 @@ Effectiveness of the transfer learning will be measured by training the VGG16 ne
     \item Number of layers
     \item Number of units in a layer
     \item Kernel size for convolution layers
+    \item Type of the convolution layer
     \item Learning rate decay
+    \item Type of optimization algorithm
+    \item Regularization type and quantity
     \item Mini batch size
+\end{itemize}
+
+Complexity of the task gets significantly higher when the attributes such as convolution layers padding and strides included in the number of layer and kernel size.
+When used with valid padding convolutional layer have addition constrain that the further layers have to be compatible with the output tensor shapes from previous layers.
+Given these complexities and limited time frame of this project some aspects of the hyper-parameter search will be determinant.
+Grid search and random search are two of the widely used method when determining the right hyper-parameters.
+Studies suggests that random search is more efficient and computationally inexpensive than the grid search in the context of neural network~\cite{randomsearch}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{img/randomsearch.png}
+    \caption{Random search versus grid search~\cite{randomsearch}}
+    \label{fig:randomsearch}
+\end{figure}
+
+For the custom architecture I will be running experiments with random search over the fallowing hyper-parameters.
+
+\begin{itemize}
+    \item Type of convolutional layer. Conv2D versus Depthwise convolution
+    \item Number of layers
+    \item Different convolution blocks (e.g. Inception, residual, etc.)
+    \item Type of regularization (e.g. Batch normalization, Dropout)
 \end{itemize}
 
 \section{Model Interpretability}

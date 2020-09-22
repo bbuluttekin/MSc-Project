@@ -39,7 +39,7 @@ Cross validation for the support vector machine classifier runs suggested the fa
     \item Tolerance: 0.001
 \end{itemize}
 
-Confusion matrix of these classifiers generated fallowing results.
+Confusion matrix of these classifiers evaluated on test data generated fallowing results.
 
 \begin{figure}[H]%
     \centering
@@ -49,6 +49,9 @@ Confusion matrix of these classifiers generated fallowing results.
     \caption{Confusion matrix of the classifiers.}%
     \label{fig:cmatrix}%
 \end{figure}
+
+It is clear from the amount of wrongly classified healthy patience X-ray, both of the models suffer from the imbalance dataset.
+This effect is slightly more dominant in the random forest classifier than the SVC, albeit performance of both model is similar.
 
 \begin{table}[H]
     \centering
@@ -66,6 +69,7 @@ Confusion matrix of these classifiers generated fallowing results.
 \end{table}
 
 \subsection{LeNet-5}
+
 \subsection{AlexNet}
 AlexNet~\footnote{AlexNet Base:https://tensorboard.dev/experiment/PaBawCErSqG6zIef7JPq8g/}
 balanced: https://tensorboard.dev/experiment/7b6W0tdHQQ2RINGt6cYbrA/
