@@ -50,8 +50,8 @@ Confusion matrix of these classifiers evaluated on test data generated fallowing
     \label{fig:cmatrix}%
 \end{figure}
 
-It is clear from the amount of wrongly classified healthy patience X-ray, both of the models suffer from the imbalance dataset.
-This effect is slightly more dominant in the random forest classifier than the SVC, albeit performance of both model is similar.
+It is clear from the amount of wrongly classified healthy patience X-ray, both of the models suffer from the imbalance effect.
+This effect is slightly more dominant in the random forest classifier than the SVC, albeit performance of both model are similar.
 
 \begin{table}[H]
     \centering
@@ -68,22 +68,130 @@ This effect is slightly more dominant in the random forest classifier than the S
     \label{table:mlmetrics}
 \end{table}
 
-\subsection{LeNet-5}
+
 
 \subsection{AlexNet}
-AlexNet~\footnote{AlexNet Base:https://tensorboard.dev/experiment/PaBawCErSqG6zIef7JPq8g/}
-balanced: https://tensorboard.dev/experiment/7b6W0tdHQQ2RINGt6cYbrA/
+During the experiments for AlexNet and LeNet5 effect of the balanced~\footnote{AlexNet Balanced: https://tensorboard.dev/experiment/7b6W0tdHQQ2RINGt6cYbrA/} dataset is also compared to base~\footnote{AlexNet Base: https://tensorboard.dev/experiment/PaBawCErSqG6zIef7JPq8g/} dataset to mesure the effectiveness of the data augmentation.
+Figures used in AlexNet and LeNet5 annotated with balanced training/val to reflect that balanced dataset is created with the data augmentation.
+Base training/val is used to refer base image data is used without and data augmentation.
+Results from AlexNet was average but given the loss values did not declined in the validation dataset suggest that ALexNet slightly over-fitted the data.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{img/alexnetloss.png}
+    \caption{}
+    \label{fig:alexloss}
+\end{figure}
+
+Another important point is that converge was very quick for this particular dataset. 
+It is clearly visible in the charts that model converge in around first 30 epochs and remained unchanged for the rest of the training.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{img/alexnetf1.png}
+    \caption{}
+    \label{fig:alexf1}
+\end{figure}
+
+
+\subsection{LeNet-5}
+I was not able to train the LeNet5 model with the original model specification that utilize hyperbolic tangent function (tanh).
+This was partially expected as tanh activation function is not able to pass the gradient flow very well when the initialization is not favorable.
+This effect is mentioned in the section \ref{sec:gradients} and as such I have replaced the activation function with the ReLu activation function for my implementation.
+Similar to AlexNet, LeNet5 also displayed possible sign of over-fitting when loss did not declined on the validation dataset.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\textwidth]{img/lenetloss.png}
+    \caption{LeNet5 loss metrics}
+    \label{fig:lenetloss}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\textwidth]{img/lenetf1.png}
+    \caption{LeNet5 f1 metrics}
+    \label{fig:lenetloss}
+\end{figure}
+
+
 
 \subsection{VGGNet}
+Performance of this model~\footnote{VGGNet Base: https://tensorboard.dev/experiment/IbsPnocxSMKqNjmdJ3CdpA/}~\footnote{VGG Balanced: https://tensorboard.dev/experiment/ABd8GrKdSXyzHgNPDngeEw/} is the worst among all of the model I tried.
+Disappointing performance didn't change with the different random initialization.
+However, training and validation loss suggested a good training, accuracy metric was below random guess.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\textwidth]{img/vggnetloss.png}
+    \caption{}
+    \label{fig:vggloss}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\textwidth]{img/vggnetaccuracy.png}
+    \caption{}
+    \label{fig:vggacc}
+\end{figure}
+
 % vggnet https://tensorboard.dev/experiment/IbsPnocxSMKqNjmdJ3CdpA/
 % vgg balanced https://tensorboard.dev/experiment/ABd8GrKdSXyzHgNPDngeEw/
 
-
-\section{Custom NN Architecture}
-
 \section{Transfer Learning}
+I was very skeptical when adopting transfer learning to pneumonia detection because of the fundamental difference in the type of images in the imagenet compare to project dataset.
+In this implementation weights in the convolutional part of the model initialized with the pre-trained VGGNet model from imagenet dataset.
+Convolution layer weights in this network is kept frozen during the training and allowed only fully connected layers at the end of the model to be trained.
+To my surprise this approach worked considerably well. Achieving $\approx 77 \%$ in accuracy and $\approx 87 \%$ f1 on validation data. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\textwidth]{img/vggnettfloss.png}
+    \caption{}
+    \label{fig:vggtfloss}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\textwidth]{img/vggnettff1.png}
+    \caption{}
+    \label{fig:vggtff1}
+\end{figure}
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=.8\textwidth]{img/vggnettfaccuracy.png}
+%     \caption{}
+%     \label{fig:vggtfacc}
+% \end{figure}
 % vgg https://tensorboard.dev/experiment/VxxyXkn6TaSMrgKnSP1low/
 % vgg-balanced https://tensorboard.dev/experiment/c1zSx6N0QviARqCVIq3QMw/
+
+\section{Custom Neural Network Architecture}
+After experimenting with randomly choose number of layers best combination I discovered is an architecture with ten convolution layers fallowed by batch normalization and max-pooling layer. 
+In final experiments showed using two convolutional layer fallowed by batch normalization layer and max-pooling layer like a convolutional block is an optimal choice for this architecture.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{img/layerexpaccuracy.png}
+    \caption{}
+    \label{fig:layerexpacc}
+\end{figure}
+
+Immediately after this experiments same number of layers are maintain to determine the performance of the type of the convolution layer on the dataset.
+For the same number of layer I replaced the convolutional layers with the depthwise separable convolutional layers.
+Depthwise separable convolutional layers works by performing a depthwise convolution first then mixing that with the pointwise convolution.
+Result shows that convolutional layers perform better than depthwise convolutional layers whit the same layer numbers and other convolution properties set equally.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\textwidth]{img/deptoconvexpaccuracy.png}
+    \caption{}
+    \label{fig:depttoconvacc}
+\end{figure}
+
+Lastly, I have started experiments to observe the effect of regularization at the fully connected layers.
+Varying levels of dropout rate applied to dense layers to fine-tune the regularization level that best suits this architecture. Results shows that best level of dropout rate as 30\%, albeit dropout rates in the dense layers effect change very little the performance scores of the model.
 
 \section{Interpreting Model Decisions}
 
