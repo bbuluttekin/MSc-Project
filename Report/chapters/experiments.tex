@@ -19,7 +19,7 @@ Random cropping, changing saturation and horizontal flipping are set of augmenta
 
 \section{Benchmark Experiments}
 
-\subsection{Random Forest Classifier and SVM}
+\subsection{Random Forest Classifier and SVC}
 Cross validation results of the random forest classifier found the fallowing hyper-parameters achieves the best performance:
 
 \begin{itemize}
@@ -158,6 +158,8 @@ To my surprise this approach worked considerably well. Achieving $\approx 77 \%$
     \label{fig:vggtff1}
 \end{figure}
 
+Although transfer learning proven to be a viable method to increase model performance, fine tuning attempts on the transfer learning was unsuccessful~\footnote{https://tensorboard.dev/experiment/QRbFzlgwSGaf0lu5LLRSzA/}.
+After unfreezing top convolutional block layers and training the model, performance decreased to below 0.4 in the validation accuracy with f1 score of zero.
 % \begin{figure}[H]
 %     \centering
 %     \includegraphics[width=.8\textwidth]{img/vggnettfaccuracy.png}
@@ -168,7 +170,7 @@ To my surprise this approach worked considerably well. Achieving $\approx 77 \%$
 % vgg-balanced https://tensorboard.dev/experiment/c1zSx6N0QviARqCVIq3QMw/
 
 \section{Custom Neural Network Architecture}
-After experimenting with randomly choose number of layers best combination I discovered is an architecture with ten convolution layers fallowed by batch normalization and max-pooling layer. 
+After experimenting~\footnote{Layer Exp: https://tensorboard.dev/experiment/BDwUXqGgSVWA8Ieawcb3Rg/} with randomly choose number of layers best combination I discovered is an architecture with ten convolution layers fallowed by batch normalization and max-pooling layer. 
 In final experiments showed using two convolutional layer fallowed by batch normalization layer and max-pooling layer like a convolutional block is an optimal choice for this architecture.
 
 \begin{figure}[H]
@@ -179,7 +181,7 @@ In final experiments showed using two convolutional layer fallowed by batch norm
 \end{figure}
 
 Immediately after this experiments same number of layers are maintain to determine the performance of the type of the convolution layer on the dataset.
-For the same number of layer I replaced the convolutional layers with the depthwise separable convolutional layers.
+For the same number of layer I replaced the convolutional layers with the depthwise separable convolutional layers~\footnote{Type Exp: https://tensorboard.dev/experiment/aA2SgzCNTXWXK7kWMhyJNg/}.
 Depthwise separable convolutional layers works by performing a depthwise convolution first then mixing that with the pointwise convolution.
 Result shows that convolutional layers perform better than depthwise convolutional layers whit the same layer numbers and other convolution properties set equally.
 
@@ -190,10 +192,54 @@ Result shows that convolutional layers perform better than depthwise convolution
     \label{fig:depttoconvacc}
 \end{figure}
 
-Lastly, I have started experiments to observe the effect of regularization at the fully connected layers.
+Lastly, I have started experiments~\footnote{Dropout: https://tensorboard.dev/experiment/x8d0woI6Q7SpKo8zc0ZbSQ/} to observe the effect of regularization at the fully connected layers.
 Varying levels of dropout rate applied to dense layers to fine-tune the regularization level that best suits this architecture. Results shows that best level of dropout rate as 30\%, albeit dropout rates in the dense layers effect change very little the performance scores of the model.
 
 \section{Interpreting Model Decisions}
+Application of GradCAM~\cite{cam} provided valuable insight to understanding the features and parts of the images that lead to certain type of prediction.
+In the case of images with the pneumonia presence models usually focused on the lung or lung segments which was expected.
+However, occasionally some predictions was based on regions that consist of bones that suggested that search for a better model should continue.
+
+\begin{figure}[H]%
+    \centering
+    \subfloat{{\includegraphics[width=.4\textwidth]{img/pnue38.jpg} }}%
+    \qquad
+    \subfloat{{\includegraphics[width=.4\textwidth]{img/pnue42.jpg} }}%
+    \caption{GradCAM result of the images with pneumonia diagnosis.}%
+    \label{fig:campnue}%
+\end{figure}
+
+It was also noteworthy that in the case of absence of pnuemonia X-rays models tend to focus on features like background or bone structures.
+One such example is the figure \ref{fig:camnormal}, that model give emphasis on background above shoulders and curved parts of the ribs of the patient.
+
+% \begin{figure}[H]%
+%     \centering
+%     \subfloat[Random forest]{{\includegraphics[width=.4\textwidth]{img/pnue38.jpg} }}%
+%     \qquad
+%     \subfloat[SVC]{{\includegraphics[width=.4\textwidth]{img/pnue27.jpg} }}%
+%     \caption{GradCAM result of the images with pneumonia diagnosis.}%
+%     \label{fig:campnue}%
+% \end{figure}
+
+% \begin{figure}[H]%
+%     \centering
+%     \subfloat[Random forest]{{\includegraphics[width=.4\textwidth]{img/pnue25.jpg} }}%
+%     \qquad
+%     \subfloat[SVC]{{\includegraphics[width=.4\textwidth]{img/pnue22.jpg} }}%
+%     \caption{GradCAM result of the images with pneumonia diagnosis.}%
+%     \label{fig:campnue}%
+% \end{figure}
+
+\begin{figure}[H]%
+    \centering
+    \subfloat[Stand alone heatmap]{{\includegraphics[width=.35\textwidth]{img/heatmapnormal.png} }}%
+    \qquad
+    \subfloat[Overlayed heatmap on image]{{\includegraphics[width=.45\textwidth]{img/normalimg.png} }}%
+    \caption{GradCAM result and heatmap of the image without pneumonia diagnosis.}%
+    \label{fig:camnormal}%
+\end{figure}
+
+Model interpretability tool in this case is valuable for the decision making in which models to promote to production, especially in the case of selecting between models that have a very close performance metrics.
 
 % base (https://tensorboard.dev/experiment/p2mkNoLORACZlCXL2UQRbg)
 % augmented (https://tensorboard.dev/experiment/dmQIbMeJQtqF70MhQQqySA)
