@@ -179,7 +179,7 @@ There are two main concept defines the operation, one is stride or how many pixe
 Padding is zero value pixels that get placed around the image to centralize the items at the edge of the image in kernels.
 
 The output of the convolutional network can be calculated easily to ensure no bug is introduced to the model during implementation.
-Given the volume size of the input image (\textbf{\textit{I}}), kernel size of CNN (\textbf{\textit{K}}), stride which is applied (\textbf{\textit{S}}), and the amount of zero padding applied is (\textbf{\textit{P}}). We can calculate the output as:
+Given the volume size of the input image (\textbf{\textit{I}}), kernel size of CNN (\textbf{\textit{K}}), stride which is applied (\textbf{\textit{S}}), and the amount of zero padding applied (\textbf{\textit{P}}). We can calculate the output as:
 
 \begin{equation}
   output = \frac{(I - K + 2P)}{S} + 1  
@@ -241,9 +241,17 @@ In addition to starting the training with the previous model, by using naming co
 In other words, if the first training attempt is failed in epoch number 23 restarting training will start with the epoch number 23.
 
 \section{Literature Review}
-The aim of this project is building an automated CI/CD machine learning pipeline for classification of X-ray images.
-Or to summarize Mlops applied to medical imaging.
-Therefore it is practical to split the relevant works reviewed for this project to two distinct categories, mlops and computer vision in medical imaging.
+% Because of the aim of this project spans over two distinct area of research it is imperative to examine related works from these two field.
+
+Applying machine learning to medical imaging have seen rise of popularity with the emergence of the popularity of neural networks.
+Such algorithms applied to many medical diagnosis problems such as Gulshan et al~\cite{retinopathy} diabetic retinopathy detection or Estava et al~\cite{skincancer} cancer classification etc.
+More specifically performance of convolutional neural networks and localization studied in Islam et al~\cite{abnormalxray} by using OpenI~\cite{openi} dataset.
+However, because of the limited number of examples in the dataset for this project perhaps the most impactful part of the literature was the transfer learning in the medical imaging field.
+Use of transfer learning become ubiquitous when it comes to eliminate the learning problems in the small datasets.
+But use of transfer learnings effectiveness is an open question in this problem because of the dissimilarity between the source dataset of learned features such as imagenet versus the dataset of this project. 
+Performance of the pre-trained networks have shown to be lower in such cases by Yosinski et al~\cite{transferfeatures}.
+Actual benefit from transfer learning is not trying to reuse the feature dissimilar to pneumonia detection but to utilize the pre-trained weight as a good initialization step to start the training and research has shown this method is better than just using trained features out of the box~\cite{transfusion,bettertransfer, RethinkingIP}.
+Evidence of effectiveness of this method is also proven by the results of CheXNet~\cite{CheXNetRP} which have fallowed the initialization of the Dense convolution networks this way to surpass practitioner level accuracy in X-ray images.
 
 
 
