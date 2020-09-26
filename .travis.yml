@@ -27,7 +27,7 @@ jobs:
       if: branch = gh-pages
       deploy:
         - provider: script
-          script: bash scripts/convert-model.sh
+          script: ./scripts/convert-model.sh
           on:
             branch: gh-pages
         # - provider: pages
