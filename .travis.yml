@@ -24,10 +24,9 @@ jobs:
         - pytest tests/
       # Conditional deployment
     - name: deployment
-      if: branch = gh-pages
       deploy:
         - provider: script
-          script: ./scripts/convert-model.sh
+          script: bash scripts/convert-model.sh
           on:
             branch: gh-pages
         # - provider: pages
