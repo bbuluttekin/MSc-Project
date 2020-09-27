@@ -4,7 +4,7 @@ Medical diagnosis and specifically computer-aided diagnosis (CAD) is a hot topic
 Controversial topics such as whether or not artificial intelligence will replace the radiologist in the future aside, these automated systems can offer answers for patient's questions in absence of medical help or to very least offer much needed second opinion in the face of unsatisfied diagnoses. Given all the mentioned possible benefits of the CAD systems, this project is focused on building classification CAD systems for diagnosing pneumonia from the chest X-ray images together with implementing CI/CD pipeline for automation.
 
 \section{Aims and Objectives} \label{sec:aimsandobj}
-The aim of this project is to build a fully functional chest X-ray image classification pipeline that implements CI/CD principals to testing and deployment.
+The aim of this project is to build a fully functional chest X-ray image classification pipeline that implements CI/CD principals for testing and deployment.
 These pipelines also referred to as MLOps where the part of the machine learning workflow is automated.
 
 \subsection{Objectives}
@@ -12,8 +12,8 @@ The project will be implemented with the execution of the following objectives:
 \begin{enumerate}
     \item \textbf{Data pre-processing and data exploration: }Preparing the data for model ready state and general data exploration.
     \item \textbf{Building baseline model with well known neural network architectures: }This step involves setting additional benchmarks with out of the box models.
-    % \item \textbf{Using pre-trained network to increase model performance: }Using pre-trained networks to help training and accuracy of the model.
-    %\item Model improvement and hyper parameter tuning
+    % \item \textbf{Using the pre-trained network to increase model performance: }Using pre-trained networks to help training and accuracy of the model.
+    %\item Model improvement and hyperparameter tuning
     \item \textbf{Increasing model performance: }Using custom architecture and techniques such as transfer learning to increase model performance beyond benchmark levels.
     %\item \textbf{Model refinement: } Prototyping for improved model thorough hyper-parameter tuning.
     %\item Saving trained model for deployment
@@ -21,15 +21,15 @@ The project will be implemented with the execution of the following objectives:
     \item \textbf{Applying different deployment options: } Implementation of model development. Based on the best choice for project specification.
 \end{enumerate}
 It's worth emphasizing that the objective of this project is not to achieve the state of the art result in pneumonia detection but to offers a preferred method for improving and enhancing the existing models.
-The intuition behind choosing the above objectives instead of attempting to build novel state of the art architecture from scratch is the process of building such architecture has a very large search space and requires a lot of iteration and experimentation. 
-Due to the limited time frame of this project attempting to obtain state of the art model is not feasible. 
+The intuition behind choosing the above objectives instead of attempting to build a novel state of the art architecture from scratch is the process of building such architecture has a very large search space and requires a lot of iteration and experimentation. 
+Due to the limited time frame of this project attempting to obtain the state of the art model is not feasible. 
 % Additionally, objectives designed to serve the project goal with consistent aims. For example, item 1 and 2 will focus on reducing the model over-fitting while item 5 would serve as a tool to detect over-fitting. 
 % Objective 2 serves as a selection for a suitable model and setting benchmark while 6 is aimed at improving the model.
 
 \section{CI/CD Pipeline} \label{sec:cicd}
 In this section, I will give a brief introduction to the CI/CD pipeline to explain what CI/CD is and why it is chosen as a preferred way to build this project.
 
-Continuous integration (CI) is a workflow strategy that helps ensure everyone's changes will integrate with the current version of the project in the typical software engineering team. This lets members of the team catch bugs, reduce merge conflicts, and increase overall reliability that software is working. While the details may vary depending on project and the development environment, most CI systems feature the same basic tools and processes. In most scenarios, a team will apply CI in conjunction with automated testing using a dedicated server or CI service. Whenever a developer adds new work or commit to a branch, the server will automatically trigger a build and test the code to determine whether it works and can be integrated with the rest of code on the main development branch as well as release branch. The CI server will send back output containing the results of the build and an indication of whether or not the branch passes all the tests for integration into the main branch. By introducing build and test information for every commit on every branch, CI gives the way for what is generally known as continuous delivery, or CD for short, as well as a related process, called continuous deployment. The difference between continuous delivery and continuous deployment is that continuous delivery is the practice of developing software in such a way that you could release it at any time. When combined with CI, continuous delivery lets you develop projects with modular code in more manageable increments. 
+Continuous integration (CI) is a workflow strategy that helps ensure everyone's changes will integrate with the current version of the project in the typical software engineering team. This lets members of the team catch bugs, reduce merge conflicts, and increase overall reliability that software is working. While the details may vary depending on the project and the development environment, most CI systems feature the same basic tools and processes. In most scenarios, a team will apply CI in conjunction with automated testing using a dedicated server or CI service. Whenever a developer adds new work or commits to a branch, the server will automatically trigger a build and test the code to determine whether it works and can be integrated with the rest of code on the main development branch as well as release branch. The CI server will send back output containing the results of the build and an indication of whether or not the branch passes all the tests for integration into the main branch. By introducing build and test information for every commit on every branch, CI gives the way for what is generally known as continuous delivery, or CD for short, as well as a related process, called continuous deployment. The difference between continuous delivery and continuous deployment is that continuous delivery is the practice of developing software in such a way that you could release it at any time. When combined with CI, continuous delivery lets you develop projects with modular code in more manageable increments. 
 % Continuous development is an extension of continuous delivery. 
 Continuous delivery is a process that allows you to deploy newly developed code into production with confidence, and allow little if any, downtime. Even though the benefits of using CI/CD pipelines are more prominent in the software teams, integration automated testing will help even individual projects such as this by reducing time for debugging.
 

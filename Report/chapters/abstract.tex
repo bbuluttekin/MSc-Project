@@ -1,7 +1,10 @@
 \chapter*{}
 \addcontentsline{toc}{chapter}{Abstract}
 \begin{abstract}
-    Placeholder, to be completed later.
+    This project implements a working CI/CD pipeline for detecting presence or absence of pneumonia from X-ray images. Predictions part of the pipeline first sets up a benchmark with well known neural network architectures then using techniques such as transfer learning and designing a custom architecture to exceed the benchmark results. 
+    In addition to transfer learning and custom model design, custom data pipeline is implemented to create a balanced dataset from imbalance data with data augmentation.
+    Whenever the new model with a better performance found or any changes added to the code base, the automated pipeline runs integration tests and determines the compatibility of the new changes with the rest of the implementations. Upon successful passing of the tests, the model can be inspected with the model visualization technique GradCAM~\cite{cam}.
+    If model interpretability requirements are also met the model then deployed to live static website where users can input X-ray images to receive predictions. 
 \end{abstract}
 
 \cleardoublepage

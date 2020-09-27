@@ -1,17 +1,17 @@
 \chapter{Design and Experiments}
 Summary of the experiment results and their details laid out in this section.
-Neural network experiment logs are published online for more detailed examination, they are accessible by the url provided in the corresponding footnotes.
+Neural network experiment logs are published online for more detailed examination, they are accessible by the URL provided in the corresponding footnotes.
 
 \section{Training Specifications}
-Training for traditional machine learning used in this project is fallows two step approach.
-At the first part hyper-parameters for the model is selected by cross validation score then in the second part model is trained on entire dataset with the selected hyper-parameters.
-Final model then evaluated on the test set.
+Training for traditional machine learning used in this project is fallowing two-step approach.
+At the first part hyper-parameters for the model is selected by cross-validation score then in the second part model is trained on the entire dataset with the selected hyper-parameters.
+The final model then evaluated on the test set.
 
 There are many artificial neural networks used in both in benchmarking and the model selection.
 Weights of the networks initialized by random except for the transfer learning models.
-Model used in the transfer learning experiments initialized with the weighs pre-trained on imagenet~\cite{imagenet} dataset.
+The model used in the transfer learning experiments initialized with the weighs pre-trained on imagenet~\cite{imagenet} dataset.
 Each architecture is trained end-to-end using Adam~\cite{adam} optimizer with the standard parameters ($\beta_1 = 0.9$ \& $\beta_2 = 0.999$).
-I used batch size of 64 for the training, and initial learning rate of 0.001 that decayed by the factor of 10 every time validation loss stagnates after an epoch.
+I used a batch size of 64 for the training, and initial learning rate of 0.001 that decayed by the factor of 10 every time validation loss stagnates after an epoch.
 Each image in the dataset is downscaled to $224 \times 224$ size and normalized values to between zero to one.
 Data augmentation is applied to minority class in the dataset to create a balanced dataset as explained in section \ref{sec:dataprocessing}.
 Random cropping, changing saturation and horizontal flipping are set of augmentations chosen to create a balanced dataset.
@@ -20,7 +20,7 @@ Random cropping, changing saturation and horizontal flipping are set of augmenta
 \section{Benchmark Experiments}
 
 \subsection{Random Forest Classifier and SVC}
-Cross validation results of the random forest classifier found the fallowing hyper-parameters achieves the best performance:
+Cross-validation results of the random forest classifier found the fallowing hyper-parameters achieves the best performance:
 
 \begin{itemize}
     \item Number of trees: 500
@@ -39,7 +39,7 @@ Cross validation for the support vector machine classifier runs suggested the fa
     \item Tolerance: 0.001
 \end{itemize}
 
-Confusion matrix of these classifiers evaluated on test data generated fallowing results.
+Confusion matrix of these classifiers evaluated on test data generated following results.
 
 \begin{figure}[H]%
     \centering
@@ -51,7 +51,7 @@ Confusion matrix of these classifiers evaluated on test data generated fallowing
 \end{figure}
 
 It is clear from the amount of wrongly classified healthy patience X-ray, both of the models suffer from the imbalance effect.
-This effect is slightly more dominant in the random forest classifier than the SVC, albeit performance of both model are similar.
+This effect is slightly more dominant in the random forest classifier than the SVC, albeit performance of both models are similar.
 
 \begin{table}[H]
     \centering
@@ -84,7 +84,7 @@ Results from AlexNet was acceptable but given the loss values did not declined i
 \end{figure}
 
 Another important point is that convergence was very quick for this dataset. 
-It is clearly visible in the charts that model converge in around first 30 epochs and remained unchanged for the rest of the training.
+It is clearly visible in the charts that model converges in around first 30 epochs and remained unchanged for the rest of the training.
 
 \begin{figure}[H]
     \centering
@@ -95,10 +95,10 @@ It is clearly visible in the charts that model converge in around first 30 epoch
 
 
 \subsection{LeNet-5}
-I was not able to train the LeNet5 model with the original model specification that utilize hyperbolic tangent function (tanh).
-This was partially expected as tanh activation function is not able to pass the gradient flow very well when the initialization is not favorable.
-This effect is mentioned in the section \ref{sec:gradients} and as such I have replaced the activation function with the ReLu activation function for my implementation.
-Similar to AlexNet, LeNet5 also displayed possible sign of over-fitting when loss did not declined on the validation dataset.
+I was not able to train the LeNet5 model with the original model specification that utilizes hyperbolic tangent function (tanh).
+This was partially expected as tanh activation function is not able to pass the gradient flow very well when the initialization is not favourable.
+This effect is mentioned in section \ref{sec:gradients} and as such, I have replaced the activation function with the ReLu activation function for my implementation.
+Similar to AlexNet, LeNet5 also displayed a possible sign of over-fitting when loss did not decline on the validation dataset.
 
 \begin{figure}[H]
     \centering
@@ -119,7 +119,7 @@ LeNet5 performance was slightly below AlexNet's on the holdout data, yet it is s
 \subsection{VGGNet}
 Performance of this model~\footnote{VGGNet Base: https://tensorboard.dev/experiment/IbsPnocxSMKqNjmdJ3CdpA/}~\footnote{VGG Balanced: https://tensorboard.dev/experiment/ABd8GrKdSXyzHgNPDngeEw/} is the worst among all of the model I tried.
 Disappointing performance didn't change with the different random initialization.
-However, training and validation loss suggested a good training by declining in both training and validation data, accuracy metric was below random guess.
+However, training and validation loss suggested good training by declining in both training and validation data, accuracy metric was below random guess.
 
 \begin{figure}[H]
     \centering
@@ -141,8 +141,8 @@ However, training and validation loss suggested a good training by declining in 
 \section{Transfer Learning}
 I was very skeptical when adopting transfer learning to pneumonia detection because of the fundamental difference in the type of images in the imagenet compare to the project images.
 In this implementation weights in the convolutional part of the model initialized with the pre-trained VGGNet model from imagenet dataset.
-Convolution layer weights in this network is kept frozen during the training and allowed only fully connected layers at the end of the model to be trained.
-To my surprise this approach worked considerably well. Achieving $\approx 77 \%$ in accuracy and $\approx 87 \%$ f1 on validation data. 
+Convolution layer weights in this network are kept frozen during the training and allowed only fully connected layers at the end of the model to be trained.
+To my surprise, this approach worked considerably well. Achieving $\approx 77 \%$ in accuracy and $\approx 87 \%$ f1 on validation data. 
 
 \begin{figure}[H]
     \centering
@@ -158,7 +158,7 @@ To my surprise this approach worked considerably well. Achieving $\approx 77 \%$
     \label{fig:vggtff1}
 \end{figure}
 
-Although transfer learning proven to be a viable method to increase model performance, fine tuning attempts on the transfer learning was unsuccessful~\footnote{https://tensorboard.dev/experiment/QRbFzlgwSGaf0lu5LLRSzA/}.
+Although transfer learning has proven to be a viable method to increase model performance, fine-tuning attempts on transfer learning was unsuccessful~\footnote{https://tensorboard.dev/experiment/QRbFzlgwSGaf0lu5LLRSzA/}.
 After unfreezing top convolutional block layers and training the model, performance decreased to below 0.4 in the validation accuracy with a f1 score of zero.
 % \begin{figure}[H]
 %     \centering
@@ -170,8 +170,8 @@ After unfreezing top convolutional block layers and training the model, performa
 % vgg-balanced https://tensorboard.dev/experiment/c1zSx6N0QviARqCVIq3QMw/
 
 \section{Custom Neural Network Architecture}
-After experimenting~\footnote{Layer Exp: https://tensorboard.dev/experiment/BDwUXqGgSVWA8Ieawcb3Rg/} with randomly choose number of layers best combination I discovered is an architecture with ten convolution layers fallowed by batch normalization and max-pooling layer. 
-In final experiments showed using two convolutional layer fallowed by batch normalization layer and max-pooling layer like a convolutional block is the best optimal choice for this architecture.
+After experimenting~\footnote{Layer Exp: https://tensorboard.dev/experiment/BDwUXqGgSVWA8Ieawcb3Rg/} with a randomly chosen number of layers best combination I discovered is an architecture with ten convolution layers followed by batch normalization and max-pooling layer. 
+In final experiments showed using two convolutional layers fallowed by batch normalization layer and max-pooling layer like a convolutional block is the best optimal choice for this architecture.
 
 \begin{figure}[H]
     \centering
@@ -180,10 +180,10 @@ In final experiments showed using two convolutional layer fallowed by batch norm
     \label{fig:layerexpacc}
 \end{figure}
 
-Immediately after this experiments same number of layers are maintain to determine the performance of the type of the convolution layer on the dataset.
-For the same number of layer I replaced the convolutional layers with the depthwise separable convolutional layers~\footnote{Type Exp: https://tensorboard.dev/experiment/aA2SgzCNTXWXK7kWMhyJNg/}.
-Depthwise separable convolutional layers works by performing a depthwise convolution first then mixing that with the pointwise convolution.
-Result shows that convolutional layers perform better than depthwise convolutional layers whit the same layer numbers and other convolution properties set equally.
+Immediately after this experiments, the same number of layers are maintained to determine the performance of the type of the convolution layer on the dataset.
+For the same number of layer, I replaced the convolutional layers with the depthwise separable convolutional layers~\footnote{Type Exp: https://tensorboard.dev/experiment/aA2SgzCNTXWXK7kWMhyJNg/}.
+Depthwise separable convolutional layers work by performing a depthwise convolution first then mixing that with the pointwise convolution.
+The result shows that convolutional layers perform better than depthwise convolutional layers whit the same layer numbers and other convolution properties set equally.
 
 \begin{figure}[H]
     \centering
@@ -193,7 +193,7 @@ Result shows that convolutional layers perform better than depthwise convolution
 \end{figure}
 
 Lastly, I have started experiments~\footnote{Dropout: https://tensorboard.dev/experiment/x8d0woI6Q7SpKo8zc0ZbSQ/} to observe the effect of regularization at the fully connected layers.
-Varying levels of dropout rate applied to dense layers to fine-tune the regularization level that best suits this architecture. Results shows that best level of dropout rate as 30\%, albeit dropout rates in the dense layers effect change very little the performance scores of the model.
+Varying levels of dropout rate applied to dense layers to fine-tune the regularization level that best suits this architecture. Results show that the best level of dropout rate as 30\%, albeit dropout rates in the effect of the dense layers change very little the performance scores of the model.
 
 \begin{table}[H]
     \centering
@@ -221,9 +221,9 @@ Varying levels of dropout rate applied to dense layers to fine-tune the regulari
 \end{table}
 
 \section{Interpreting Model Decisions}
-Application of GradCAM~\cite{cam} provided valuable insight to understanding the features and parts of the images that lead to certain type of prediction.
-In the case of images with the pneumonia presence models usually focused on the lung or lung segments which was expected.
-However, occasionally some predictions was based on regions that consist of bones that suggested that search for a better model should continue.
+Application of GradCAM~\cite{cam} provided valuable insight into understanding the features and parts of the images that lead to a certain type of prediction.
+In the case of images with the pneumonia presence models usually focused on the lung or lung segments which were expected.
+However, occasionally some predictions were based on regions that consist of bones that suggested that search for a better model should continue.
 
 \begin{figure}[H]%
     \centering
@@ -234,8 +234,8 @@ However, occasionally some predictions was based on regions that consist of bone
     \label{fig:campnue}%
 \end{figure}
 
-It was also noteworthy that in the case of absence of pnuemonia X-rays models tend to focus on features like background or bone structures.
-One such example is the figure \ref{fig:camnormal}, that model give emphasis on background above shoulders and curved parts of the ribs of the patient.
+It was also noteworthy that in the case of absence of pneumonia X-rays models tend to focus on features like background or bone structures.
+One such example is the figure \ref{fig:camnormal}, that model gives emphasis on the background above shoulders and curved parts of the ribs of the patient.
 
 % \begin{figure}[H]%
 %     \centering
@@ -264,7 +264,7 @@ One such example is the figure \ref{fig:camnormal}, that model give emphasis on 
     \label{fig:camnormal}%
 \end{figure}
 
-Model interpretability tool in this case is valuable for the decision making in which models to promote to production, especially in the case of selecting between models that have a very close performance metrics.
+Model interpretability tool, in this case, is valuable for the decision making in which models to promote to production, especially in the case of selecting between models that have very close performance metrics.
 
 % base (https://tensorboard.dev/experiment/p2mkNoLORACZlCXL2UQRbg)
 % augmented (https://tensorboard.dev/experiment/dmQIbMeJQtqF70MhQQqySA)

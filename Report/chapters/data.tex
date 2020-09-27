@@ -49,7 +49,7 @@ The resulting image from this cropping will also be an image classified as a cat
 There are several sets of transformation that could be applied to images to create labelled data instances. 
 It is import to choose which augmentation to apply and which one to abandon.
 Some of these augmentations would be appropriate for the problem set some are not.
-Example for highlighting some argumentation that is not appropriate is flipping the image upside down. 
+Example of highlighting some argumentation that is not appropriate is flipping the image upside down. 
 Even though flipping upside down is acceptable some cases like the cat image example we considered earlier. 
 It would not be useful in the setting of Pneumonia classification because considering upside down X-rays is not a natural occurrence in the field of medical diagnosis.
 Perhaps the most striking example of an area that this argumentation technique should not be used is handwritten digits classification. 
@@ -108,7 +108,7 @@ RGB values of the image are converted to float representation then applied brigh
 Original and augmented images need to be turned into data representations that machine learning algorithms can process.
 Normally, colored images represented with pixel values for red, green and blue (RGB) color channels and values for each pixel in any given channel ranges between 0 to 255.
 For the traditional machine learning techniques, each data point should be represented in one vector.
-Additionally pixel values for each color channel needs to be turned into a vector by flattening each row of pixel values for particular color channel.
+Additionally, pixel values for each color channel need to be turned into a vector by flattening each row of pixel values for a particular color channel.
 After applying the same step to each channel flattened, channel vectors should be appended one after another to get the final vector for the image.
 Given that the model size cannot change during training, each image should be resized to the same shape before representational vector is created (e.g. $\textbf{\textit{x}} = [x_1, x_2, \ldots, x_n]$).
 
@@ -123,15 +123,15 @@ However it can also be represented in one-hot encoding, which will return a vect
 
 
 \section{Limitations of the Dataset} \label{sec:datalimitations}
-Although dataset I have chosen is well designed and validated, some aspects of data has undesired properties.
+Although dataset I have chosen is well designed and validated, some aspects of data have undesired properties.
 First of such property is the size of the validation data.
 As I mentioned earlier dataset has a folder where it hosts validation files.
-Within this folder there is sixteen images where each class have eight images each.
+Within this folder, there are sixteen images where each class have eight images each.
 This is significantly small validation dataset and would reduce the bins for each available accuracy step significantly.
-For example making one error in validation data will result accuracy declining from 100\% to 93.75\%.
+For example, making one error in the validation data will result in accuracy declining from 100\% to 93.75\%.
 
 Second undesired property is the high variance of the image resolutions.
-Having such a high variance in image resolution makes it difficult to choose right resolution to resize all the images.
+Having such a high variance in image resolution makes it difficult to choose the right resolution to resize all the images.
 To show the variance within the data I have added a density plot that illustrates the height and width of the images and their distribution in Figure \ref{fig:imagedimensions}.
 
 \begin{figure}[H]
@@ -141,7 +141,7 @@ To show the variance within the data I have added a density plot that illustrate
     \label{fig:imagedimensions}
 \end{figure}
 
-This graph gives an insight for what resolution for the image should be chosen to have minimal informal loss and distortion in the final image. As we can see most of the images have shape above $500 \times 500$, therefore any resolution below this shape would be appropriate choice for the training. 
+This graph gives an insight into what resolution for the image should be chosen to have minimal informal loss and distortion in the final image. As we can see most of the images have shape above $500 \times 500$, therefore any resolution below this shape would be an appropriate choice for the training. 
 
 \section{Data Processing} \label{sec:dataprocessing}
 Inline with the information provided in section \ref{sec:datarepresentation}, I have designed two separate data processing pipeline.

@@ -15,8 +15,8 @@ Further sections will provide detail for these four main categories.
 The first step to every machine learning project is that model produced is performs better than any random or naive solution.
 Although random guess in any binary classification suggests that the minimum accuracy should be greater or equal than 50\%, because of the imbalance in the test dataset, minimum accuracy requirement for this dataset is even higher.
 I have 390 pneumonia images in the 624 total images in the test dataset, dummy classifier that predict pneumonia for any given image will achieve 62.5\% accuracy in this test dataset.
-Because of the imbalance in dataset, accuracy would not be a good metric choice for assessing the performance.
-Precision (specificity) and recall (sensitivity) are better choice of performance metrics in the field of medical research.
+Because of the imbalance in the dataset, accuracy would not be a good metric choice for assessing the performance.
+Precision (specificity) and recall (sensitivity) are a better choice of performance metrics in the field of medical research.
 
 % For that reason on any experiment conducted, collecting precision, recall as well as calculating f1 score will be utilized.
 If I introduce these metrics in more detail,
@@ -144,13 +144,13 @@ _________________________________________________________________
 \end{verbatim}
 
 \subsection{VGGNet}
-VGGNet is one of the best performant in 2014 ILSVRC competition that get a best performance in classification and localization task.
-There are two different variation of this network is available namely the VGGNet 19 and VGGNet 16. 
-For this project 16 layered VGGNet 16 appears as a good choice because it has a sufficient capacity given that the dataset is relatively small and larger model likely to overfit to my project dataset.
-Main contribution of the VGGNet is that it demonstrated the importance of the network depth to good performance.
-Layer structure of the architecture is straightforward, only performs $3 \times 3$ convolution with $2 \times 2$ pooling.
+VGGNet is one of the best performant in 2014 ILSVRC competition that gets the best performance in classification and localization task.
+There are two different variations of this network is available namely the VGGNet 19 and VGGNet 16. 
+For this project, 16 layered VGGNet 16 appears as a good choice because it has a sufficient capacity given that the dataset is relatively small and larger model likely to overfit to my project dataset.
+The main contribution of the VGGNet is that it demonstrated the importance of the network depth to good performance.
+The layer structure of the architecture is straightforward, only performs $3 \times 3$ convolution with $2 \times 2$ pooling.
 Similarly, for the purpose of the benchmarking architecture kept as close to original as possible with only change is made to final layer replaced with one neuron dense layer to accommodate the binary classification task.
-Advantage of using this network is that it is implemented in most of the modern software packages and it also available to initialize with the weights of imagenet. 
+Advantage of using this network is that it is implemented in most of the modern software packages and is also available to initialize with the weights of imagenet. 
 That property will be very useful for comparing the performance when transfer learning is explored in subsection \ref{subsec:transferlearning}.
 Detail breakdown of the network listed below.
 
@@ -182,27 +182,27 @@ Non-trainable params: 0
 % \subsection{ResNet}
 
 \section{Improving Performance}
-After establishing a benchmark for minimum acceptable performance, this step of will focus on continuously improving the performance on the problem. 
-Materialize that goal I have chosen two method, applying transfer learning and building custom neural.
+After establishing a benchmark for minimum acceptable performance, this step will focus on continuously improving the performance on the problem. 
+Materialize that goal I have chosen two methods, applying transfer learning and building custom neural network.
 
 \subsection{Transfer Learning} \label{subsec:transferlearning}
-Transfer learning is fundamentally taking weights (or features) learned on one problem, and applying them to similar or new problem that could benefit from it.
+Transfer learning is fundamentally taking weights (or features) learned on one problem, and applying them to a similar or new problem that could benefit from it.
 Transfer learning usually considered when the training data is too small to train a deep neural network from a scratch.
 Process for transfer learning is simple, architecture is initialized with the weights learned from another problem without the top part of the model.
-Here top part is refers to the layer(s) at the end of the model which has got the high level features specific to the problem.
-And given that the lower layers of the model contribute to simply features like vertical and horizontal lines or edges, weights in these layers held frozen to allow feature extraction from the images in new problem.
-After that step, top part of the model initialized with the random weights to be trained on the new dataset and start learning higher level features from that data.
-Transfer learning sometimes get adopted with the concept of \emph{fine-tuning}, which is a process of unfreezing the part of the convolution layers or the entire model and re-training it with the new data.
+Here the top part is referred to the layer(s) at the end of the model which has got the high level features specific to the problem.
+And given that the lower layers of the model contribute to simple features like vertical and horizontal lines or edges, weights in these layers held frozen to allow feature extraction from the images in new problem.
+After that step, the top part of the model initialized with the random weights to be trained on the new dataset and start learning higher-level features from that data.
+Transfer learning sometimes applied with the concept of \emph{fine-tuning}, which is a process of unfreezing the part of the convolution layers or the entire model and re-training it with the new data.
 
-Because the dataset of this project is suffering from a small data problem, transfer learning is utilized to discover if generic datasets like imagenet~\cite{imagenet} can be helpful to improve existing model.
-Effectiveness of the transfer learning will be measured by training the VGG16 network with the imagenet weights and comparing the performance against same network with randomly initialized version from the benchmarking experiments.
+Because the dataset of this project is suffering from a small data problem, transfer learning is utilized to discover if generic datasets like imagenet~\cite{imagenet} can be helpful to improve the existing model.
+Effectiveness of the transfer learning will be measured by training the VGG16 network with the imagenet weights and comparing the performance against the same network with a randomly initialized version from the benchmarking experiments.
 
 \subsection{Custom Model Architecture}
 Another method available to get higher performance in machine learning is to designing custom architecture that better represent the data.
 % better reflect the data representation.
 Despite the great potential of better performance, this method is usually more complex in nature because of the challenges in hyper-parameter search.
 Modern CNNs have significantly more hyper-parameters compare to traditional machine learning algorithms. 
-For instance, below items are non-exhaustive list of hyper-parameters to consider when designing custom architecture.
+For instance, below items are a non-exhaustive list of hyper-parameters to consider when designing custom architecture.
 
 \begin{itemize}
     \item Learning rate $\alpha$
@@ -217,11 +217,11 @@ For instance, below items are non-exhaustive list of hyper-parameters to conside
     \item Mini batch size
 \end{itemize}
 
-Complexity of the task gets significantly higher when the attributes such as convolution layers padding and strides included in the number of layer and kernel size.
+The complexity of the task gets significantly higher when the attributes such as convolution layers padding and strides included in the number of layer and kernel size.
 When used with valid padding convolutional layer have addition constrain that the further layers have to be compatible with the output tensor shapes from previous layers.
-Given these complexities and limited time frame of this project some aspects of the hyper-parameter search will be constant to allow experimentation on other parameters.
+Given these complexities and limited time frame of this project, some aspects of the hyper-parameter search will be constant to allow experimentation on other parameters.
 Grid search and random search are two of the widely used method when determining the right hyper-parameters.
-Studies suggests that random search is more efficient and computationally inexpensive than the grid search in the context of neural network~\cite{randomsearch}.
+Studies suggest that random search is more efficient and computationally inexpensive than the grid search in the context of neural network~\cite{randomsearch}.
 
 \begin{figure}[H]
     \centering
@@ -230,7 +230,7 @@ Studies suggests that random search is more efficient and computationally inexpe
     \label{fig:randomsearch}
 \end{figure}
 
-For the custom architecture I will be running experiments with random search over the fallowing hyper-parameters.
+For the custom architecture, I will be running experiments with the random search over the following hyper-parameters.
 
 \begin{itemize}
     \item Type of convolutional layer. Conv2D versus Depthwise convolution
@@ -240,25 +240,25 @@ For the custom architecture I will be running experiments with random search ove
 \end{itemize}
 
 \section{Model Interpretability}
-Machine learning models and more specifically neural network usually regarded as black box machines.
+Machine learning models and a more specifically neural network usually regarded as black-box machines.
 Meaning that reason for their predictions are unknown.
-However there are variety of techniques that design to elaborate the machine learning models emphasis points.
-Before any model put into production it should also be examined for their predictive reasons and because of that I added model interpretability rules before making decision to promote any model to deployment stage.
+However, there are a variety of techniques that design to elaborate the machine learning models emphasis points.
+Before any model put into production it should also be examined for their predictive reasons and because of that, I added model interpretability rules before making a decision to promote any model to deployment stage.
 One such technique call GradCAM~\cite{heatmap} is designed to highlight the areas in the image that contributes the most for the prediction machine learning outputs.
 
 \subsection{GradCAM}
 GradCAM~\cite{heatmap} is part of the general visualization technique called \emph{class activation map} (CAM).
-It consist of creating a heatmap of activations over the input image space.
-A class activation heatmap is a two dimensional surface of scores for individual class mapped in to the corresponding location. For instance, if the input image is with pneumonia heatmap is indicates the areas that most represent pneumonia like features found and vice versa for images that absent of pneumonia.
-This technique originally designed for softmax output with different classes and to adapt it to binary classification with sigmoid output, but integration to the sigmoid output is also possible because ultimately what algorithm needs is the probability of the certain class decision.
-% additional logic based on assigning classification with probability grater that 0.5 to pneumonia presence and absence of it to those less that 0.5 probability.
+It consists of creating a heatmap of activations over the input image space.
+A class activation heatmap is a two dimensional surface of scores for individual class mapped into the corresponding location. For instance, if the input image is with pneumonia, heatmap indicates the areas that most represent pneumonia-like features found and vice versa for images that absent from pneumonia.
+This technique originally designed for softmax output with different classes and to adapt it to binary classification with sigmoid output, but the integration to the sigmoid output is also possible because ultimately what algorithm needs is the probability of the certain class decision.
+% additional logic based on assigning classification with probability grater that 0.5 to pneumonia presence and absence of it to those less than 0.5 probability.
 
 \section{Deployments with CI/CD}
-Upon discovery of best performer model up to this point, if the model satisfies the interpretation stage, can added to model folders as a candidate for production release.
-Please note that due to manual nature of the model interpretation stage this project utilize continuous development rather than continuous deployment.
+Upon discovery of the best performer model up to this point, if the model satisfies the interpretation stage, can be added to model folders as a candidate for production release.
+Please note that due to the manual nature of the model interpretation stage this project utilizes continuous development rather than continuous deployment.
 Because it is not possible to assess this step without having a human intuition in the loop.
 % Because even though visualization for GradCAM can be generated in an automated fashion there is no measurable criteria available to asses that step.
-After the insertion of the model to models folder, test suite for the project will run and if the tests are successful, deployment script will automatically run to produce the model artificial needed for the deployment.
-Final step in this process is to commit the most recent artifact to central code repository for deployment.
-This process repeats ever time when there is a better performer model found.
+After the insertion of the model to models folder, the test suite for the project will run and if the tests are successful, deployment script will automatically run to produce the model artificial needed for the deployment.
+The final step in this process is to commit the most recent artifact to the central code repository for deployment.
+This process repeats ever a time when there is a better performer model found.
 Detailed information about the deployment choice and the assessment of the deployment is covered in chapter \ref{chap:deployment}.

@@ -1,5 +1,27 @@
 \chapter{Conclusion}
+In summary, I have implemented a functional CI/CD pipeline to predict the presence or absence of pneumonia from X-ray images.
+Most of the steps I set out to achieve as part of this pipeline were successful with the exception of one. 
+Originally, I have planned to implement ensemble method to increase the performance of the algorithms, but due to the limitations related to deploying multiple models into one static website, I had to abandon that step and decided to create a custom architecture instead.
+Nevertheless, the decision to building custom architecture also worked as expected and model created as a product of these experiments surpassed the performance of the benchmark and transfer learning experiments and promoted to deployment.
 
+In addition to achieving my aim, I am also proud of some other design implementations that will be useful beyond this project.
+For example, the solution for resistant training module allows model training that lasts for days in a short term computational environment like Google Colaboratory.
+This solution can be used in any future project and disruption to training will not affect the progress of the experimentations.
+Generating a balanced dataset from imbalance data with data augmentation is another side achievement that can be applied to a wide variety of problems that suffering from data imbalance.
+
+\section{Next Steps}
+This project can be extended with the suggestions from this section to improve many aspects of the project.
+I listed some steps to increase the overall quality of the implementation.
+
+\begin{itemize}
+    \item Addition hyper-parameter tuning to increase model performance.
+    \item Implementing GradCAM visualization to static website deployment so the users can see the reasons for the model predictions together with the prediction.
+    \item Adding more tests to increase test coverage.
+    \item Bigger datasets became publicly available after I started this project. Switching to one of those dataset benefits the performance.
+\end{itemize}
+
+
+% Steps I have set for this project such as setting a benchmark and improving prediction performance beyond this benchmark was successful.
 
 % "The module should demonstrate:
 % - A knowledge of programming a piece of software that goes beyond a few lines of code, applying what was learnt in the eight taught modules to a concrete problem.
