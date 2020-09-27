@@ -1,13 +1,17 @@
 \chapter{Background} \label{chap:background}
 Generally, the first part of every machine learning project is to choosing the algorithm to tackle the problem in hand. As I stated in the proposal of this project, I choose to apply specific machine learning algorithms called Artificial Neural Networks (ANNs) to tackle the classification challenge of detecting pneumonia in X-ray images. The first part of this chapter I would like to provide some information to justify that decision. 
 
-The objective of the algorithm in this report is to classify X-ray images with or without pneumonia. Classification is a task of determining what is the defined class of an example given its data associated with it. In our case, we defined our classes for prediction to the person in the example image having pneumonia or not. In order to achieve that goal, machine learning algorithm must produce a function that outputs the class within defined finite possible classes such as \(f:\mathbb{R}^n \rightarrow \{1, \ldots, k\ \}\) which in this case k is equal to 2. In essence all machine learning algorithms will map input representation of the data \textbf{\textit{x}} to prediction output $\hat{y}=f(x)$. The only difference is how each algorithm is representing the data distribution with a model $f$. Which consequently leads to the question of which algorithm is the best algorithm for machine learning or which algorithm to choose to find the best model representation. According to \textbf{no free lunch theorem}~\cite{nofreelunch} there is no such algorithm exist that will consistently achieve low error rate averaged over all possible distributions. In other words, no model is universally any better than any other machine learning model. Luckily, the objective in this project is not to find the universally best algorithm but rather to find the algorithm that will find the best representation for the data distribution of healthy and pneumonia X-ray images. 
-Historically, traditional machine learning algorithms often performed poorly on tasks such as computer vision, detecting objects or speech recognition. Part of the reason is these task usually involve high-dimensional data. Because many traditional machine learning algorithms assume that any unseen data point should be similar to nearest training point, generalization in high-dimensional data such as image classification also suffers due to the fact that data points in these space are spread out and the notion of similarity weakens. Effect of this high-dimensionality also known as \emph{curse of dimensionality}.
+The objective of the algorithm in this report is to classify X-ray images with or without pneumonia. Classification is a task of determining what is the defined class of an example given the data associated with it. In our case, we defined our classes for prediction to the person in the example image having pneumonia or not. In order to achieve that goal, machine learning algorithm must produce a function that outputs the class within defined finite possible classes such as \(f:\mathbb{R}^n \rightarrow \{1, \ldots, k\ \}\) which in this case k is equal to 2. In essence all machine learning algorithms will map input representation of the data \textbf{\textit{x}} to prediction output $\hat{y}=f(x)$. The only difference between them is how each algorithm is representing the data distribution with a model $f$. Which consequently leads to the question of which algorithm is the best algorithm for machine learning or which algorithm to choose for finding the best model representation. According to \textbf{no free lunch theorem}~\cite{nofreelunch} there is no such algorithm exist that will consistently achieve low error rate averaged over all possible distributions. In other words, no model is universally any better than any other machine learning model. Luckily, the objective in this project is not to find the universally best algorithm but rather to find the algorithm that will find the best representation for the data distribution of this dataset. 
+Historically, traditional machine learning algorithms often performed poorly on tasks such as computer vision, detecting objects or speech recognition. 
+Part of the reason is, traditional algorithms relies on similarity of data points and these tasks usually have high-dimensional data, yet notion of nearness gets weaker with the high dimensionality. 
+% Because many traditional machine learning algorithms assume that any unseen data point should be similar to nearest training point, generalization in high-dimensional data such as image classification often produce poor results.
+% Because the notion of similarity gets very weak in high dimensional spaces. 
+An effect commonly known as \emph{curse of dimensionality}.
 Because of the weakness described earlier, Artificial Neural Networks emerges as a clear choice for image classification and object detection task which became evident with the performance of AlexNet~\cite{Alexnet}, VGGNet~\cite{vggnet} and ResNet~\cite{resnet} in the ILSVRC~\cite{imagenet}.  
 
 
 \section{Building Blocks of ANN} \label{sec:bbann}
-The idea of Artificial Neural Networks inspired by the neural cells of the human brain. Earliest known research for ANNs dates back to 1943 as a multidisciplinary work of phycology and mathematics by Warren McCulloch and Walter Pitts~\cite{firstann}. Their work covered how computational logic could model complex neural cells activities. However, first development that reshaped the way for current generally accepted practices of ANNs was the work of Frank Rosenblatt's  \emph{"The Perceptron: A Probabilistic Model for Information Storage and Organization in The Brain"}~\cite{perceptron}. Perceptron is the simplest linear ANN that always converges to hyper-plane when there are two sets of classes that can be linearly separable. Like the current single neurons generally used in modern ANNs, for producing output it calculates the sum of weighted inputs and applies a \emph{step function} to that sum. For example, let the input \textbf{\textit{x}} be n-dimensional input vector, Perceptron first calculates \(z = w_1x_1 + w_2x_2 + \ldots + w_nx_n = x^Tw\) then pass this weighted sum of inputs to step function \(h(z)\) below to calculate final output. 
+The idea of Artificial Neural Networks inspired by the neural cells of the human brain. Earliest known research for ANNs dates back to 1943 as a multidisciplinary work of psychology and mathematics by Warren McCulloch and Walter Pitts~\cite{firstann}. Their work covered how computational logic could model complex neural cells activities. However, first development that reshaped the way for current generally accepted practices of ANNs was the work of Frank Rosenblatt's  \emph{"The Perceptron: A Probabilistic Model for Information Storage and Organization in The Brain"}~\cite{perceptron}. Perceptron is the simplest linear ANN that always converges to hyper-plane when there are two sets of classes that can be separated linearly. Like the current single neurons generally used in modern ANNs, for producing an output it calculates the sum of weighted inputs and applies a \emph{step function} to that sum. For example, let the input \textbf{\textit{x}} be n-dimensional input vector, Perceptron first calculates \(z = w_1x_1 + w_2x_2 + \ldots + w_nx_n = x^Tw\) then pass this weighted sum of inputs to step function \(h(z)\) below to calculate final output. 
 
 \begin{equation} \label{eq:stepfunc21}
 h(z)=
@@ -17,14 +21,14 @@ h(z)=
 \end{cases}    
 \end{equation}
 
-Current ANN units also have same properties with the exception of the use of step function. Instead current ANN units uses set of non-linear functions that generally called \emph{activation functions}. 
+Current ANN units also have same properties with the exception of the use of step function. Instead current ANN units uses set of non-linear functions that generally called as \emph{activation functions}. 
 
-Despite its robust nature Perceptron is ultimately a linear model which implies that it can only be effective for the data distributions that can be linearly separable.
+Despite its robust nature Perceptron is ultimately a linear model which implies that it can only be effective for the data distributions that are linearly separable.
 The popularity of the algorithm is faded as the limitations such as not being able to separate logical operation exclusive OR (also know as XOR) is discovered~\cite{marvinperceptrons}.
-However, later on, it is discovered that these limitations can be eliminated by just using layers of many Perceptrons together as a single model and the resulting model is called \emph{Multilayer Perceptron} (MLP). 
+However, later on, it has found that these limitations can be eliminated by just using layers of many Perceptrons together as a single model and the resulting model is named \emph{Multilayer Perceptron} (MLP). 
 (\emph{Feedforward Network} is another term that usually used interchangeably with Multilayer Perceptron.)
 MLPs uses a concept called layer which is useful for calculation and managing the architecture of the model.
-In a nutshell, a layer is the combination of neurons with bias neuron stack together (with exception of output layer) that have the same input source.
+In a nutshell, a layer is the combination of neurons with biases stack together (with exception of output layer) that have the same input source.
 Concept of a layer is used in many different architectures, for example, a layer with each neuron that connected to each unit in previous and next later is known as \emph{Fully connected layer} or \emph{Dense layer} whereas layer with pre-defined convolution operation is called \emph{Convolutional layer}. 
 
 \tikzset{%
@@ -80,18 +84,19 @@ Concept of a layer is used in many different architectures, for example, a layer
 \section{Exploding and Vanishing Gradients} \label{sec:gradients}
 Having the sequential architecture described in section \ref{sec:bbann} MLPs faces an additional implementation challenge that is not common in traditional machine learning, the difficulty of training. 
 The typical training process for the machine learning algorithm is at a very high level is a standard procedure.  
-The first step is to feeding input data to model and produce an output, then based on desired output for the input loss value can be calculated.
+The first step is to feeding input data to model and produce an output, then based on desired output for the input, loss value can be calculated.
 Loss value is a calculation of how much the output is further away from the desired output. 
 Using this loss value we can approximate weight updates with the help of the optimization algorithm until the model weights converge.
-Even though the training process is also the same for the MLPs there is more complexity involved in MLPs giving that instead of dealing with one model we have layers of neurons chained together that each has its own weights. 
+Even though the training process is also the same for the MLPs there are more complexities involved in MLPs training. 
+Given that instead of dealing with one model we have layers of neurons chained together that each has its own weights. 
 For those reasons training MLPs was a challenge until the influential \emph{backpropagation} paper~\cite{backprop} is published. In this paper efficient technique of calculating the gradients using forward and backwards passes demonstrated.
 Utilizing the chain rule of calculus, the backpropagation algorithm was able to calculate the update for each weight in every neuron.
 
-Notwithstanding help of the backpropagation algorithm, as the need for training deeper networks increased, the difficulty of training such networks remained a problem.
-Part of the problem was, as the gradients get smaller and smaller as the gradient flowed down to lower layers (layers close to the input layer) of the network. 
-When the gradient updates get close to very small values some of the lower layer weights do not updated enough and consequently not converging model to appropriate representation.
+With the  help of the backpropagation algorithm, need for training deeper networks increased, but the difficulty of training such networks remained a problem.
+Part of the problem was, the gradients get smaller and smaller as the gradient flowed down to lower layers (layers close to the input layer) of the network. 
+When the gradient updates get close to very small values some of the lower layer weights do not update enough and consequently not converging model to appropriate representation.
 This phenomenon is usually referred to as \emph{vanishing gradients} problem.
-Similarly, some network such as recurrent neural networks can have an opposite problem that resulting in gradients getting larger and larger which pushes weights to be a very large number. 
+Similarly, some network such as recurrent neural networks can have an opposite problem that resulting in gradients getting larger and larger which pushes weights to be a very large numbers. 
 Similarly, this phenomenon referred to as the \emph{exploding gradients} problem.
 Later on, this unstable gradient flow problems are shown to be the combination of choice for weight initialization and the characteristic of the activation functions that widely used~\cite{vanishgrads}.
 Previously, activation function often get used was the sigmoid (also known as logistic function) \(\sigma(x) = \frac{1}{1 + e^{-x}}\) and the hyperbolic tangent function (\(tanh(x) = 2\sigma(2x) -1\)) have a flatten tails where \textbf{\textit{x}} get very large or very small. 
@@ -102,8 +107,12 @@ For example lets suppose \(\hat{y} = \sigma(z(w, b))\) and \(z(w, b) = wx + b\).
   \frac{\partial{\hat{y}}}{\partial{w}} = \frac{\partial{\hat{y}}}{\partial{\sigma}}  \frac{\partial{\sigma}}{\partial{w}}
 \end{equation}
 
-It is clear that the gradient update of \textbf{\textit{w}} is predicated on the gradient of the $\sigma$ is not being zero.
-While the sigmoid and hyperbolic tangent functions derivatives get close to zero when the functions are on the saturating region. 
+It is clear that the healthy gradient update of \textbf{\textit{w}} is predicated on the gradient of the $\sigma$ is not being zero or too close to zero.
+Sigmoid and hyperbolic tangent functions produce derivatives that are very close to zero when the function inputs are on the saturating region. 
+To eliminate this effect, \emph{Rectified Linear Unit} (ReLU) activation function applied as a good alternative to train deeper neural networks.
+ReLU behaves like a linear function for the non-negative input values ($f(x) = max(0, x)$) and outputs zero for the negative input values.
+It's also implies that the derivative of the ReLu is either zero for the neuron outputs below zero or one for neuron outputs that are positive.
+% With that characteristic gradient of the ReLU will be either zero for the input values less than or equal to zero and one for any other values.
 
 \begin{figure}[H]
   \centering
@@ -112,10 +121,9 @@ While the sigmoid and hyperbolic tangent functions derivatives get close to zero
   \label{fig:saturate}
 \end{figure}
 
-Due to these properties, \emph{Rectified Linear Unit} (ReLU) activation function emerges as a good alternative to train deeper neural networks.
-ReLU behaves like a linear function for the non-negative values ($f(x) = max(0, x)$) and outputs zero for the negative input values.
-With that characteristic gradient of the ReLU will be either zero for the input values less than or equal to zero and one for any other values.
-Because of consistent properties of the non-saturating functions, it is always better to use such activation functions for hidden layers to ensure the gradient flow is faster and Network will converge faster as a result.
+
+Because of the consistent gradient flow generated by ReLu. 
+It is usually a better choice for starting an experiment with such activation functions for hidden layers to ensure the gradient flow is faster and Network will converge faster as a result.
 
 \section{Optimization} \label{sec:optimization}
 Most machine learning algorithms utilize some sort of optimization. 
@@ -127,19 +135,21 @@ The process also known as \emph{gradient descent}.
 Gradient descent used in machine learning field for a long time, however depending on the complexity of the function space this process could take a significantly long time. 
 For mitigating this problem new set of algorithms called \emph{momentum optimizers} created.
 The difference between these algorithms and gradient descent is simply, gradient descent will take small consistent steps regularly throughout the optimization process. 
-How these momentum-based algorithms works are they generally pay attention to the previous gradients and accelerate the updates based on gradients and the slope at the point of the gradient. 
+These momentum-based algorithms works by paying attention to the previous gradients and accelerate the updates based on gradients and the slope at the point of the gradient.
+% These momentum-based algorithms works are they generally pay attention to the previous gradients and accelerate the updates based on gradients and the slope at the point of the gradient. 
 This will help the optimization to converge to global minimum faster when there is a lot of plateau areas in the function surface.
 Later on, momentum algorithms expanded to include taking the steepest dimension of the gradient to point updates more toward to the global minimum, a new family of optimizers named as \emph{adaptive} optimizers. 
 Most well know algorithms of this category is AdaGrad~\cite{adagrad}, RMSProp~\cite{rmsprop}, Adam~\cite{adam} and Nadam~\cite{nadam}.
-Despite the fact, these adaptive optimizers usually converge to good solutions faster research by Ashia C. Wilson et al~\cite{optimize-ashia}. showed that in some cases these optimizers can lead to poor generalization result depending on the dataset.
-It might be good practice to try adaptive and momentum-based optimizers in the training job to observe their effect in generalization.
+Despite the fact, these adaptive optimizers usually converge to good solutions faster, research by Ashia C. Wilson et al~\cite{optimize-ashia} showed that in some cases these optimizers can lead to poor generalization result depending on the dataset.
+It might be good practice to try adaptive and momentum-based optimizers in the training job to observe which is the most suitable optimization algorithm for that dataset.
 
 
 \section{Regularization and Over-fitting} \label{sec:regularization}
-Generally, the fundamental challenge in machine learning is that our model should perform well on previously unseen data points which is also referred to as generalization.
+Generally, the fundamental problem in machine learning is that our model should perform well on previously unseen data points which is also known as generalization.
 If the scope of the model is sufficiently large (model with a large number of parameters) optimization techniques described previously could enable the model to capture noise that specific to training records. 
-In other words \emph{overfitting} is where the model will focus on individual nuances of data records instead of focusing on general pattern overall.
-However, there are numerous regularization techniques available to mitigate the overfitting in ANNs.
+In other words model can \emph{overfit} to dataset.
+Overfitting is where the model will focus on individual nuances of data records instead of focusing on general pattern overall.
+There are numerous regularization techniques available to mitigate the overfitting in ANNs.
 Just like traditional machine learning \textit{l} regularization (norm) can be applied to the artificial neural networks.
 In general form $l_p$ norm is given by
 
@@ -158,7 +168,7 @@ In addition to $l_p$ norms \emph{dropout}~\cite{dropout} emerges as a popular re
 Dropout is a process of removing a fraction of the units from a neural network layer by setting the weight of the unit to zero during training.
 This technique reduces the reliance of each unit for the prediction.
 In each training iteration fraction of the neurons dropped randomly so the remain neurons are forced to train in the absence of the neurons picked.
-Although dropout has proven to improve generalization in many machine learning tasks, due to its unstable nature time it takes for the network to converge usually increases.
+Although dropout has proven to improve generalization in many machine learning tasks, due to its unstable nature time it takes for the networks to converge usually fluctuates.
 
 
 
@@ -176,7 +186,7 @@ The kernel then slides over the rest of the image until all image covered.
 The area that processed by the image is called \emph{receptive field} and operating this way by calculating each area in image CNNs are able to capture information about the locality of the image as opposed to flattening.
 The output of the operation depends on the design of the convolution operation.
 There are two main concept defines the operation, one is stride or how many pixels the kernel will be moved to complete the operation, and the size of the padding.
-Padding is zero value pixels that get placed around the image to centralize the items at the edge of the image in kernels.
+Padding is zero value pixels that get placed around the image to centralize the items at the edge of the images.
 
 The output of the convolutional network can be calculated easily to ensure no bug is introduced to the model during implementation.
 Given the volume size of the input image (\textbf{\textit{I}}), kernel size of CNN (\textbf{\textit{K}}), stride which is applied (\textbf{\textit{S}}), and the amount of zero padding applied (\textbf{\textit{P}}). We can calculate the output as:
@@ -186,7 +196,7 @@ Given the volume size of the input image (\textbf{\textit{I}}), kernel size of C
 \end{equation}
 
 The generally accepted way of padding in convolution operations are, the SAME and the VALID padding.
-SAME padding is using zero paddings around the image to output \emph{same} size output from the convolution when chosen a stride is one.
+SAME padding is using zero paddings around the image to output \emph{same} size output from the convolution when the stride is one.
 VALID padding, however, is a practice of not applying any zero paddings and only uses \emph{valid} pixels from the image.
 
 Conventionally, convolutional layers are used together with the pooling layer.
@@ -194,7 +204,7 @@ The main contribution of the pooling layer is to under-sample the output data.
 Doing so they will reduce the memory usage and the computational complexity of the network.
 Additionally reducing the size of the output will reduce the chance of overfitting.
 Most frequently used versions of the pooling layer are max pooling and average pooling.
-Regardless of the operation pooling layer works by choosing the pool size and applying the desired operation to that field in the input.
+Regardless of the operation, pooling layer works by choosing the pool size and applying the desired operation to that field in the input.
 For example, if it is a max-pooling layer, the maximum pixel value in the polling size is passed on to the next layer.
 
 
@@ -207,7 +217,7 @@ For overcoming this challenge I am employing a diagnosis and debugging check lis
 Where applicable checklist points are:
 
 \begin{itemize}
-  \item Overfit to sample data to ensure no optimization mistakes made.
+  \item Overfit to a sample data to ensure no optimization mistakes made.
   \item Monitor training loss during training and make sure it is declining throughout the training.
   \item Check the input and output shapes are correct.
   \item Make minor changes to models and only add addition changes after ensuring there is no bug in the system.
@@ -216,7 +226,7 @@ Where applicable checklist points are:
 Another challenge is the computationally expensive nature of the training.
 Due to the iterative nature of the machine learning, it is vital that the experimentation for the task will run sufficiently quick that the improvement for the model can be identified quickly and progressed to further stages. 
 However, standard ANNs usually have millions of parameters that need to be updated while training with hundreds of thousands if not millions of training examples to train on. 
-Considering the average training process will need multiple passes on the entire dataset, the need for high computation power becomes evident.
+Considering the average training process that will need multiple passes on the entire dataset for converge to solution the need for high computation power becomes evident.
 That's why most training is done with the help of hardware accelerators such as GPUs or TPUs.
 Choice of computation environment for this project luckily includes such hardware accelerators but these special hardwares must be detected and enabled so the calculation can take advantage of the compute power.
 To enable the hardware related capabilities and to reduce training management overhead I have written a wrapper module in the custom code library.
@@ -238,20 +248,23 @@ If similar events happen many more times it could even risk not completing all t
 To eliminate that risk, I have implemented a process that will save model weight to storage outside the compute environment regularly. 
 If such failure happens, the module will pick up the last saved weights and continue to training where it left of previously.
 In addition to starting the training with the previous model, by using naming conventions, the module can initialize the epoch number for the training accordingly and allow accurate comparison between other models. 
-In other words, if the first training attempt is failed in epoch number 23 restarting training will start with the epoch number 23.
+For instance, if the first training attempt is failed in epoch number 23 restarting training will start with the epoch number 23 together with the weights from that epoch.
 
 \section{Literature Review}
 % Because of the aim of this project spans over two distinct area of research it is imperative to examine related works from these two field.
 
-Applying machine learning to medical imaging have seen rise of popularity with the emergence of the popularity of neural networks.
+Applying machine learning to medical imaging have seen increase of popularity with the emergence of the popularity of neural networks.
 Such algorithms applied to many medical diagnosis problems such as Gulshan et al~\cite{retinopathy} diabetic retinopathy detection or Estava et al~\cite{skincancer} cancer classification etc.
 More specifically performance of convolutional neural networks and localization studied in Islam et al~\cite{abnormalxray} by using OpenI~\cite{openi} dataset.
-However, because of the limited number of examples in the dataset for this project perhaps the most impactful part of the literature was the transfer learning in the medical imaging field.
-Use of transfer learning become ubiquitous when it comes to eliminate the learning problems in the small datasets.
-But use of transfer learnings effectiveness is an open question in this problem because of the dissimilarity between the source dataset of learned features such as imagenet versus the dataset of this project. 
-Performance of the pre-trained networks have shown to be lower in such cases by Yosinski et al~\cite{transferfeatures}.
-Actual benefit from transfer learning is not trying to reuse the feature dissimilar to pneumonia detection but to utilize the pre-trained weight as a good initialization step to start the training and research has shown this method is better than just using trained features out of the box~\cite{transfusion,bettertransfer, RethinkingIP}.
-Evidence of effectiveness of this method is also proven by the results of CheXNet~\cite{CheXNetRP} which have fallowed the initialization of the Dense convolution networks this way to surpass practitioner level accuracy in X-ray images.
+
+Because of the limited number of examples in the dataset for this project, the most impactful part of the literature was the application of transfer learning in the medical imaging field.
+Use of transfer learning becomes ubiquitous when it comes to eliminating the learning problems of the small datasets.
+But use of transfer learnings effectiveness is an open question in this field because of the dissimilarity between the source dataset of learned features such as imagenet versus the datasets of medical imagery. 
+Performance of the pre-trained networks in such cases have found to be lower compare to similar task by Yosinski et al~\cite{transferfeatures}.
+Another technique that found to be successful is initializing models with the pre-trained weights rather than random initialization ~\cite{transfusion,bettertransfer, RethinkingIP}.
+% Actual benefit from transfer learning is not trying to reuse the feature dissimilar to pneumonia detection but to utilize the pre-trained weight as a good initialization step to start the training and research has shown this method is better than just using trained features out of the box~\cite{transfusion,bettertransfer, RethinkingIP}.
+Evidence of effectiveness of this method is also proven by the results of CheXNet~\cite{CheXNetRP} which have fallowed the initialization of the Dense convolution networks this way and results of this network surpassed practitioner level accuracy in X-ray images.
+Considering all these encouraging result, it is a worthwhile option to explore this technique as part of this projects as well.
 
 
 

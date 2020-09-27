@@ -1,6 +1,6 @@
 \chapter{Design and Experiments}
 Summary of the experiment results and their details laid out in this section.
-Neural network experiment logs are published online for more detailed examination, they are accessible by the url provided in the corresponding footnotes of this section.
+Neural network experiment logs are published online for more detailed examination, they are accessible by the url provided in the corresponding footnotes.
 
 \section{Training Specifications}
 Training for traditional machine learning used in this project is fallows two step approach.
@@ -12,7 +12,7 @@ Weights of the networks initialized by random except for the transfer learning m
 Model used in the transfer learning experiments initialized with the weighs pre-trained on imagenet~\cite{imagenet} dataset.
 Each architecture is trained end-to-end using Adam~\cite{adam} optimizer with the standard parameters ($\beta_1 = 0.9$ \& $\beta_2 = 0.999$).
 I used batch size of 64 for the training, and initial learning rate of 0.001 that decayed by the factor of 10 every time validation loss stagnates after an epoch.
-Each image in the dataset is is downscaled to $224 \times 224$ size and normalized values to between zero to one.
+Each image in the dataset is downscaled to $224 \times 224$ size and normalized values to between zero to one.
 Data augmentation is applied to minority class in the dataset to create a balanced dataset as explained in section \ref{sec:dataprocessing}.
 Random cropping, changing saturation and horizontal flipping are set of augmentations chosen to create a balanced dataset.
 
@@ -71,10 +71,10 @@ This effect is slightly more dominant in the random forest classifier than the S
 
 
 \subsection{AlexNet}
-During the experiments for AlexNet and LeNet5 effect of the balanced~\footnote{AlexNet Balanced: https://tensorboard.dev/experiment/7b6W0tdHQQ2RINGt6cYbrA/} dataset is also compared to base~\footnote{AlexNet Base: https://tensorboard.dev/experiment/PaBawCErSqG6zIef7JPq8g/} dataset to mesure the effectiveness of the data augmentation.
-Figures used in AlexNet and LeNet5 annotated with balanced training/val to reflect that balanced dataset is created with the data augmentation.
-Base training/val is used to refer base image data is used without and data augmentation.
-Results from AlexNet was average but given the loss values did not declined in the validation dataset suggest that ALexNet slightly over-fitted the data.
+During the experiments for AlexNet and LeNet5 effect of the balanced dataset~\footnote{AlexNet Balanced: https://tensorboard.dev/experiment/7b6W0tdHQQ2RINGt6cYbrA/} is also compared to base dataset~\footnote{AlexNet Base: https://tensorboard.dev/experiment/PaBawCErSqG6zIef7JPq8g/} to measure the effectiveness of the data augmentation.
+Figures used in AlexNet and LeNet5 annotated with balanced training/validation to reflect that balanced dataset is created with the data augmentation.
+Base training/validation is used to refer base image data is used without any data augmentation.
+Results from AlexNet was acceptable but given the loss values did not declined in the validation dataset suggest that ALexNet slightly over-fitted the data.
 
 \begin{figure}[H]
     \centering
@@ -83,7 +83,7 @@ Results from AlexNet was average but given the loss values did not declined in t
     \label{fig:alexloss}
 \end{figure}
 
-Another important point is that converge was very quick for this particular dataset. 
+Another important point is that convergence was very quick for this dataset. 
 It is clearly visible in the charts that model converge in around first 30 epochs and remained unchanged for the rest of the training.
 
 \begin{figure}[H]
@@ -114,12 +114,12 @@ Similar to AlexNet, LeNet5 also displayed possible sign of over-fitting when los
     \label{fig:lenetloss}
 \end{figure}
 
-
+LeNet5 performance was slightly below AlexNet's on the holdout data, yet it is still a considerable performance given the algorithm is the oldest one among the neural networks.
 
 \subsection{VGGNet}
 Performance of this model~\footnote{VGGNet Base: https://tensorboard.dev/experiment/IbsPnocxSMKqNjmdJ3CdpA/}~\footnote{VGG Balanced: https://tensorboard.dev/experiment/ABd8GrKdSXyzHgNPDngeEw/} is the worst among all of the model I tried.
 Disappointing performance didn't change with the different random initialization.
-However, training and validation loss suggested a good training, accuracy metric was below random guess.
+However, training and validation loss suggested a good training by declining in both training and validation data, accuracy metric was below random guess.
 
 \begin{figure}[H]
     \centering
@@ -139,7 +139,7 @@ However, training and validation loss suggested a good training, accuracy metric
 % vgg balanced https://tensorboard.dev/experiment/ABd8GrKdSXyzHgNPDngeEw/
 
 \section{Transfer Learning}
-I was very skeptical when adopting transfer learning to pneumonia detection because of the fundamental difference in the type of images in the imagenet compare to project dataset.
+I was very skeptical when adopting transfer learning to pneumonia detection because of the fundamental difference in the type of images in the imagenet compare to the project images.
 In this implementation weights in the convolutional part of the model initialized with the pre-trained VGGNet model from imagenet dataset.
 Convolution layer weights in this network is kept frozen during the training and allowed only fully connected layers at the end of the model to be trained.
 To my surprise this approach worked considerably well. Achieving $\approx 77 \%$ in accuracy and $\approx 87 \%$ f1 on validation data. 
@@ -159,7 +159,7 @@ To my surprise this approach worked considerably well. Achieving $\approx 77 \%$
 \end{figure}
 
 Although transfer learning proven to be a viable method to increase model performance, fine tuning attempts on the transfer learning was unsuccessful~\footnote{https://tensorboard.dev/experiment/QRbFzlgwSGaf0lu5LLRSzA/}.
-After unfreezing top convolutional block layers and training the model, performance decreased to below 0.4 in the validation accuracy with f1 score of zero.
+After unfreezing top convolutional block layers and training the model, performance decreased to below 0.4 in the validation accuracy with a f1 score of zero.
 % \begin{figure}[H]
 %     \centering
 %     \includegraphics[width=.8\textwidth]{img/vggnettfaccuracy.png}
@@ -171,7 +171,7 @@ After unfreezing top convolutional block layers and training the model, performa
 
 \section{Custom Neural Network Architecture}
 After experimenting~\footnote{Layer Exp: https://tensorboard.dev/experiment/BDwUXqGgSVWA8Ieawcb3Rg/} with randomly choose number of layers best combination I discovered is an architecture with ten convolution layers fallowed by batch normalization and max-pooling layer. 
-In final experiments showed using two convolutional layer fallowed by batch normalization layer and max-pooling layer like a convolutional block is an optimal choice for this architecture.
+In final experiments showed using two convolutional layer fallowed by batch normalization layer and max-pooling layer like a convolutional block is the best optimal choice for this architecture.
 
 \begin{figure}[H]
     \centering
@@ -194,6 +194,31 @@ Result shows that convolutional layers perform better than depthwise convolution
 
 Lastly, I have started experiments~\footnote{Dropout: https://tensorboard.dev/experiment/x8d0woI6Q7SpKo8zc0ZbSQ/} to observe the effect of regularization at the fully connected layers.
 Varying levels of dropout rate applied to dense layers to fine-tune the regularization level that best suits this architecture. Results shows that best level of dropout rate as 30\%, albeit dropout rates in the dense layers effect change very little the performance scores of the model.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{||c c c c c||} 
+    \hline
+    Classifier & Accuracy & Precision & Recall & f1\\ [0.5ex] 
+    \hline\hline
+    Random Forest & 0.7532 & 0.3547 & 0.9650 & 0.5187\\ 
+    \hline
+    SVC & 0.7580 & 0.3718 & 0.9560 & 0.5354\\
+    \hline
+    LeNet5 & 0.7869 & 0.7535 & 0.9795 & 0.8517\\
+    \hline
+    AlexNet & 0.7949 & 0.7579 & 0.9872 & 0.8575\\
+    \hline
+    VGGNet & 0.3750 & 0.0000 & 0.0000 & 0.0000\\
+    \hline
+    VGGNet (Transfer learning) & 0.8109 & 0.7688 & \textbf{0.9974} & 0.8683\\
+    \hline
+    \textbf{Custom ConvNet} & \textbf{0.8542} & \textbf{0.8360} & 0.9538 & \textbf{0.8910}\\
+    \hline
+    \end{tabular}
+    \caption{Performance metrics for all machine learning algorithms.}
+    \label{table:allmlmetrics}
+\end{table}
 
 \section{Interpreting Model Decisions}
 Application of GradCAM~\cite{cam} provided valuable insight to understanding the features and parts of the images that lead to certain type of prediction.

@@ -1,9 +1,9 @@
 \chapter{Data} \label{chap:data}
-Dataset~\cite{dataset} for the project is X-ray images collected at Guangzhou Women and Children’s Medical Center, Guangzhou from pediatric patients aged between one to five.
+Dataset~\cite{dataset} for the project is X-ray images collected at Guangzhou Women and Children’s Medical Center, from pediatric patients aged between one to five.
 All X-ray images are in JPEG format and organized into a folder-based structure.
 Main sub-structures in the dataset are train, validation and the test folders.
-All main folders also are broken into sub-folders that named \emph{Normal} and \emph{Pneumonia} to indicate their classification.
-All X-rays have graded by expert physicians and check individually, damaged or un-readable X-rays discarded.
+All main folders are also broken into sub-folders that named \emph{Normal} and \emph{Pneumonia} to indicate the classification of the images they contain.
+All X-rays have classified by expert physicians and check individually, damaged or un-readable X-rays discarded.
 Below are the illustrative examples from both classes of the X-ray.
 
 \begin{figure}[H]%
@@ -46,9 +46,10 @@ Generally, because it is well understood that the images could be modified some 
 For example image of a cat on the table can be cropped such a way that will still contain the cat on the table but without the background that is not relevant.
 The resulting image from this cropping will also be an image classified as a cat image.
 
-There are similar sets of transformation that could be applied to images to create labelled data instances. 
+There are several sets of transformation that could be applied to images to create labelled data instances. 
 It is import to choose which augmentation to apply and which one to abandon.
-Example to highlight some argumentation that is not appropriate is flipping the image upside down. 
+Some of these augmentations would be appropriate for the problem set some are not.
+Example for highlighting some argumentation that is not appropriate is flipping the image upside down. 
 Even though flipping upside down is acceptable some cases like the cat image example we considered earlier. 
 It would not be useful in the setting of Pneumonia classification because considering upside down X-rays is not a natural occurrence in the field of medical diagnosis.
 Perhaps the most striking example of an area that this argumentation technique should not be used is handwritten digits classification. 
@@ -79,7 +80,7 @@ This argumentation applied by randomly sampling a certain percentage of the orig
 It is important to choose an appropriate percentage for this argumentation.
 The percentage should be chosen in a way that it would not omit the area of interest in the image.
 For the purpose of my project, this argumentation must be applied such a way that it would not leave any part of the lungs outside of the image. 
-As an example figure \ref{fig:randomzoomxray}, is applied with 90\% of random zoom and it is a considerable level for this dataset.
+As an example figure \ref{fig:randomzoomxray}, is applied with 10\% of random zoom and it is a considerable level for this dataset.
 
 \begin{figure}[H]
     \centering
@@ -109,12 +110,12 @@ Normally, colored images represented with pixel values for red, green and blue (
 For the traditional machine learning techniques, each data point should be represented in one vector.
 Additionally pixel values for each color channel needs to be turned into a vector by flattening each row of pixel values for particular color channel.
 After applying the same step to each channel flattened, channel vectors should be appended one after another to get the final vector for the image.
-Given that the model size cannot change during training each image should be resized to the same shape before representational vector is created (e.g. $\textbf{\textit{x}} = [x_1, x_2, \ldots, x_n]$).
+Given that the model size cannot change during training, each image should be resized to the same shape before representational vector is created (e.g. $\textbf{\textit{x}} = [x_1, x_2, \ldots, x_n]$).
 
 Representation for CNNs, however, require different processing because the convolution operation requires locality of the data points to be taken into consideration.
 Therefore the most common approach is to represent each colour channel of the image as an array of vectors which commonly know as \emph{matrix}.
 Because the coloured image has three colour channels each matrix for the channels should be combined as a multi-dimension matrix.
-This multi-dimensional matrix representation usually get referred to as \emph{tensor}.
+This multi-dimensional matrix representation usually referred to as \emph{tensor}.
 
 Much like input data, the label for each image should also be represented in appropriate mathematical entity to be able to process in training.
 Because this problem has only two classifications most used method is to encode each class in binary (e.g. 1 for pneumonia and 0 for normal).
@@ -122,7 +123,7 @@ However it can also be represented in one-hot encoding, which will return a vect
 
 
 \section{Limitations of the Dataset} \label{sec:datalimitations}
-Although dataset I have choose is well designed and validated, some aspects of data has undesired properties.
+Although dataset I have chosen is well designed and validated, some aspects of data has undesired properties.
 First of such property is the size of the validation data.
 As I mentioned earlier dataset has a folder where it hosts validation files.
 Within this folder there is sixteen images where each class have eight images each.
@@ -140,7 +141,7 @@ To show the variance within the data I have added a density plot that illustrate
     \label{fig:imagedimensions}
 \end{figure}
 
-This graph gives an insight for what resolution for the image should be chosen to have minimal informal loss and distortion in the final image.
+This graph gives an insight for what resolution for the image should be chosen to have minimal informal loss and distortion in the final image. As we can see most of the images have shape above $500 \times 500$, therefore any resolution below this shape would be appropriate choice for the training. 
 
 \section{Data Processing} \label{sec:dataprocessing}
 Inline with the information provided in section \ref{sec:datarepresentation}, I have designed two separate data processing pipeline.
@@ -150,10 +151,10 @@ This pipeline does the flattening of the X-ray images discussed and depends on o
 The second pipeline is created for pre-processing of CNN models which would be used in the majority of the time in training and testing.
 The module is designed to be lightweight with minimal dependencies. Only third party open source libraries used are, Numpy and the TensorFlow~\cite{tensorflow}.
 Although TensorFlow has high-level Keras module that allows easier implementation for data pipeline, I have decided on building data processing pipeline in tf.data module of the TensorFlow library.
-Building my pipeline in tf.data meant that I have to build all of the implementations from scratch myself but it also allowed me to build more flexible and more performant pipeline I could have had than the alternative. 
+Building my pipeline in tf.data meant that I have to build all of the implementations from scratch myself but it also allowed me to build more flexible and more performant pipeline I could have had than the other alternative. 
 The goal of having faster training runs and ultimately having shorter prototyping time only achievable if the training is fast enough to feed data into powerful hardware accelerators.
-Otherwise, the process will become a bottleneck in the training because the processing unit whether it is GPU or any other device will remain idle until the data fed to the system.
-Tf.data designed with parallelization in mind that carries out the process of fetching next data batch while the training for the current batch in progress so the next batch can be ready as soon as the training is finished.
+Otherwise, the process will become a bottleneck in the training because the processing unit whether it is GPU or any other device will remain idle until the data fed into the system.
+Tf.data designed with parallelization in mind that carries out the process of fetching next data batch while the training for the current batch is in progress so the next batch can be ready as soon as the training is finished.
 Providing that all the augmentations and pre-processing will be done in CPU while GPU is training on the previous batch in effect means all the augmentations are computationally free.
 
 
