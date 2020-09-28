@@ -1,8 +1,8 @@
-\chapter{Design and Experiments}
+\chapter{Design and Experiments} \label{chap:experiments}
 Summary of the experiment results and their details laid out in this section.
 Neural network experiment logs are published online for more detailed examination, they are accessible by the URL provided in the corresponding footnotes.
 
-\section{Training Specifications}
+\section{Training Specifications} \label{sec:trainspec}
 Training for traditional machine learning used in this project is fallowing two-step approach.
 At the first part hyper-parameters for the model is selected by cross-validation score then in the second part model is trained on the entire dataset with the selected hyper-parameters.
 The final model then evaluated on the test set.
@@ -10,11 +10,12 @@ The final model then evaluated on the test set.
 There are many artificial neural networks used in both in benchmarking and the model selection.
 Weights of the networks initialized by random except for the transfer learning models.
 The model used in the transfer learning experiments initialized with the weighs pre-trained on imagenet~\cite{imagenet} dataset.
-Each architecture is trained end-to-end using Adam~\cite{adam} optimizer with the standard parameters ($\beta_1 = 0.9$ \& $\beta_2 = 0.999$).
-I used a batch size of 64 for the training, and initial learning rate of 0.001 that decayed by the factor of 10 every time validation loss stagnates after an epoch.
+Each architecture is trained using Adam~\cite{adam} optimizer with the default parameters ($\beta_1 = 0.9$ \& $\beta_2 = 0.999$).
+I used a batch size of 64 for the training, and default learning rate of 0.001 that decayed by the factor of ten every time validation loss stagnates at the end of an epoch.
 Each image in the dataset is downscaled to $224 \times 224$ size and normalized values to between zero to one.
 Data augmentation is applied to minority class in the dataset to create a balanced dataset as explained in section \ref{sec:dataprocessing}.
 Random cropping, changing saturation and horizontal flipping are set of augmentations chosen to create a balanced dataset.
+
 
 
 \section{Benchmark Experiments}
@@ -74,11 +75,11 @@ This effect is slightly more dominant in the random forest classifier than the S
 During the experiments for AlexNet and LeNet5 effect of the balanced dataset~\footnote{AlexNet Balanced: https://tensorboard.dev/experiment/7b6W0tdHQQ2RINGt6cYbrA/} is also compared to base dataset~\footnote{AlexNet Base: https://tensorboard.dev/experiment/PaBawCErSqG6zIef7JPq8g/} to measure the effectiveness of the data augmentation.
 Figures used in AlexNet and LeNet5 annotated with balanced training/validation to reflect that balanced dataset is created with the data augmentation.
 Base training/validation is used to refer base image data is used without any data augmentation.
-Results from AlexNet was acceptable but given the loss values did not declined in the validation dataset suggest that ALexNet slightly over-fitted the data.
+Results from AlexNet was acceptable but given the loss values did not declined in the validation dataset suggest that ALexNet may have over-fitted the data.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.9\textwidth]{img/alexnetloss.png}
+    \includegraphics[width=.8\textwidth]{img/alexnetloss.png}
     \caption{}
     \label{fig:alexloss}
 \end{figure}
@@ -88,7 +89,7 @@ It is clearly visible in the charts that model converges in around first 30 epoc
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.9\textwidth]{img/alexnetf1.png}
+    \includegraphics[width=.8\textwidth]{img/alexnetf1.png}
     \caption{}
     \label{fig:alexf1}
 \end{figure}
@@ -170,7 +171,7 @@ After unfreezing top convolutional block layers and training the model, performa
 % vgg-balanced https://tensorboard.dev/experiment/c1zSx6N0QviARqCVIq3QMw/
 
 \section{Custom Neural Network Architecture}
-After experimenting~\footnote{Layer Exp: https://tensorboard.dev/experiment/BDwUXqGgSVWA8Ieawcb3Rg/} with a randomly chosen number of layers best combination I discovered is an architecture with ten convolution layers followed by batch normalization and max-pooling layer. 
+After experimenting~\footnote{https://tensorboard.dev/experiment/BDwUXqGgSVWA8Ieawcb3Rg/} with a randomly chosen number of layers best combination I discovered is an architecture with ten convolution layers followed by batch normalization and max-pooling layer. 
 In final experiments showed using two convolutional layers fallowed by batch normalization layer and max-pooling layer like a convolutional block is the best optimal choice for this architecture.
 
 \begin{figure}[H]
@@ -181,7 +182,7 @@ In final experiments showed using two convolutional layers fallowed by batch nor
 \end{figure}
 
 Immediately after this experiments, the same number of layers are maintained to determine the performance of the type of the convolution layer on the dataset.
-For the same number of layer, I replaced the convolutional layers with the depthwise separable convolutional layers~\footnote{Type Exp: https://tensorboard.dev/experiment/aA2SgzCNTXWXK7kWMhyJNg/}.
+For the same number of layer, I replaced the convolutional layers with the depthwise separable convolutional layers~\footnote{https://tensorboard.dev/experiment/aA2SgzCNTXWXK7kWMhyJNg/}.
 Depthwise separable convolutional layers work by performing a depthwise convolution first then mixing that with the pointwise convolution.
 The result shows that convolutional layers perform better than depthwise convolutional layers whit the same layer numbers and other convolution properties set equally.
 
@@ -192,33 +193,9 @@ The result shows that convolutional layers perform better than depthwise convolu
     \label{fig:depttoconvacc}
 \end{figure}
 
-Lastly, I have started experiments~\footnote{Dropout: https://tensorboard.dev/experiment/x8d0woI6Q7SpKo8zc0ZbSQ/} to observe the effect of regularization at the fully connected layers.
+Lastly, I have started experiments~\footnote{https://tensorboard.dev/experiment/x8d0woI6Q7SpKo8zc0ZbSQ/} to observe the effect of regularization at the fully connected layers.
 Varying levels of dropout rate applied to dense layers to fine-tune the regularization level that best suits this architecture. Results show that the best level of dropout rate as 30\%, albeit dropout rates in the effect of the dense layers change very little the performance scores of the model.
 
-\begin{table}[H]
-    \centering
-    \begin{tabular}{||c c c c c||} 
-    \hline
-    Classifier & Accuracy & Precision & Recall & f1\\ [0.5ex] 
-    \hline\hline
-    Random Forest & 0.7532 & 0.3547 & 0.9650 & 0.5187\\ 
-    \hline
-    SVC & 0.7580 & 0.3718 & 0.9560 & 0.5354\\
-    \hline
-    LeNet5 & 0.7869 & 0.7535 & 0.9795 & 0.8517\\
-    \hline
-    AlexNet & 0.7949 & 0.7579 & 0.9872 & 0.8575\\
-    \hline
-    VGGNet & 0.3750 & 0.0000 & 0.0000 & 0.0000\\
-    \hline
-    VGGNet (Transfer learning) & 0.8109 & 0.7688 & \textbf{0.9974} & 0.8683\\
-    \hline
-    \textbf{Custom ConvNet} & \textbf{0.8542} & \textbf{0.8360} & 0.9538 & \textbf{0.8910}\\
-    \hline
-    \end{tabular}
-    \caption{Performance metrics for all machine learning algorithms.}
-    \label{table:allmlmetrics}
-\end{table}
 
 \section{Interpreting Model Decisions}
 Application of GradCAM~\cite{cam} provided valuable insight into understanding the features and parts of the images that lead to a certain type of prediction.

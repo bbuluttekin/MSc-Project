@@ -1,4 +1,4 @@
-\chapter{Conclusion}
+\chapter{Discussion and Conclusions}
 In summary, I have implemented a functional CI/CD pipeline to predict the presence or absence of pneumonia from X-ray images.
 Most of the steps I set out to achieve as part of this pipeline were successful with the exception of one. 
 Originally, I have planned to implement ensemble method to increase the performance of the algorithms, but due to the limitations related to deploying multiple models into one static website, I had to abandon that step and decided to create a custom architecture instead.
@@ -9,9 +9,75 @@ For example, the solution for resistant training module allows model training th
 This solution can be used in any future project and disruption to training will not affect the progress of the experimentations.
 Generating a balanced dataset from imbalance data with data augmentation is another side achievement that can be applied to a wide variety of problems that suffering from data imbalance.
 
+Before concluding this chapter, I would like to summarize the model performances.
+Despite the modest performance goal of this project, the final model performance in the testing was surprisingly good.
+The F1 score of the custom convolutional neural network model scored better than F1 score reported on CheXNet~\cite{CheXNetRP} and ChestX-ray8~\cite{ChestX-ray8}.
+However, this would not be a fair comparison as the dataset used in these papers and the methodology they conducted is different than what I applied in this project.
+I provided the final performance metrics for all of the benchmark models and best model from transfer learning and custom model architecture.
+All other models performance below selected models can be found in their corresponding experiment link provided in chapter \ref{chap:experiments}.
+Metrics in table \ref{table:allmlmetrics} are calculated using test dataset, but please keep in mind that dataset was also used as a validation dataset in training. 
+That decision was based on not having enough data points in validation data which also explained in section \ref{sec:estbench}.
+For the interest of full disclosure, I have tested the models on the very small validation dataset (16 records in total), because it was not used in training this result should act as performance in holdout dataset. 
+Table \ref{table:allvalmetrics} shows the result of that evaluation, please note that these results are very volatile and should be taken with a grain of salt.
+At the end making this difficult decision to use test data as a validation taught me a valuable lesson, that I should always
+examine the dataset thoroughly before committing any work.
+
+
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{||c c c c c||} 
+    \hline
+    Classifier & Accuracy & Precision & Recall & f1\\ [0.5ex] 
+    \hline\hline
+    Random Forest & 0.7532 & 0.3547 & 0.9650 & 0.5187\\ 
+    \hline
+    SVC & 0.7580 & 0.3718 & 0.9560 & 0.5354\\
+    \hline
+    LeNet5 & 0.7869 & 0.7535 & 0.9795 & 0.8517\\
+    \hline
+    AlexNet & 0.7949 & 0.7579 & 0.9872 & 0.8575\\
+    \hline
+    VGGNet & 0.3750 & 0.0000 & 0.0000 & 0.0000\\
+    \hline
+    VGGNet (Transfer learning) & 0.8109 & 0.7688 & \textbf{0.9974} & 0.8683\\
+    \hline
+    \textbf{Custom ConvNet} & \textbf{0.8542} & \textbf{0.8360} & 0.9538 & \textbf{0.8910}\\
+    \hline
+    \end{tabular}
+    \caption{Performance metrics of selected algorithms on test data. (Also used during training as validation data.)}
+    \label{table:allmlmetrics}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{||c c c c c||} 
+    \hline
+    Classifier & Accuracy & Precision & Recall & f1\\ [0.5ex] 
+    \hline\hline
+    Random Forest & 0.625 & 0.625 & 1.0000 & 0.7692  \\ 
+    \hline
+    SVC & 0.8125 & 0.2500 & 1.0000 & 0.4000  \\
+    \hline
+    LeNet5 & 1.0000 & 1.0000 & 1.0000 & 1.0000\\
+    \hline
+    AlexNet & 0.7500 & 0.6666 & 1.0000 & 0.8000\\
+    \hline
+    VGGNet & 0.5000 & 0.0000 & 0.0000 & 0.0000\\
+    \hline
+    VGGNet (Transfer learning) & 0.9375 & 0.8889 & 1.000 & 0.9412\\
+    \hline
+    Custom ConvNet & 0.8125 & 0.7273 & 1.000 & 0.8421\\
+    \hline
+    \end{tabular}
+    \caption{Performance metrics of all machine learning with holdout (validation) data.}
+    \label{table:allvalmetrics}
+\end{table}
+
 \section{Next Steps}
 This project can be extended with the suggestions from this section to improve many aspects of the project.
-I listed some steps to increase the overall quality of the implementation.
+I listed some steps below to point out what else can be done.
+% increase the overall quality of the implementation.
 
 \begin{itemize}
     \item Addition hyper-parameter tuning to increase model performance.
@@ -20,6 +86,8 @@ I listed some steps to increase the overall quality of the implementation.
     \item Bigger datasets became publicly available after I started this project. Switching to one of those dataset benefits the performance.
 \end{itemize}
 
+
+% Lessons learned : Scrutinize the data more, and absence of proper validation data. 
 
 % Steps I have set for this project such as setting a benchmark and improving prediction performance beyond this benchmark was successful.
 

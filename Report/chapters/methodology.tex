@@ -11,7 +11,7 @@ These four categories are:
 
 Further sections will provide detail for these four main categories.
 
-\section{Establishing a benchmark}
+\section{Establishing a benchmark} \label{sec:estbench}
 The first step to every machine learning project is that model produced is performs better than any random or naive solution.
 Although random guess in any binary classification suggests that the minimum accuracy should be greater or equal than 50\%, because of the imbalance in the test dataset, minimum accuracy requirement for this dataset is even higher.
 I have 390 pneumonia images in the 624 total images in the test dataset, dummy classifier that predict pneumonia for any given image will achieve 62.5\% accuracy in this test dataset.
@@ -32,6 +32,7 @@ The recall is calculated by dividing true positives to true positives and false 
 \end{equation}
 
 To capture the correct performance of the classifier we need to consider both precision and recall.
+Because I am aiming to reduce both false positive and false negatives rates
 F1 score provides the ability to consider both precision and recall for the same classification problem because it is calculated by getting a harmonic mean of the precision and recall.
 
 \begin{equation}
@@ -42,6 +43,11 @@ F1 score provides the ability to consider both precision and recall for the same
 Remaining part for the benchmarking involves choosing which algorithms to train on the dataset.
 Given we don't know the distribution of the data, training fundamental machine learning algorithms together with the neural network algorithms is a cautious step to take. 
 For that reason, I have chosen to train two fundamental machine learning algorithm, namely the Random Forest classifier and the Support vector classifier (SVC) for establishing a benchmark.
+
+Previously I have mentioned in section \ref{sec:datalimitations} that the validation data for this dataset is very small.
+Having only 16 records in validation dataset prevent reliable feedback from the validation metrics. 
+For that reason, I had opted in for using the training dataset as a validation dataset and evaluated the model performance in both the test and the validation dataset at the end of the report.
+Please note that the figures that will be reported in the next chapter are based on the validation scores of a single model.
 
 
 \subsection{Random Forest Classifier}
