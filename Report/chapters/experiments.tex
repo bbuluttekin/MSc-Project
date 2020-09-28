@@ -12,7 +12,7 @@ Weights of the networks initialized by random except for the transfer learning m
 The model used in the transfer learning experiments initialized with the weighs pre-trained on imagenet~\cite{imagenet} dataset.
 Each architecture is trained using Adam~\cite{adam} optimizer with the default parameters ($\beta_1 = 0.9$ \& $\beta_2 = 0.999$).
 I used a batch size of 64 for the training, and default learning rate of 0.001 that decayed by the factor of ten every time validation loss stagnates at the end of an epoch.
-Each image in the dataset is downscaled to $224 \times 224$ size and normalized values to between zero to one.
+Each image in the dataset is downscaled to $224 \times 224$ shape and normalized to have values between 0 to 1.
 Data augmentation is applied to minority class in the dataset to create a balanced dataset as explained in section \ref{sec:dataprocessing}.
 Random cropping, changing saturation and horizontal flipping are set of augmentations chosen to create a balanced dataset.
 
@@ -182,7 +182,7 @@ In final experiments showed using two convolutional layers fallowed by batch nor
 \end{figure}
 
 Immediately after this experiments, the same number of layers are maintained to determine the performance of the type of the convolution layer on the dataset.
-For the same number of layer, I replaced the convolutional layers with the depthwise separable convolutional layers~\footnote{https://tensorboard.dev/experiment/aA2SgzCNTXWXK7kWMhyJNg/}.
+For the same number of layers, I replaced the convolutional layers with the depthwise separable convolutional layers~\footnote{https://tensorboard.dev/experiment/aA2SgzCNTXWXK7kWMhyJNg/}.
 Depthwise separable convolutional layers work by performing a depthwise convolution first then mixing that with the pointwise convolution.
 The result shows that convolutional layers perform better than depthwise convolutional layers whit the same layer numbers and other convolution properties set equally.
 

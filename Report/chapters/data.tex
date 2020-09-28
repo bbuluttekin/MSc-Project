@@ -155,7 +155,7 @@ Building my pipeline in tf.data meant that I have to build all of the implementa
 The goal of having faster training runs and ultimately having shorter prototyping time only achievable if the training is fast enough to feed data into powerful hardware accelerators.
 Otherwise, the process will become a bottleneck in the training because the processing unit whether it is GPU or any other device will remain idle until the data fed into the system.
 Tf.data designed with parallelization in mind that carries out the process of fetching next data batch while the training for the current batch is in progress so the next batch can be ready as soon as the training is finished.
-Providing that all the augmentations and pre-processing will be done in CPU while GPU is training on the previous batch ultimately means all the augmentations calculations are computationally free.
+Providing that all the augmentations and pre-processing will be done in CPU while GPU is training on the previous batch ultimately means all the augmentation calculations are computationally free.
 
 
 At the beginning of this chapter, I point out that the dataset for this project has an imbalance problem.

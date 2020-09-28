@@ -31,8 +31,7 @@ The recall is calculated by dividing true positives to true positives and false 
     Recall = \frac{tp}{tp + fn}
 \end{equation}
 
-To capture the correct performance of the classifier we need to consider both precision and recall.
-Because I am aiming to reduce both false positive and false negatives rates
+To capture the correct performance of the classifier we need to consider both precision and recall and F1 metrics allow us to capture that in a single metric.
 F1 score provides the ability to consider both precision and recall for the same classification problem because it is calculated by getting a harmonic mean of the precision and recall.
 
 \begin{equation}
@@ -47,7 +46,7 @@ For that reason, I have chosen to train two fundamental machine learning algorit
 Previously I have mentioned in section \ref{sec:datalimitations} that the validation data for this dataset is very small.
 Having only 16 records in validation dataset prevent reliable feedback from the validation metrics. 
 For that reason, I had opted in for using the training dataset as a validation dataset and evaluated the model performance in both the test and the validation dataset at the end of the report.
-Please note that the figures that will be reported in the next chapter are based on the validation scores of a single model.
+Please note that the figures that will be reported in the next chapter are based on the validation data of a single model.
 
 
 \subsection{Random Forest Classifier}
