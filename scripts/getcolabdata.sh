@@ -14,3 +14,5 @@ rm chest-xray-pneumonia.zip
 rm chest_xray.zip
 rm -rf __MACOSX/
 rm -rf sample_data/
+git clone https://github.com/bbuluttekin/MSc-Project.git
+mv MSc-Project/src/ .
